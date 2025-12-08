@@ -1,0 +1,121 @@
+{
+	"Network Data Type": "Float",
+	"Network Name": "Buddy",
+	"Network Learning Rate": 0,
+	"Network Momentum": 0,
+	"Network Input Vector Size": 1,
+	"Network Output Vector Size": 5,
+	"Network Layer Count": 5,
+	"Network Layers": [
+		{
+			"Layer Data Type": "Float",
+			"Layer Type": "Input",
+			"Layer Input Vector Size": 1,
+			"Layer Output Vector Size": 1,
+			"Layer Neuron Type": "Input",
+			"Layer Neuron Count": 1,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Input"
+				}
+			]
+		},
+		{
+			"Layer Data Type": "Float",
+			"Layer Type": "Dense",
+			"Layer Input Vector Size": 1,
+			"Layer Output Vector Size": 2,
+			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Count": 2,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				}
+			]
+		},
+		{
+			"Layer Data Type": "Float",
+			"Layer Type": "Dense",
+			"Layer Input Vector Size": 2,
+			"Layer Output Vector Size": 3,
+			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Count": 3,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				}
+			]
+		},
+		{
+			"Layer Data Type": "Float",
+			"Layer Type": "Dense",
+			"Layer Input Vector Size": 3,
+			"Layer Output Vector Size": 4,
+			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Count": 4,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Feedforward"
+				}
+			]
+		},
+		{
+			"Layer Data Type": "Float",
+			"Layer Type": "Output",
+			"Layer Input Vector Size": 4,
+			"Layer Output Vector Size": 5,
+			"Layer Neuron Type": "Output",
+			"Layer Neuron Count": 5,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Output"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Output"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Output"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Output"
+				},
+				{
+					"Neuron Data Type": "Float",
+					"Neuron Type": "Output"
+				}
+			]
+		}
+	]
+}
