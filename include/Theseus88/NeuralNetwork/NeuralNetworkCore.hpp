@@ -3,11 +3,14 @@
 #define THESEUS88_NEURALNETWORKCORE_HPP
 
 // ADD COMMENT HERE LATER
+#include <algorithm>    // std::max
 #include <filesystem>   // std::filesystem
 #include <fstream>      // std::ofstream
-//#include <functional>   // std::function
+#include <functional>   // std::function
+#include <cmath>        // std::pow, std::exp, std::tanh, std::log, std::sqrt
 #include <cstddef>      // std::size_t
 #include <memory>       // std::unique_ptr, std::make_unique
+#include <random>       // std::random_device, std::mt19937, std::uniform_real_distribution
 #include <stdexcept>    // std::runtime_error
 #include <string>       // std::string
 #include <utility>      // std::move, std::forward
