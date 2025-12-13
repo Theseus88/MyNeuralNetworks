@@ -78,6 +78,11 @@ namespace Theseus88 {
         LayerBase<T>::saveNetworkLayer(writer, false);
         writer.writeNumber("Layer Neuron Randomize Parameter One", m_randomizeParameterOne);
         writer.writeNumber("Layer Neuron Randomize Parameter Two", m_randomizeParameterTwo);
+        writer.writeString("Layer Neuron Randomize Method", RandomizeFunctions<T>::randomizeMethodToString(m_randomizeMethod));
+        writer.writeString("Layer Neuron Activation Method", ActivationFunctions<T>::activationMethodToString(m_activationMethod));
+        writer.writeString("Layer Neuron Derivative Method", ActivationFunctions<T>::derivativeMethodToString(m_derivativeMethod));
+        writer.writeString("Layer Neuron Error Method", ErrorFunctions<T>::errorMethodToString(m_errorMethod));
+        writer.writeString("Layer Neuron Optimizer Method", OptimizerFunctions<T>::optimizerMethodToString(m_optimizerMethod));
         if (includeNeurons) {
             writer.writeNumber("Layer Neuron Count", LayerBase<T>::m_neuronCount);
             writer.writeArrayStart("Layer Neurons");

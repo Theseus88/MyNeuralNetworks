@@ -29,6 +29,11 @@
 			"Layer Neuron Type": "Feedforward",
 			"Layer Neuron Randomize Parameter One": -1,
 			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "Mean Squared Error",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
 			"Layer Neuron Count": 2,
 			"Layer Neurons": [
 				{
@@ -49,6 +54,11 @@
 			"Layer Neuron Type": "Feedforward",
 			"Layer Neuron Randomize Parameter One": -1,
 			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "Mean Squared Error",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
 			"Layer Neuron Count": 3,
 			"Layer Neurons": [
 				{
@@ -73,6 +83,11 @@
 			"Layer Neuron Type": "Feedforward",
 			"Layer Neuron Randomize Parameter One": -1,
 			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "Mean Squared Error",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
 			"Layer Neuron Count": 4,
 			"Layer Neurons": [
 				{

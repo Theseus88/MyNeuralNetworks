@@ -12,6 +12,17 @@ namespace Theseus88 {
     public:
         // ADD COMMENT HERE LATER
         enum class Method { MeanSquaredError, MeanAbsoluteError, SquaredError, BinaryCrossEntropy, HingeLoss, FocalLoss };
+        static constexpr const char* errorMethodToString(Method type) {
+            switch (type) {
+                case Method::MeanSquaredError: return "Mean Squared Error";
+                case Method::MeanAbsoluteError: return "Mean Absolute Error";
+                case Method::SquaredError: return "Squared Error";
+                case Method::BinaryCrossEntropy: return "Binary Cross Entropy";
+                case Method::HingeLoss: return "Hinge Loss";
+                case Method::FocalLoss: return "Focal Loss";
+                default: return "Unknown";
+            };
+        };
 
         /*// ADD COMMENT HERE LATER
         static std::function<const T(NeuralNetworkNeuron<T>&, const T, const T)> getErrorFunction(const Method method);

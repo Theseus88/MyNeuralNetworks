@@ -13,6 +13,13 @@ namespace Theseus88 {
     public:
         // ADD COMMENT HERE LATER
         enum class Method { Uniform, Normal };
+        static constexpr const char* randomizeMethodToString(Method type) {
+            switch (type) {
+                case Method::Uniform: return "Uniform";
+                case Method::Normal: return "Normal";
+                default: return "Unknown";
+            };
+        };
 
         /*// ADD COMMENT HERE LATER
         static std::function<void(std::vector<NeuralNetworkConnection<T>>&, NeuralNetworkConnection<T>&, const T, const T)> getRandomizeFunction(const Method method);

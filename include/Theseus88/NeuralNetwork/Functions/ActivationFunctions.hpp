@@ -12,6 +12,24 @@ namespace Theseus88 {
     public:
         // ADD COMMENT HERE LATER
         enum class Method { Sigmoid, SigmoidDerivative, Relu, ReluDerivative, Tanh, TanhDerivative, Linear, LinearDerivative };
+        static constexpr const char* activationMethodToString(Method type) {
+            switch (type) {
+                case Method::Sigmoid: return "Sigmoid";
+                case Method::Relu: return "Relu";
+                case Method::Tanh: return "Tanh";
+                case Method::Linear: return "Linear";
+                default: return "Unknown";
+            };
+        };
+        static constexpr const char* derivativeMethodToString(Method type) {
+            switch (type) {
+                case Method::SigmoidDerivative: return "Sigmoid Derivative";
+                case Method::ReluDerivative: return "Relu Derivative";
+                case Method::TanhDerivative: return "Tanh Derivative";
+                case Method::LinearDerivative: return "Linear Derivative";
+                default: return "Unknown";
+            };
+        };
 
         // ADD COMMENT HERE LATER
         static std::function<const T(const T)> getActivationFunction(const Method& method);
