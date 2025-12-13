@@ -18,8 +18,8 @@ void testTwo() {
     concreteNet->addNetworkLayer<LayerType::Dense>(2);
     concreteNet->addNetworkLayer<LayerType::Dense>(4);
     concreteNet->insertNetworkLayer<LayerType::Dense>(2, 3);
-    myNeuralNetwork->finalizeNeuralNetwork();
-    myNeuralNetwork->saveNeuralNetwork("../build/debug/TestTwoData.json");
+    concreteNet->finalizeNeuralNetwork();
+    concreteNet->saveNeuralNetwork("../build/debug/TestTwoData.json");
 };
 void testThree() {
 
@@ -28,6 +28,6 @@ void testThree() {
 int main() {
     testOne();
     testTwo();
-    testThree();
+    //testThree();
     return 0;
 };

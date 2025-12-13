@@ -1,5 +1,5 @@
 {
-	"Network Data Type": "Float",
+	"Network Data Type": "float",
 	"Network Name": "Buddy",
 	"Network Learning Rate": 0,
 	"Network Momentum": 0,
@@ -8,7 +8,7 @@
 	"Network Layer Count": 5,
 	"Network Layers": [
 		{
-			"Layer Data Type": "Float",
+			"Layer Data Type": "float",
 			"Layer Type": "Input",
 			"Layer Input Vector Size": 1,
 			"Layer Output Vector Size": 1,
@@ -16,79 +16,85 @@
 			"Layer Neuron Count": 1,
 			"Layer Neurons": [
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Input"
 				}
 			]
 		},
 		{
-			"Layer Data Type": "Float",
+			"Layer Data Type": "float",
 			"Layer Type": "Dense",
 			"Layer Input Vector Size": 1,
 			"Layer Output Vector Size": 2,
 			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
 			"Layer Neuron Count": 2,
 			"Layer Neurons": [
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				}
 			]
 		},
 		{
-			"Layer Data Type": "Float",
+			"Layer Data Type": "float",
 			"Layer Type": "Dense",
 			"Layer Input Vector Size": 2,
 			"Layer Output Vector Size": 3,
 			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
 			"Layer Neuron Count": 3,
 			"Layer Neurons": [
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				}
 			]
 		},
 		{
-			"Layer Data Type": "Float",
+			"Layer Data Type": "float",
 			"Layer Type": "Dense",
 			"Layer Input Vector Size": 3,
 			"Layer Output Vector Size": 4,
 			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
 			"Layer Neuron Count": 4,
 			"Layer Neurons": [
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Feedforward"
 				}
 			]
 		},
 		{
-			"Layer Data Type": "Float",
+			"Layer Data Type": "float",
 			"Layer Type": "Output",
 			"Layer Input Vector Size": 4,
 			"Layer Output Vector Size": 5,
@@ -96,23 +102,23 @@
 			"Layer Neuron Count": 5,
 			"Layer Neurons": [
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Output"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Output"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Output"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Output"
 				},
 				{
-					"Neuron Data Type": "Float",
+					"Neuron Data Type": "float",
 					"Neuron Type": "Output"
 				}
 			]

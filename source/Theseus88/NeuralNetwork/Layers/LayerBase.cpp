@@ -83,17 +83,19 @@ namespace Theseus88 {
     };
 
     // Public Member Functions
-    template <typename T> void LayerBase<T>::saveNetworkLayer(JsonWriter& writer) const { // Still working on code here...
+    template <typename T> void LayerBase<T>::saveNetworkLayer(JsonWriter& writer, const bool includeNeurons) const { // Still working on code here...
         writer.writeObjectStart();
         writer.writeString("Layer Data Type", M_LAYERDATATYPE);
         writer.writeString("Layer Type", layerTypeToString(M_LAYERTYPE));
         writer.writeNumber("Layer Input Vector Size", m_inputVectorSize);
         writer.writeNumber("Layer Output Vector Size", m_outputVector.size());
         writer.writeString("Layer Neuron Type", neuronTypeToString(m_neuronType));
-        writer.writeNumber("Layer Neuron Count", m_neuronCount);
-        writer.writeArrayStart("Layer Neurons");
-        for (const auto& neuronPtr : m_layerNeurons) neuronPtr->saveLayerNeuron(writer);
-        writer.writeArrayEnd();
+        if (includeNeurons) {
+            writer.writeNumber("Layer Neuron Count", m_neuronCount);
+            writer.writeArrayStart("Layer Neurons");
+            for (const auto& neuronPtr : m_layerNeurons) neuronPtr->saveLayerNeuron(writer);
+            writer.writeArrayEnd();
+        };
     };
 
     // ADD COMMENT HERE LATER

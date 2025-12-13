@@ -18,14 +18,18 @@
 
 // ADD COMMENT HERE LATER
 #include "../JsonUtilities/JsonUtilities.hpp"
+#include "Functions/ActivationFunctions.hpp"
+#include "Functions/ErrorFunctions.hpp"
+#include "Functions/OptimizerFunctions.hpp"
+#include "Functions/RandomizeFunctions.hpp"
 
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
-    constexpr const char* dataTypeToString(float) { return "Float"; };
-    constexpr const char* dataTypeToString(double) { return "Double"; };
-    constexpr const char* dataTypeToString(long double) { return "Long Double"; };
+    constexpr const char* dataTypeToString(float) { return "float"; };
+    constexpr const char* dataTypeToString(double) { return "double"; };
+    constexpr const char* dataTypeToString(long double) { return "long double"; };
 
     // ADD COMMENT HERE LATER
     enum class NeuronType : int { Input, Output, Feedforward };
@@ -52,12 +56,12 @@ namespace Theseus88 {
     template <typename T> class NeuronInput;
     template <typename T> class NeuronOutput;
     template <typename T> class NeuronFeedforward;
-    template <typename T> class NeuronFactory;
+    template <typename T> class FactoryNeuron;
     template <typename T> class LayerBase;
     template <typename T> class LayerInput;
     template <typename T> class LayerOutput;
     template <typename T> class LayerDense;
-    template <typename T> class LayerFactory;
+    template <typename T> class FactoryLayer;
     template <typename T> class NeuralNetwork;
 
 };
