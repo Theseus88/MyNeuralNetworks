@@ -13,12 +13,16 @@ namespace Theseus88 {
     template <typename T> void LayerBase<T>::updateLayerNeurons() { // Still working on code here...
         m_layerNeurons.clear();
         if (m_layerNeurons.capacity() != m_neuronCount) m_layerNeurons.reserve(m_neuronCount);
-        for (std::size_t i = 0; i < m_neuronCount; i++) m_layerNeurons.emplace_back(FactoryNeuron<T>::createNeuron(m_neuronType));
+        for (std::size_t i = 0; i < m_neuronCount; i++) {
+            m_layerNeurons.emplace_back(FactoryNeuron<T>::createNeuron(m_neuronType));
+            m_layerNeurons[i]->setActivationFunction(m_activationMethod);
+            m_layerNeurons[i]->setDerivativeFunction(m_derivativeMethod);
+        };
     };
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerBase<T>::LayerBase(const LayerType layerType, const NeuronType neuronType, const size_t neuronCount)
-    : M_LAYERDATATYPE(dataTypeToString(T())), M_LAYERTYPE(layerType), m_neuronType(neuronType), m_randomizeParameterOne(static_cast<T>(-1.0)), m_randomizeParameterTwo(static_cast<T>(1.0)), m_randomizeMethod(RandomizeFunctions<T>::Method::Uniform), m_activationMethod(ActivationFunctions<T>::Method::Sigmoid), m_derivativeMethod(ActivationFunctions<T>::Method::SigmoidDerivative), m_errorMethod(ErrorFunctions<T>::Method::MeanSquaredError), m_optimizerMethod(OptimizerFunctions<T>::Method::StochasticGradientDescent), m_neuronCount(neuronCount), m_layerNeurons(), m_outputVector(), m_isFinalized(false) {};
+    : M_LAYERDATATYPE(dataTypeToString(T())), M_LAYERTYPE(layerType), m_neuronType(neuronType), m_randomizeParameterOne(static_cast<T>(0.0)), m_randomizeParameterTwo(static_cast<T>(0.0)), m_randomizeMethod(RandomizeFunctions<T>::Method::None), m_activationMethod(ActivationFunctions<T>::Method::None), m_derivativeMethod(ActivationFunctions<T>::Method::None), m_errorMethod(ErrorFunctions<T>::Method::None), m_optimizerMethod(OptimizerFunctions<T>::Method::None), m_neuronCount(neuronCount), m_layerNeurons(), m_outputVector(), m_isFinalized(false) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerBase<T>::~LayerBase() {};

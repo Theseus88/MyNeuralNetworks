@@ -11,12 +11,13 @@ namespace Theseus88 {
     template <typename T> class OptimizerFunctions {
     public:
         // ADD COMMENT HERE LATER
-        enum class Method { StochasticGradientDescent, StochasticGradientDescentWithClassicalMomentum, StochasticGradientDescentWithNesterovMomentum, AdaptiveGradient, RootMeanSquaredPropagation, AdaptiveMomentEstimation };
+        enum class Method { None, StochasticGradientDescent, StochasticGradientDescentWithClassicalMomentum, StochasticGradientDescentWithNesterovMomentum, AdaptiveGradient, RootMeanSquaredPropagation, AdaptiveMomentEstimation };
         static constexpr const char* optimizerMethodToString(Method type) {
             switch (type) {
+                case Method::None: return "None";
                 case Method::StochasticGradientDescent: return "Stochastic Gradient Descent";
-                case Method::StochasticGradientDescentWithClassicalMomentum: return "Stochastic Gradient Descent With Classical Momentum";
-                case Method::StochasticGradientDescentWithNesterovMomentum: return "Stochastic Gradient Descent With Nesterov Momentum";
+                case Method::StochasticGradientDescentWithClassicalMomentum: return "Stochastic Gradient Descent with Classical Momentum";
+                case Method::StochasticGradientDescentWithNesterovMomentum: return "Stochastic Gradient Descent with Nesterov Momentum";
                 case Method::AdaptiveGradient: return "Adaptive Gradient";
                 case Method::RootMeanSquaredPropagation: return "Root Mean Squared Propagation";
                 case Method::AdaptiveMomentEstimation: return "Adaptive Moment Estimation";

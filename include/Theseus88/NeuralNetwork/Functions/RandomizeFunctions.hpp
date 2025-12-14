@@ -12,9 +12,10 @@ namespace Theseus88 {
     template <typename T> class RandomizeFunctions {
     public:
         // ADD COMMENT HERE LATER
-        enum class Method { Uniform, Normal };
+        enum class Method { None, Uniform, Normal };
         static constexpr const char* randomizeMethodToString(Method type) {
             switch (type) {
+                case Method::None: return "None";
                 case Method::Uniform: return "Uniform";
                 case Method::Normal: return "Normal";
                 default: return "Unknown";

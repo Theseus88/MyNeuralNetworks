@@ -11,10 +11,18 @@ namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::NeuronBase(const NeuronType neuronType)
-    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType) {};
+    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType)/*, m_activationFunction(), m_derivativeFunction()*/ {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::~NeuronBase() {};
+
+    // Public Member Mutators
+    template <typename T> void NeuronBase<T>::setActivationFunction(const typename ActivationFunctions<T>::Method activationMethod) {
+        m_activationFunction = ActivationFunctions<T>::getActivationFunction(activationMethod);
+    };
+    template <typename T> void NeuronBase<T>::setDerivativeFunction(const typename ActivationFunctions<T>::Method derivativeMethod) {
+        m_derivativeFunction = ActivationFunctions<T>::getActivationFunction(derivativeMethod);
+    };
 
     // ADD COMMENT HERE LATER
     template <typename T> void NeuronBase<T>::saveLayerNeuron(JsonWriter& writer) const {

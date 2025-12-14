@@ -6,6 +6,7 @@ namespace Theseus88 {
     // ADD COMMENT HERE LATER
     template <typename T> std::function<const T(const T)> ActivationFunctions<T>::getActivationFunction(const Method& method) {
         switch (method) {
+            case Method::None: return none;
             case Method::Sigmoid: return sigmoid;
             case Method::SigmoidDerivative: return sigmoidDerivative;
             case Method::Relu: return relu;
@@ -19,6 +20,9 @@ namespace Theseus88 {
     };
 
     // ADD COMMENT HERE LATER
+    template <typename T> const T ActivationFunctions<T>::none(const T x) {
+        return x;
+    };
     template <typename T> const T ActivationFunctions<T>::sigmoid(const T x) {
         return static_cast<T>(1.0) / (static_cast<T>(1.0) + std::exp(-x));
     };

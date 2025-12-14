@@ -11,9 +11,10 @@ namespace Theseus88 {
     template <typename T> class ActivationFunctions {
     public:
         // ADD COMMENT HERE LATER
-        enum class Method { Sigmoid, SigmoidDerivative, Relu, ReluDerivative, Tanh, TanhDerivative, Linear, LinearDerivative };
+        enum class Method { None, Sigmoid, SigmoidDerivative, Relu, ReluDerivative, Tanh, TanhDerivative, Linear, LinearDerivative };
         static constexpr const char* activationMethodToString(Method type) {
             switch (type) {
+                case Method::None: return "None";
                 case Method::Sigmoid: return "Sigmoid";
                 case Method::Relu: return "Relu";
                 case Method::Tanh: return "Tanh";
@@ -23,6 +24,7 @@ namespace Theseus88 {
         };
         static constexpr const char* derivativeMethodToString(Method type) {
             switch (type) {
+                case Method::None: return "None";
                 case Method::SigmoidDerivative: return "Sigmoid Derivative";
                 case Method::ReluDerivative: return "Relu Derivative";
                 case Method::TanhDerivative: return "Tanh Derivative";
@@ -35,6 +37,7 @@ namespace Theseus88 {
         static std::function<const T(const T)> getActivationFunction(const Method& method);
 
         // ADD COMMENT HERE LATER
+        static const T none(const T x);
         static const T sigmoid(const T x);
         static const T sigmoidDerivative(const T x);
         static const T relu(const T x);

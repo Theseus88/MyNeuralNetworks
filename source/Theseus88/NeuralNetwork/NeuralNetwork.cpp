@@ -139,7 +139,7 @@ namespace Theseus88 {
         if (m_isFinalized) return;
         if (m_inputVector.size() == 0) throwError("ADD ERROR MESSAGE HERE LATER.");
         if (m_outputVectorSize == 0) throwError("ADD ERROR MESSAGE HERE LATER.");
-        if (m_networkLayers[0]->getLayerType() != LayerType::Input) throwError("ADD ERROR MESSAGE HERE LATER."); // Maybe insert an input layer here instead of throwing an error...
+        if (m_networkLayers[0]->getLayerType() != LayerType::Input) throwError("ADD ERROR MESSAGE HERE LATER.");
         if (m_networkLayers.back()->getLayerType() != LayerType::Output) addNetworkLayer<LayerType::Output>(m_outputVectorSize);
         if (m_networkLayers.size() < S_MINIMUMLAYERCOUNT) throwError("ADD ERROR MESSAGE HERE LATER.");
         if (m_networkLayers[0]->getLayerNeuronsSize() != m_inputVector.size()) m_networkLayers[0]->setNeuronCount(m_inputVector.size());

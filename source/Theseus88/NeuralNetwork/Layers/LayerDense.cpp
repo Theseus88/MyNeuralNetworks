@@ -13,7 +13,15 @@ namespace Theseus88 {
     template <typename T> LayerDense<T>::LayerDense(const int neuronCount, const NeuronType neuronType)
     : LayerDense<T>(std::size_t(neuronCount), neuronType) {};
     template <typename T> LayerDense<T>::LayerDense(const size_t neuronCount, const NeuronType neuronType)
-    : LayerBase<T>(LayerType::Dense, neuronType, neuronCount) {};
+    : LayerBase<T>(LayerType::Dense, neuronType, neuronCount) {
+        LayerBase<T>::setRandomizeParameterOne(static_cast<T>(-1.0));
+        LayerBase<T>::setRandomizeParameterTwo(static_cast<T>(1.0));
+        LayerBase<T>::setRandomizeMethod(RandomizeFunctions<T>::Method::Uniform);
+        LayerBase<T>::setActivationMethod(ActivationFunctions<T>::Method::Sigmoid);
+        LayerBase<T>::setDerivativeMethod(ActivationFunctions<T>::Method::SigmoidDerivative);
+        LayerBase<T>::setErrorMethod(ErrorFunctions<T>::Method::MeanSquaredError);
+        LayerBase<T>::setOptimizerMethod(OptimizerFunctions<T>::Method::StochasticGradientDescent);
+    };
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerDense<T>::~LayerDense() {};

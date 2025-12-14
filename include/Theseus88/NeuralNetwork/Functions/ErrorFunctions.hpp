@@ -11,9 +11,10 @@ namespace Theseus88 {
     template <typename T> class ErrorFunctions {
     public:
         // ADD COMMENT HERE LATER
-        enum class Method { MeanSquaredError, MeanAbsoluteError, SquaredError, BinaryCrossEntropy, HingeLoss, FocalLoss };
+        enum class Method { None, MeanSquaredError, MeanAbsoluteError, SquaredError, BinaryCrossEntropy, HingeLoss, FocalLoss };
         static constexpr const char* errorMethodToString(Method type) {
             switch (type) {
+                case Method::None: return "None";
                 case Method::MeanSquaredError: return "Mean Squared Error";
                 case Method::MeanAbsoluteError: return "Mean Absolute Error";
                 case Method::SquaredError: return "Squared Error";
