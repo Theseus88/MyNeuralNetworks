@@ -25,6 +25,12 @@ namespace Theseus88 {
         // Protected Member Variables
         std::size_t m_inputVectorSize;
         NeuronType m_neuronType;
+        T m_randomizeParameterOne, m_randomizeParameterTwo;
+        typename RandomizeFunctions<T>::Method m_randomizeMethod;
+        typename ActivationFunctions<T>::Method m_activationMethod;
+        typename ActivationFunctions<T>::Method m_derivativeMethod;
+        typename ErrorFunctions<T>::Method m_errorMethod;
+        typename OptimizerFunctions<T>::Method m_optimizerMethod;
         std::size_t m_neuronCount;
         std::vector<std::unique_ptr<NeuronBase<T>>> m_layerNeurons;
         const std::vector<T>* m_inputVectorPtr;
@@ -44,6 +50,13 @@ namespace Theseus88 {
         // Public Member Mutators
         void setInputVectorSize(const std::size_t inputVectorSize);
         void setNeuronType(const NeuronType neuronType);
+        void setRandomizeParameterOne(const T randomizeParameterOne);
+        void setRandomizeParameterTwo(const T randomizeParameterTwo);
+        void setRandomizeMethod(const typename RandomizeFunctions<T>::Method randomizeMethod);
+        void setActivationMethod(const typename ActivationFunctions<T>::Method activationMethod);
+        void setDerivativeMethod(const typename ActivationFunctions<T>::Method derivativeMethod);
+        void setErrorMethod(const typename ErrorFunctions<T>::Method errorMethod);
+        void setOptimizerMethod(const typename OptimizerFunctions<T>::Method optimizerMethod);
         void setNeuronCount(const std::size_t neuronCount);
         void setLayerNeuronsCapacity(const std::size_t neuronCapacity);
 
@@ -53,6 +66,13 @@ namespace Theseus88 {
         const std::size_t getInputVectorSize() const;
         const std::size_t getOutputVectorSize() const;
         const NeuronType getNeuronType() const;
+        const T getRandomizeParameterOne() const;
+        const T getRandomizeParameterTwo() const;
+        const typename RandomizeFunctions<T>::Method getRandomizeMethod() const;
+        const typename ActivationFunctions<T>::Method getActivationMethod() const;
+        const typename ActivationFunctions<T>::Method getDerivativeMethod() const;
+        const typename ErrorFunctions<T>::Method getErrorMethod() const;
+        const typename OptimizerFunctions<T>::Method getOptimizerMethod() const;
         const std::size_t getNeuronCount() const;
         const std::size_t getLayerNeuronsCapacity() const;
         const std::size_t getLayerNeuronsSize() const;
@@ -63,7 +83,7 @@ namespace Theseus88 {
         // Public Member Functions
         //virtual std::unique_ptr<LayerBase<T>> cloneNetworkLayer() const = 0; // Still working on code here...
         virtual const size_t finalizeNetworkLayer(const size_t inputVectorSize) = 0; // Still working on code here...
-        virtual void saveNetworkLayer(JsonWriter& writer, const bool includeNeurons = true) const; // Still working on code here...
+        virtual void saveNetworkLayer(JsonWriter& writer) const; // Still working on code here...
         virtual const std::vector<T>& propagateForward(const std::vector<T>& inputVector) = 0; // Still working on code here...
 
     };

@@ -18,10 +18,10 @@
 
 // ADD COMMENT HERE LATER
 #include "../JsonUtilities/JsonUtilities.hpp"
+#include "Functions/RandomizeFunctions.hpp"
 #include "Functions/ActivationFunctions.hpp"
 #include "Functions/ErrorFunctions.hpp"
 #include "Functions/OptimizerFunctions.hpp"
-#include "Functions/RandomizeFunctions.hpp"
 
 // ADD COMMENT HERE LATER
 namespace Theseus88 {

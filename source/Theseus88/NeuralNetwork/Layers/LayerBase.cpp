@@ -18,7 +18,7 @@ namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerBase<T>::LayerBase(const LayerType layerType, const NeuronType neuronType, const size_t neuronCount)
-    : M_LAYERDATATYPE(dataTypeToString(T())), M_LAYERTYPE(layerType), m_neuronType(neuronType), m_neuronCount(neuronCount), m_layerNeurons(), m_outputVector(), m_isFinalized(false) {};
+    : M_LAYERDATATYPE(dataTypeToString(T())), M_LAYERTYPE(layerType), m_neuronType(neuronType), m_randomizeParameterOne(static_cast<T>(-1.0)), m_randomizeParameterTwo(static_cast<T>(1.0)), m_randomizeMethod(RandomizeFunctions<T>::Method::Uniform), m_activationMethod(ActivationFunctions<T>::Method::Sigmoid), m_derivativeMethod(ActivationFunctions<T>::Method::SigmoidDerivative), m_errorMethod(ErrorFunctions<T>::Method::MeanSquaredError), m_optimizerMethod(OptimizerFunctions<T>::Method::StochasticGradientDescent), m_neuronCount(neuronCount), m_layerNeurons(), m_outputVector(), m_isFinalized(false) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerBase<T>::~LayerBase() {};
@@ -33,6 +33,27 @@ namespace Theseus88 {
         if (neuronType == m_neuronType) return;
         m_isFinalized = false;
         m_neuronType = neuronType;
+    };
+    template <typename T> void LayerBase<T>::setRandomizeParameterOne(const T randomizeParameterOne) {
+        m_randomizeParameterOne = randomizeParameterOne;
+    };
+    template <typename T> void LayerBase<T>::setRandomizeParameterTwo(const T randomizeParameterTwo) {
+        m_randomizeParameterTwo = randomizeParameterTwo;
+    };
+    template <typename T> void LayerBase<T>::setRandomizeMethod(const typename RandomizeFunctions<T>::Method randomizeMethod) {
+        m_randomizeMethod = randomizeMethod;
+    };
+    template <typename T> void LayerBase<T>::setActivationMethod(const typename ActivationFunctions<T>::Method activationMethod) {
+        m_activationMethod = activationMethod;
+    };
+    template <typename T> void LayerBase<T>::setDerivativeMethod(const typename ActivationFunctions<T>::Method derivativeMethod) {
+        m_derivativeMethod = derivativeMethod;
+    };
+    template <typename T> void LayerBase<T>::setErrorMethod(const typename ErrorFunctions<T>::Method errorMethod) {
+        m_errorMethod = errorMethod;
+    };
+    template <typename T> void LayerBase<T>::setOptimizerMethod(const typename OptimizerFunctions<T>::Method optimizerMethod) {
+        m_optimizerMethod = optimizerMethod;
     };
     template <typename T> void LayerBase<T>::setNeuronCount(const std::size_t neuronCount) {
         if (neuronCount == m_neuronCount) return;
@@ -63,6 +84,27 @@ namespace Theseus88 {
     template <typename T> const NeuronType LayerBase<T>::getNeuronType() const {
         return m_neuronType;
     };
+    template <typename T> const T LayerBase<T>::getRandomizeParameterOne() const {
+        return m_randomizeParameterOne;
+    };
+    template <typename T> const T LayerBase<T>::getRandomizeParameterTwo() const {
+        return m_randomizeParameterTwo;
+    };
+    template <typename T> const typename RandomizeFunctions<T>::Method LayerBase<T>::getRandomizeMethod() const {
+        return m_randomizeMethod;
+    };
+    template <typename T> const typename ActivationFunctions<T>::Method LayerBase<T>::getActivationMethod() const {
+        return m_activationMethod;
+    };
+    template <typename T> const typename ActivationFunctions<T>::Method LayerBase<T>::getDerivativeMethod() const {
+        return m_derivativeMethod;
+    };
+    template <typename T> const typename ErrorFunctions<T>::Method LayerBase<T>::getErrorMethod() const {
+        return m_errorMethod;
+    };
+    template <typename T> const typename OptimizerFunctions<T>::Method LayerBase<T>::getOptimizerMethod() const {
+        return m_optimizerMethod;
+    };
     template <typename T> const std::size_t LayerBase<T>::getNeuronCount() const {
         return m_neuronCount;
     };
@@ -83,19 +125,24 @@ namespace Theseus88 {
     };
 
     // Public Member Functions
-    template <typename T> void LayerBase<T>::saveNetworkLayer(JsonWriter& writer, const bool includeNeurons) const { // Still working on code here...
+    template <typename T> void LayerBase<T>::saveNetworkLayer(JsonWriter& writer) const { // Still working on code here...
         writer.writeObjectStart();
         writer.writeString("Layer Data Type", M_LAYERDATATYPE);
         writer.writeString("Layer Type", layerTypeToString(M_LAYERTYPE));
         writer.writeNumber("Layer Input Vector Size", m_inputVectorSize);
         writer.writeNumber("Layer Output Vector Size", m_outputVector.size());
         writer.writeString("Layer Neuron Type", neuronTypeToString(m_neuronType));
-        if (includeNeurons) {
-            writer.writeNumber("Layer Neuron Count", m_neuronCount);
-            writer.writeArrayStart("Layer Neurons");
-            for (const auto& neuronPtr : m_layerNeurons) neuronPtr->saveLayerNeuron(writer);
-            writer.writeArrayEnd();
-        };
+        writer.writeNumber("Layer Neuron Randomize Parameter One", m_randomizeParameterOne);
+        writer.writeNumber("Layer Neuron Randomize Parameter Two", m_randomizeParameterTwo);
+        writer.writeString("Layer Neuron Randomize Method", RandomizeFunctions<T>::randomizeMethodToString(m_randomizeMethod));
+        writer.writeString("Layer Neuron Activation Method", ActivationFunctions<T>::activationMethodToString(m_activationMethod));
+        writer.writeString("Layer Neuron Derivative Method", ActivationFunctions<T>::derivativeMethodToString(m_derivativeMethod));
+        writer.writeString("Layer Neuron Error Method", ErrorFunctions<T>::errorMethodToString(m_errorMethod));
+        writer.writeString("Layer Neuron Optimizer Method", OptimizerFunctions<T>::optimizerMethodToString(m_optimizerMethod));
+        writer.writeNumber("Layer Neuron Count", m_neuronCount);
+        writer.writeArrayStart("Layer Neurons");
+        for (const auto& neuronPtr : m_layerNeurons) neuronPtr->saveLayerNeuron(writer);
+        writer.writeArrayEnd();
     };
 
     // ADD COMMENT HERE LATER

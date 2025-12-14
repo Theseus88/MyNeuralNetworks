@@ -28,8 +28,8 @@ namespace Theseus88 {
         LayerBase<T>::m_isFinalized = true;
         return LayerBase<T>::m_outputVector.size();
     };
-    template <typename T> void LayerInput<T>::saveNetworkLayer(JsonWriter& writer, const bool includeNeurons) const { // Still working on code here...
-        LayerBase<T>::saveNetworkLayer(writer, includeNeurons);
+    template <typename T> void LayerInput<T>::saveNetworkLayer(JsonWriter& writer) const { // Still working on code here...
+        LayerBase<T>::saveNetworkLayer(writer);
         writer.writeObjectEnd();
     };
     template <typename T> const std::vector<T>& LayerInput<T>::propagateForward(const std::vector<T>& inputVector) { // Still working on code here...

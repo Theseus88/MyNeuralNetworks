@@ -13,6 +13,13 @@
 			"Layer Input Vector Size": 1,
 			"Layer Output Vector Size": 1,
 			"Layer Neuron Type": "Input",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "Mean Squared Error",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
 			"Layer Neuron Count": 1,
 			"Layer Neurons": [
 				{
@@ -29,11 +36,11 @@
 			"Layer Neuron Type": "Feedforward",
 			"Layer Neuron Randomize Parameter One": -1,
 			"Layer Neuron Randomize Parameter Two": 1,
-			"Layer Neuron Randomize Method": "Uniform",
-			"Layer Neuron Activation Method": "Sigmoid",
-			"Layer Neuron Derivative Method": "Sigmoid Derivative",
-			"Layer Neuron Error Method": "Mean Squared Error",
-			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
+			"Layer Neuron Randomize Method": "Normal",
+			"Layer Neuron Activation Method": "Relu",
+			"Layer Neuron Derivative Method": "Relu Derivative",
+			"Layer Neuron Error Method": "Mean Absolute Error",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent With Nesterov Momentum",
 			"Layer Neuron Count": 2,
 			"Layer Neurons": [
 				{
@@ -114,6 +121,13 @@
 			"Layer Input Vector Size": 4,
 			"Layer Output Vector Size": 5,
 			"Layer Neuron Type": "Output",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "Mean Squared Error",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
 			"Layer Neuron Count": 5,
 			"Layer Neurons": [
 				{

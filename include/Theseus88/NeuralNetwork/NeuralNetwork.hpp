@@ -62,12 +62,14 @@ namespace Theseus88 {
         const double getMomentum() const;
         const std::size_t getNetworkLayersCapacity() const override;
         const std::size_t getNetworkLayersSize() const override;
+        LayerBase<T>& getNetworkLayer(const int layerIndex);
+        LayerBase<T>& getNetworkLayer(const std::size_t layerIndex);
         const std::vector<T>& getInputVector() const;
         const std::vector<T>& getOutputVector() const;
         const bool getIsFinalized() const override;
 
         // Public Member Functions
-        template <LayerType LType, typename... Args> void addNetworkLayer(Args&&... args);
+        template <LayerType LType, typename... Args> const std::size_t addNetworkLayer(Args&&... args);
         template <LayerType LType, typename... Args> void insertNetworkLayer(const std::size_t layerIndex, Args&&... args);
         void removeNetworkLayer(const size_t layerIndex) override;
         void finalizeNeuralNetwork() override;
