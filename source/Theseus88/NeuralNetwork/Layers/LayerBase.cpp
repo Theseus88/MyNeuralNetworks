@@ -15,8 +15,11 @@ namespace Theseus88 {
         if (m_layerNeurons.capacity() != m_neuronCount) m_layerNeurons.reserve(m_neuronCount);
         for (std::size_t i = 0; i < m_neuronCount; i++) {
             m_layerNeurons.emplace_back(FactoryNeuron<T>::createNeuron(m_neuronType));
+            m_layerNeurons[i]->setRandomizeFunction(m_randomizeMethod);
             m_layerNeurons[i]->setActivationFunction(m_activationMethod);
             m_layerNeurons[i]->setDerivativeFunction(m_derivativeMethod);
+            m_layerNeurons[i]->setErrorFunction(m_errorMethod);
+            m_layerNeurons[i]->setOptimizerFunction(m_optimizerMethod);
         };
     };
 

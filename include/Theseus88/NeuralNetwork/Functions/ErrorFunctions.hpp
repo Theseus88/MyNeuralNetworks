@@ -25,16 +25,17 @@ namespace Theseus88 {
             };
         };
 
-        /*// ADD COMMENT HERE LATER
-        static std::function<const T(NeuralNetworkNeuron<T>&, const T, const T)> getErrorFunction(const Method method);
+        // ADD COMMENT HERE LATER
+        static std::function<const T(NeuronBase<T>&, const T, const T)> getErrorFunction(const Method method);
 
         // ADD COMMENT HERE LATER
-        static const T meanSquaredError(NeuralNetworkNeuron<T>& neuron, const T predicted, const T target);
-        static const T meanAbsoluteError(NeuralNetworkNeuron<T>& neuron, const T predicted, const T target);
-        static const T squaredError(NeuralNetworkNeuron<T>& neuron, const T predicted, const T target);
-        static const T binaryCrossEntropy(NeuralNetworkNeuron<T>& neuron, const T predicted, const T target);
-        static const T hingeLoss(NeuralNetworkNeuron<T>& neuron, const T predicted, const T target);
-        static const T focalLoss(NeuralNetworkNeuron<T>& neuron, const T predicted, const T target);*/
+        static const T none(NeuronBase<T>& neuron, const T predicted, const T target);
+        static const T meanSquaredError(NeuronBase<T>& neuron, const T predicted, const T target);
+        static const T meanAbsoluteError(NeuronBase<T>& neuron, const T predicted, const T target);
+        static const T squaredError(NeuronBase<T>& neuron, const T predicted, const T target);
+        static const T binaryCrossEntropy(NeuronBase<T>& neuron, const T predicted, const T target);
+        static const T hingeLoss(NeuronBase<T>& neuron, const T predicted, const T target);
+        static const T focalLoss(NeuronBase<T>& neuron, const T predicted, const T target);
 
     };
 

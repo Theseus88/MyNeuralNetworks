@@ -3,7 +3,13 @@
 #define THESEUS88_LAYERBASE_HPP
 
 #include "../NeuralNetworkCore.hpp"
+
 #include "../Factories/FactoryNeuron.hpp"
+
+#include "../Functions/RandomizeFunctions.hpp"
+#include "../Functions/ActivationFunctions.hpp"
+#include "../Functions/ErrorFunctions.hpp"
+#include "../Functions/OptimizerFunctions.hpp"
 
 // ADD COMMENT HERE LATER
 namespace Theseus88 {

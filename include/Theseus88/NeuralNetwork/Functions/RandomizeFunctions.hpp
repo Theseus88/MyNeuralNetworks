@@ -3,7 +3,7 @@
 #define THESEUS88_RANDOMIZEFUNCTIONS_HPP
 
 #include "../NeuralNetworkCore.hpp"
-//#include "NeuralNetworkConnection.hpp"
+#include "../Neurons/NeuronConnection.hpp"
 
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
@@ -22,12 +22,13 @@ namespace Theseus88 {
             };
         };
 
-        /*// ADD COMMENT HERE LATER
-        static std::function<void(std::vector<NeuralNetworkConnection<T>>&, NeuralNetworkConnection<T>&, const T, const T)> getRandomizeFunction(const Method method);
+        // ADD COMMENT HERE LATER
+        static std::function<void(std::vector<NeuronConnection<T>>&, NeuronConnection<T>&, const T, const T)> getRandomizeFunction(const Method method);
 
         // ADD COMMENT HERE LATER
-        static void uniform(std::vector<NeuralNetworkConnection<T>>& neuronConnections, NeuralNetworkConnection<T>& biasConnection, const T minVal, const T maxVal);
-        static void normal(std::vector<NeuralNetworkConnection<T>>& neuronConnections, NeuralNetworkConnection<T>& biasConnection, const T mean, const T stddev);*/
+        static void none(std::vector<NeuronConnection<T>>& neuronConnections, NeuronConnection<T>& biasConnection, const T, const T);
+        static void uniform(std::vector<NeuronConnection<T>>& neuronConnections, NeuronConnection<T>& biasConnection, const T minVal, const T maxVal);
+        static void normal(std::vector<NeuronConnection<T>>& neuronConnections, NeuronConnection<T>& biasConnection, const T mean, const T stddev);
 
     };
 

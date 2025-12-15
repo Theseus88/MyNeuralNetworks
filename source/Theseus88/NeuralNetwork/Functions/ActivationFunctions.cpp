@@ -21,7 +21,8 @@ namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
     template <typename T> const T ActivationFunctions<T>::none(const T x) {
-        return x;
+        throw std::runtime_error("Activation Functions Error: ADD ERROR MESSAGE HERE LATER.\n");
+        return static_cast<T>(0.0);
     };
     template <typename T> const T ActivationFunctions<T>::sigmoid(const T x) {
         return static_cast<T>(1.0) / (static_cast<T>(1.0) + std::exp(-x));

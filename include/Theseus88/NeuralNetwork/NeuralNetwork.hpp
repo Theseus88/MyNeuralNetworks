@@ -3,8 +3,15 @@
 #define THESEUS88_NEURALNETWORK_HPP
 
 #include "NeuralNetworkCore.hpp"
+
 #include "Factories/FactoryNeuron.hpp"
 #include "Factories/FactoryLayer.hpp"
+
+#include "Functions/RandomizeFunctions.hpp"
+#include "Functions/ActivationFunctions.hpp"
+#include "Functions/ErrorFunctions.hpp"
+#include "Functions/OptimizerFunctions.hpp"
+
 #include "INeuralNetwork.hpp"
 
 // ADD COMMENT HERE LATER

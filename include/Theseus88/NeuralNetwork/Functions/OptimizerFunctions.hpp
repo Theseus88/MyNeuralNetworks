@@ -25,16 +25,17 @@ namespace Theseus88 {
             };
         };
 
-        /*// ADD COMMENT HERE LATER
-        static std::function<void(NeuralNetworkNeuron<T>&)> getOptimizerFunction(const Method method);
+        // ADD COMMENT HERE LATER
+        static std::function<void(NeuronBase<T>&)> getOptimizerFunction(const Method method);
 
         // ADD COMMENT HERE LATER
-        static void stochasticGradientDescent(NeuralNetworkNeuron<T>& neuron);
-        static void stochasticGradientDescentWithClassicalMomentum(NeuralNetworkNeuron<T>& neuron);
-        static void stochasticGradientDescentWithNesterovMomentum(NeuralNetworkNeuron<T>& neuron);
-        static void adaptiveGradient(NeuralNetworkNeuron<T>& neuron);
-        static void rootMeanSquaredPropagation(NeuralNetworkNeuron<T>& neuron);
-        static void adaptiveMomentEstimation(NeuralNetworkNeuron<T>& neuron);*/
+        static void none(NeuronBase<T>& neuron);
+        static void stochasticGradientDescent(NeuronBase<T>& neuron);
+        static void stochasticGradientDescentWithClassicalMomentum(NeuronBase<T>& neuron);
+        static void stochasticGradientDescentWithNesterovMomentum(NeuronBase<T>& neuron);
+        static void adaptiveGradient(NeuronBase<T>& neuron);
+        static void rootMeanSquaredPropagation(NeuronBase<T>& neuron);
+        static void adaptiveMomentEstimation(NeuronBase<T>& neuron);
 
     };
 

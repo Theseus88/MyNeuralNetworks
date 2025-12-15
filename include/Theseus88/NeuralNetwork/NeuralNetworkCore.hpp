@@ -18,10 +18,6 @@
 
 // ADD COMMENT HERE LATER
 #include "../JsonUtilities/JsonUtilities.hpp"
-#include "Functions/RandomizeFunctions.hpp"
-#include "Functions/ActivationFunctions.hpp"
-#include "Functions/ErrorFunctions.hpp"
-#include "Functions/OptimizerFunctions.hpp"
 
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
@@ -65,5 +61,7 @@ namespace Theseus88 {
     template <typename T> class NeuralNetwork;
 
 };
+
+
 
 #endif // THESEUS88_NEURALNETWORKCORE_HPP

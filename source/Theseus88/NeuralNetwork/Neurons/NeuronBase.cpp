@@ -17,11 +17,20 @@ namespace Theseus88 {
     template <typename T> NeuronBase<T>::~NeuronBase() {};
 
     // Public Member Mutators
+    template <typename T> void NeuronBase<T>::setRandomizeFunction(const typename RandomizeFunctions<T>::Method randomizeMethod) {
+        m_randomizeFunction = RandomizeFunctions<T>::getRandomizeFunction(randomizeMethod);
+    };
     template <typename T> void NeuronBase<T>::setActivationFunction(const typename ActivationFunctions<T>::Method activationMethod) {
         m_activationFunction = ActivationFunctions<T>::getActivationFunction(activationMethod);
     };
     template <typename T> void NeuronBase<T>::setDerivativeFunction(const typename ActivationFunctions<T>::Method derivativeMethod) {
         m_derivativeFunction = ActivationFunctions<T>::getActivationFunction(derivativeMethod);
+    };
+    template <typename T> void NeuronBase<T>::setErrorFunction(const typename ErrorFunctions<T>::Method errorMethod) {
+        m_errorFunction = ErrorFunctions<T>::getErrorFunction(errorMethod);
+    };
+    template <typename T> void NeuronBase<T>::setOptimizerFunction(const typename OptimizerFunctions<T>::Method optimizerMethod) {
+        m_optimizerFunction = OptimizerFunctions<T>::getOptimizerFunction(optimizerMethod);
     };
 
     // ADD COMMENT HERE LATER
