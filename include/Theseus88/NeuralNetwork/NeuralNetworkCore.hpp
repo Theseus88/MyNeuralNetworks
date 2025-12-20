@@ -3,7 +3,7 @@
 #define THESEUS88_NEURALNETWORKCORE_HPP
 
 // ADD COMMENT HERE LATER
-#include <algorithm>    // std::max
+#include <algorithm>    // std:: min, std::max
 #include <filesystem>   // std::filesystem
 #include <fstream>      // std::ofstream
 #include <functional>   // std::function
@@ -48,6 +48,7 @@ namespace Theseus88 {
     };
 
     // Forward Declarations
+    template <typename T> class NeuronConnection;
     template <typename T> class NeuronBase;
     template <typename T> class NeuronInput;
     template <typename T> class NeuronOutput;

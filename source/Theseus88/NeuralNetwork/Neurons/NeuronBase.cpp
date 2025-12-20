@@ -9,6 +9,15 @@ namespace Theseus88 {
         throw std::runtime_error(std::string("Neuron Base Error: ") + errorMessage + "\n");
     };
 
+    // Protected Member Functions
+    template <typename T> void NeuronBase<T>::updateNeuronConnections() { // Still working on code here...
+        m_neuronConnections.clear();
+        if (m_neuronConnections.capacity() != m_connectionCount) m_neuronConnections.reserve(m_connectionCount);
+        for (std::size_t i = 0; i < m_connectionCount; i++) {
+            m_neuronConnections.emplace_back();
+        };
+    };
+
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::NeuronBase(const NeuronType neuronType)
     : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType)/*, m_activationFunction(), m_derivativeFunction()*/ {};
@@ -16,7 +25,7 @@ namespace Theseus88 {
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::~NeuronBase() {};
 
-    // Public Member Mutators
+    // Public Member Function Mutators
     template <typename T> void NeuronBase<T>::setRandomizeFunction(const typename RandomizeFunctions<T>::Method randomizeMethod) {
         m_randomizeFunction = RandomizeFunctions<T>::getRandomizeFunction(randomizeMethod);
     };
@@ -31,6 +40,14 @@ namespace Theseus88 {
     };
     template <typename T> void NeuronBase<T>::setOptimizerFunction(const typename OptimizerFunctions<T>::Method optimizerMethod) {
         m_optimizerFunction = OptimizerFunctions<T>::getOptimizerFunction(optimizerMethod);
+    };
+
+    // Public Member Mutators
+    template <typename T> void NeuronBase<T>::setConnectionCount(const size_t connectionCount) {
+        if (connectionCount == m_connectionCount) return;
+        if (connectionCount <= 0) throwError("Connection count must be greater than 0.");
+        m_isFinalized = false;
+        m_connectionCount = connectionCount;
     };
 
     // ADD COMMENT HERE LATER

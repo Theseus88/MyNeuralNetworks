@@ -33,6 +33,7 @@ namespace Theseus88 {
     // Public Member Mutators
     template <typename T> void LayerBase<T>::setInputVectorSize(const std::size_t inputVectorSize) {
         if (inputVectorSize == m_inputVectorSize) return;
+        if (inputVectorSize <= 0) throwError("Input Vector Size must be greater than 0.");
         m_isFinalized = false;
         m_inputVectorSize = inputVectorSize;
     };

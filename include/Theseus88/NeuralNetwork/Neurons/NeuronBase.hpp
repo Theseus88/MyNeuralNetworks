@@ -27,12 +27,20 @@ namespace Theseus88 {
         const std::string M_NEURONDATATYPE;
         const NeuronType M_NEURONTYPE;
 
-        // Protected Member Variables
-        std::function<void(std::vector<NeuronConnection<T>>&, NeuronConnection<T>&, const T&, const T&)> m_randomizeFunction;
-        std::function<const T(const T&)> m_activationFunction;
-        std::function<const T(const T&)> m_derivativeFunction;
-        std::function<const T(NeuronBase<T>&, const T&, const T&)> m_errorFunction;
+        // Protected Member Function Variables
+        std::function<void(std::vector<NeuronConnection<T>>&, NeuronConnection<T>&, const T, const T)> m_randomizeFunction;
+        std::function<const T(const T)> m_activationFunction;
+        std::function<const T(const T)> m_derivativeFunction;
+        std::function<const T(NeuronBase<T>&, const T, const T)> m_errorFunction;
         std::function<void(NeuronBase<T>&)> m_optimizerFunction;
+
+        // Protected Member Variables
+        std::size_t m_connectionCount;
+        std::vector<NeuronConnection<T>> m_neuronConnections;
+        bool m_isFinalized;
+
+        // Protected Member Functions
+        void updateNeuronConnections(); // Still working on code here...
 
     public:
         // Public Member Constructors
@@ -41,16 +49,19 @@ namespace Theseus88 {
         // Public Member Destructor
         ~NeuronBase();
 
-        // Public Member Mutators
+        // Public Member Function Mutators
         void setRandomizeFunction(const typename RandomizeFunctions<T>::Method randomizeMethod);
         void setActivationFunction(const typename ActivationFunctions<T>::Method activationMethod);
         void setDerivativeFunction(const typename ActivationFunctions<T>::Method derivativeMethod);
         void setErrorFunction(const typename ErrorFunctions<T>::Method errorMethod);
         void setOptimizerFunction(const typename OptimizerFunctions<T>::Method optimizerMethod);
 
+        // Public Member Mutators
+        void setConnectionCount(const std::size_t connectionCount);
+
         // Public Member Functions
         //virtual std::unique_ptr<NeuronBase<T>> cloneLayerNeuron() const = 0; // Still working on code here...
-        virtual void finalizeLayerNeuron() = 0; // Still working on code here...
+        virtual void finalizeLayerNeuron(const size_t inputVectorSize) = 0; // Still working on code here...
         virtual void saveLayerNeuron(JsonWriter& writer) const; // Still working on code here...
         //virtual const T propagateForward(const std::vector<T>& inputVector) = 0; // Still working on code here...
 

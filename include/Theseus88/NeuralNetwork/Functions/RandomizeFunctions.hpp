@@ -3,7 +3,7 @@
 #define THESEUS88_RANDOMIZEFUNCTIONS_HPP
 
 #include "../NeuralNetworkCore.hpp"
-#include "../Neurons/NeuronConnection.hpp"
+#include "../Neurons/NeuronConnection.hpp" // Full definition needed for NeuronConnection<T>
 
 // ADD COMMENT HERE LATER
 namespace Theseus88 {

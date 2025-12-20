@@ -32,7 +32,7 @@ namespace Theseus88 {
         LayerBase<T>::updateLayerNeurons();
         LayerBase<T>::m_outputVector.clear();
         LayerBase<T>::m_outputVector.resize(LayerBase<T>::m_neuronCount);
-        for (auto& neuron : LayerBase<T>::m_layerNeurons) neuron->finalizeLayerNeuron();
+        for (auto& neuron : LayerBase<T>::m_layerNeurons) neuron->finalizeLayerNeuron(LayerBase<T>::m_inputVectorSize);
         LayerBase<T>::m_isFinalized = true;
         return LayerBase<T>::m_outputVector.size();
     };
