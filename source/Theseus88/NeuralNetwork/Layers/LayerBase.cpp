@@ -133,6 +133,22 @@ namespace Theseus88 {
     };
 
     // Public Member Functions
+    template <typename T> const std::size_t LayerBase<T>::finalizeNetworkLayer(const std::size_t inputVectorSize) { // Still working on code here...
+        m_inputVectorSize = inputVectorSize;
+        updateLayerNeurons();
+        m_outputVector.clear();
+        m_outputVector.resize(m_neuronCount);
+        if (M_LAYERTYPE == LayerType::Input) {
+            std::size_t index = 0;
+            for (auto& neuron : m_layerNeurons) neuron->finalizeLayerNeuron(index++, m_randomizeParameterOne, m_randomizeParameterTwo);
+        } else if (M_LAYERTYPE == LayerType::Output || M_LAYERTYPE == LayerType::Dense) {
+            for (auto& neuron : m_layerNeurons) neuron->finalizeLayerNeuron(m_inputVectorSize, m_randomizeParameterOne, m_randomizeParameterTwo);
+        } else {
+            throwError("ADD ERROR MESSAGE HERE LATER.");
+        };        
+        m_isFinalized = true;
+        return m_outputVector.size();
+    };
     template <typename T> void LayerBase<T>::saveNetworkLayer(JsonWriter& writer) const { // Still working on code here...
         writer.writeObjectStart();
         writer.writeString("Layer Data Type", M_LAYERDATATYPE);

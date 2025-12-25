@@ -10,17 +10,20 @@ namespace Theseus88 {
     };
 
     // Protected Member Functions
-    template <typename T> void NeuronBase<T>::updateNeuronConnections() { // Still working on code here...
+    template <typename T> void NeuronBase<T>::updateNeuronConnections(const T randomizeParamterOne, const T randomizeParamterTwo) { // Still working on code here...
         m_neuronConnections.clear();
         if (m_neuronConnections.capacity() != m_connectionCount) m_neuronConnections.reserve(m_connectionCount);
         for (std::size_t i = 0; i < m_connectionCount; i++) {
             m_neuronConnections.emplace_back();
         };
+        if (M_NEURONTYPE == NeuronType::Output || M_NEURONTYPE == NeuronType::Feedforward) {
+            m_randomizeFunction(m_neuronConnections, m_biasConnection, randomizeParamterOne, randomizeParamterTwo);
+        };
     };
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::NeuronBase(const NeuronType neuronType)
-    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType)/*, m_activationFunction(), m_derivativeFunction()*/ {};
+    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::~NeuronBase() {};

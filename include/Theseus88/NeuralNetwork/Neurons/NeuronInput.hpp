@@ -17,6 +17,9 @@ namespace Theseus88 {
         // Private Static Functions
         static void throwError(const char* errorMessage);
 
+        // Private Member Variables
+        std::size_t m_index;
+
     public:
         // Default Constructors
         NeuronInput();
@@ -25,7 +28,7 @@ namespace Theseus88 {
         ~NeuronInput();
 
         // ADD COMMENT HERE LATER
-        void finalizeLayerNeuron(const size_t inputVectorSize) override; // Still working on code here...
+        void finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParamterOne, const T randomizeParamterTwo) override; // Still working on code here...
         void saveLayerNeuron(JsonWriter& writer) const override; // Still working on code here...
         //const T propagateForward(const std::vector<T>& inputVector) override; // Still working on code here...
 

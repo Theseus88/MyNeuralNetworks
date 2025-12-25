@@ -17,8 +17,9 @@ namespace Theseus88 {
     template <typename T> NeuronOutput<T>::~NeuronOutput() {};
 
     // ADD COMMENT HERE LATER
-    template <typename T> void NeuronOutput<T>::finalizeLayerNeuron(const size_t inputVectorSize) { // Still working on code here...
-
+    template <typename T> void NeuronOutput<T>::finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParamterOne, const T randomizeParamterTwo) { // Still working on code here...
+        NeuronBase<T>::m_connectionCount = inputVectorSize;
+        NeuronBase<T>::updateNeuronConnections(randomizeParamterOne, randomizeParamterTwo);
     };
     template <typename T> void NeuronOutput<T>::saveLayerNeuron(JsonWriter& writer) const { // Still working on code here...
         NeuronBase<T>::saveLayerNeuron(writer);

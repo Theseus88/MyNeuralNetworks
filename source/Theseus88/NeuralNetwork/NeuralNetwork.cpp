@@ -20,7 +20,7 @@ namespace Theseus88 {
     template <typename T> NeuralNetwork<T>::NeuralNetwork(const std::string& networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize)
     : NeuralNetwork(std::string(networkName), inputVectorSize, outputVectorSize) {};
     template <typename T> NeuralNetwork<T>::NeuralNetwork(std::string&& networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize)
-    : M_NETWORKDATATYPE(dataTypeToString(T())), m_networkName(std::move(networkName)), m_learningRate(static_cast<T>(0)), m_momentum(static_cast<T>(0)), m_outputVectorSize(outputVectorSize), m_networkLayers(), m_outputVectorPtr(nullptr), m_isFinalized(false) {
+    : M_NETWORKDATATYPE(dataTypeToString(T())), m_networkName(std::move(networkName)), m_learningRate(static_cast<T>(0.01)), m_momentum(static_cast<T>(0.9)), m_outputVectorSize(outputVectorSize), m_networkLayers(), m_outputVectorPtr(nullptr), m_isFinalized(false) {
         // ADD COMMENT HERE LATER
         setInputVectorSize(inputVectorSize);
         setNetworkLayersCapacity(S_DEFAULTLAYERCAPACITY);

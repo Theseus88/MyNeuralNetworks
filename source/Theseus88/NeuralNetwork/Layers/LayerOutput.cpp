@@ -13,20 +13,22 @@ namespace Theseus88 {
     template <typename T> LayerOutput<T>::LayerOutput(const int neuronCount, const NeuronType neuronType)
     : LayerOutput<T>(std::size_t(neuronCount), neuronType) {};
     template <typename T> LayerOutput<T>::LayerOutput(const size_t neuronCount, const NeuronType neuronType)
-    : LayerBase<T>(LayerType::Output, neuronType, neuronCount) {};
+    : LayerBase<T>(LayerType::Output, neuronType, neuronCount) {
+        LayerBase<T>::setRandomizeParameterOne(static_cast<T>(-1.0));
+        LayerBase<T>::setRandomizeParameterTwo(static_cast<T>(1.0));
+        LayerBase<T>::setRandomizeMethod(RandomizeFunctions<T>::Method::Uniform);
+        LayerBase<T>::setActivationMethod(ActivationFunctions<T>::Method::Sigmoid);
+        LayerBase<T>::setDerivativeMethod(ActivationFunctions<T>::Method::SigmoidDerivative);
+        LayerBase<T>::setErrorMethod(ErrorFunctions<T>::Method::MeanSquaredError);
+        LayerBase<T>::setOptimizerMethod(OptimizerFunctions<T>::Method::StochasticGradientDescent);
+    };
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerOutput<T>::~LayerOutput() {};
 
     // ADD COMMENT HERE LATER
     template <typename T> const std::size_t LayerOutput<T>::finalizeNetworkLayer(const std::size_t inputVectorSize) { // Still working on code here...
-        LayerBase<T>::m_inputVectorSize = inputVectorSize;
-        LayerBase<T>::updateLayerNeurons();
-        LayerBase<T>::m_outputVector.clear();
-        LayerBase<T>::m_outputVector.resize(LayerBase<T>::m_neuronCount);
-        for (auto& neuron : LayerBase<T>::m_layerNeurons) neuron->finalizeLayerNeuron(LayerBase<T>::m_inputVectorSize);
-        LayerBase<T>::m_isFinalized = true;
-        return LayerBase<T>::m_outputVector.size();
+        return LayerBase<T>::finalizeNetworkLayer(inputVectorSize);
     };
     template <typename T> void LayerOutput<T>::saveNetworkLayer(JsonWriter& writer) const { // Still working on code here...
         LayerBase<T>::saveNetworkLayer(writer);

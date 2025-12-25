@@ -11,14 +11,15 @@ namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronInput<T>::NeuronInput()
-    : NeuronBase<T>(NeuronType::Input) {};
+    : NeuronBase<T>(NeuronType::Input), m_index(0) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronInput<T>::~NeuronInput() {};
 
     // ADD COMMENT HERE LATER
-    template <typename T> void NeuronInput<T>::finalizeLayerNeuron(const size_t inputVectorSize) { // Still working on code here...
-
+    template <typename T> void NeuronInput<T>::finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParamterOne, const T randomizeParamterTwo) { // Still working on code here...
+        NeuronBase<T>::m_connectionCount = 1;
+        NeuronBase<T>::updateNeuronConnections(randomizeParamterOne, randomizeParamterTwo);
     };
     template <typename T> void NeuronInput<T>::saveLayerNeuron(JsonWriter& writer) const { // Still working on code here...
         NeuronBase<T>::saveLayerNeuron(writer);

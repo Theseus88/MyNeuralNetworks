@@ -25,7 +25,6 @@ namespace Theseus88 {
         std::uniform_real_distribution<T> distrib(minVal, maxVal);
         for (auto& connection : neuronConnections) connection.m_weight = distrib(gen);
         biasConnection.m_weight = distrib(gen);
-        biasConnection.m_weight = distrib(gen);
     };
     template <typename T> void RandomizeFunctions<T>::normal(std::vector<NeuronConnection<T>>& neuronConnections, NeuronConnection<T>& biasConnection, const T mean, const T stddev) {
         if (stddev <= static_cast<T>(0.0)) throw std::runtime_error("Randomize Functions Error: Standard deviation must be positive for normal randomization.\n");
