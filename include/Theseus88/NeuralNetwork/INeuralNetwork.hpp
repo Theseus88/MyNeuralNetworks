@@ -41,6 +41,9 @@ namespace Theseus88 {
         // Public Pure Virtual Member Functions
         virtual void removeNetworkLayer(const size_t layerIndex) = 0;
         virtual void finalizeNeuralNetwork() = 0;
+        virtual void propagateForward(const std::vector<float>& inputVector) = 0;
+        virtual void propagateForward(const std::vector<double>& inputVector) = 0;
+        virtual void propagateForward(const std::vector<long double>& inputVector) = 0;
         virtual void saveNeuralNetwork(const std::filesystem::path& path) = 0;
         virtual void loadNeuralNetwork() = 0;
     

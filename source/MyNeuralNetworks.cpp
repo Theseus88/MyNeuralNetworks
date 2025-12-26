@@ -69,11 +69,13 @@ void testThree() {
 
 void testFour() {
     // ADD COMMENT HERE LATER
-    NeuralNetwork<float> myNeuralNetwork("Buddy", 20, 10);
-    for (int i = 0; i < 3; i++) myNeuralNetwork.addNetworkLayer<LayerType::Dense>(10);
+    NeuralNetwork<float> myNeuralNetwork("Buddy", 4, 4);
+    for (int i = 0; i < 3; i++) myNeuralNetwork.addNetworkLayer<LayerType::Dense>(2);
     myNeuralNetwork.finalizeNeuralNetwork();
 
-    // Need to test forward propagation here...
+    // Still working on code here...
+    std::vector<float> inputVector = {1, 2, 3, 4};
+    myNeuralNetwork.propagateForward(inputVector);
 
     myNeuralNetwork.saveNeuralNetwork("../build/debug/TestFourData.json");
 };
@@ -83,5 +85,6 @@ int main() {
     //testTwo();
     //testThree();
     testFour();
+
     return 0;
 };

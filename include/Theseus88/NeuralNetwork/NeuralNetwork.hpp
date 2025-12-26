@@ -80,6 +80,9 @@ namespace Theseus88 {
         template <LayerType LType, typename... Args> void insertNetworkLayer(const std::size_t layerIndex, Args&&... args);
         void removeNetworkLayer(const size_t layerIndex) override;
         void finalizeNeuralNetwork() override;
+        void propagateForward(const std::vector<float>& inputVector) override;
+        void propagateForward(const std::vector<double>& inputVector) override;
+        void propagateForward(const std::vector<long double>& inputVector) override;
         void saveNeuralNetwork(const std::filesystem::path& path) override;
         void loadNeuralNetwork() override;
 

@@ -33,7 +33,7 @@ namespace Theseus88 {
 
         // Still working on code here...
         for (std::size_t i = 0; i < LayerBase<T>::m_outputVector.size(); i++) {
-            //LayerBase<T>::m_outputVector[i] = LayerBase<T>::m_layerNeurons[i]->propagateForward({inputVector[i]});
+            LayerBase<T>::m_outputVector[i] = LayerBase<T>::m_layerNeurons[i]->propagateForward({inputVector[i]});
         };
 
         return LayerBase<T>::m_outputVector;

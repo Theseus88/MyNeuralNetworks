@@ -148,6 +148,28 @@ namespace Theseus88 {
         for (auto& layer : m_networkLayers) ioVectorSize = layer->finalizeNetworkLayer(ioVectorSize);
         m_isFinalized = true;
     };
+    template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<float>& inputVector) {
+        if constexpr (std::is_same_v<T, float>) {
+            // Actual forward propagation logic for float
+            
+        } else {
+            throwError("ADD ERROR MESSAGE HERE LATER.");
+        };
+    };
+    template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<double>& inputVector) {
+        if constexpr (std::is_same_v<T, double>) {
+            // Actual forward propagation logic for double
+        } else {
+            throwError("ADD ERROR MESSAGE HERE LATER.");
+        };
+    };
+    template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<long double>& inputVector) {
+        if constexpr (std::is_same_v<T, long double>) {
+            // Actual forward propagation logic for long double
+        } else {
+            throwError("ADD ERROR MESSAGE HERE LATER.");
+        };
+    };
     template <typename T> void NeuralNetwork<T>::saveNeuralNetwork(const std::filesystem::path& path) {
         std::ofstream outputFile(path);
         if (!outputFile.is_open()) throwError("ADD ERROR MESSAGE HERE LATER.");
