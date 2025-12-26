@@ -17,6 +17,12 @@ namespace Theseus88 {
         // Private Static Functions
         static void throwError(const char* errorMessage);
 
+        // Private Member Variables
+        T m_weightedSum;
+
+        // Private Member Functions
+        void calculateWeightedSum(); // Still working on code here...
+
     public:
         // Default Constructors
         NeuronFeedforward();

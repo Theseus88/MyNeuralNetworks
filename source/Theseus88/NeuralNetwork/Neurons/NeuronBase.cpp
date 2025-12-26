@@ -61,8 +61,10 @@ namespace Theseus88 {
             connection.saveNeuronConnection(writer);
         };
         writer.writeArrayEnd();
-        writer.writeKeyOnly("Neuron Bias Connection");
-        m_biasConnection.saveNeuronConnection(writer, true);
+        if (M_NEURONTYPE != NeuronType::Input) {
+            writer.writeKeyOnly("Neuron Bias Connection");
+            m_biasConnection.saveNeuronConnection(writer, true);
+        };
     };
 
     // ADD COMMENT HERE LATER

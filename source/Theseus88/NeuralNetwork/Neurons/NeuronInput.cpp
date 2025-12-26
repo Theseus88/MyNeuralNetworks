@@ -17,7 +17,7 @@ namespace Theseus88 {
     template <typename T> NeuronInput<T>::~NeuronInput() {};
 
     // ADD COMMENT HERE LATER
-    template <typename T> void NeuronInput<T>::finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParamterOne, const T randomizeParamterTwo) { // Still working on code here...
+    template <typename T> void NeuronInput<T>::finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParameterOne, const T randomizeParameterTwo) { // Still working on code here...
         NeuronBase<T>::m_connectionCount = 1;
         NeuronBase<T>::updateNeuronConnections();
         for (auto& connection : NeuronBase<T>::m_neuronConnections) connection.m_weight = static_cast<T>(1);
