@@ -41,7 +41,7 @@ namespace Theseus88 {
         bool m_isFinalized;
 
         // Protected Member Functions
-        void updateNeuronConnections(const T randomizeParamterOne, const T randomizeParamterTwo); // Still working on code here...
+        void updateNeuronConnections();
 
     public:
         // Public Member Constructors
