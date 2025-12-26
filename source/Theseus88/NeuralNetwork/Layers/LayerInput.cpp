@@ -30,9 +30,12 @@ namespace Theseus88 {
         if (!LayerBase<T>::m_isFinalized) throwError("The network layer is not finalized.");
         if (inputVector.size() != LayerBase<T>::m_inputVectorSize) throwError("The input vector's size does not match the expected vector size.");
         LayerBase<T>::m_inputVectorPtr = &inputVector;
+
+        // Still working on code here...
         for (std::size_t i = 0; i < LayerBase<T>::m_outputVector.size(); i++) {
             //LayerBase<T>::m_outputVector[i] = LayerBase<T>::m_layerNeurons[i]->propagateForward({inputVector[i]});
         };
+
         return LayerBase<T>::m_outputVector;
     };
 

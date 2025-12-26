@@ -18,10 +18,8 @@ namespace Theseus88 {
         static void throwError(const char* errorMessage);
 
         // Private Member Variables
-        T m_weightedSum;
 
         // Private Member Functions
-        void calculateWeightedSum(); // Still working on code here...
 
     public:
         // Default Constructors
@@ -33,7 +31,7 @@ namespace Theseus88 {
         // ADD COMMENT HERE LATER
         void finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParamterOne, const T randomizeParamterTwo) override; // Still working on code here...
         void saveLayerNeuron(JsonWriter& writer) const override; // Still working on code here...
-        //const T propagateForward(const std::vector<T>& inputVector) override; // Still working on code here...
+        const T propagateForward(const std::vector<T>& inputVector) override; // Still working on code here...
 
     };
 

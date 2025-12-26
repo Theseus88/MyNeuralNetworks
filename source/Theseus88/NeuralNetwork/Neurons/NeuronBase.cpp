@@ -4,10 +4,12 @@
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
 
-    // ADD COMMENT HERE LATER
+    // Private Static Functions
     template <typename T> void NeuronBase<T>::throwError(const char* errorMessage) {
         throw std::runtime_error(std::string("Neuron Base Error: ") + errorMessage + "\n");
     };
+
+    // Private Member Functions
 
     // Protected Member Functions
     template <typename T> void NeuronBase<T>::updateNeuronConnections() {
@@ -17,10 +19,18 @@ namespace Theseus88 {
             m_neuronConnections.emplace_back();
         };
     };
+    template <typename T> void NeuronBase<T>::calculateWeightedSum() { // Still working on code here...
+        m_weightedSum = static_cast<T>(0);
+        for (const auto& connection : m_neuronConnections) m_weightedSum += connection.getWeightedInput();
+        m_weightedSum += m_biasConnection.getWeightedInput();
+    };
+    template <typename T> void NeuronBase<T>::calculateOutput() { // Still working on code here...
+        m_output = m_activationFunction(m_weightedSum);
+    };
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::NeuronBase(const NeuronType neuronType)
-    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType), m_connectionCount(0), m_isFinalized(false) {};
+    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType), m_connectionCount(0), m_isFinalized(false), m_weightedSum(static_cast<T>(0)), m_output(static_cast<T>(0)) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::~NeuronBase() {};

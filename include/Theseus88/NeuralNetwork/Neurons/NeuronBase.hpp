@@ -22,6 +22,10 @@ namespace Theseus88 {
         // Private Static Functions
         static void throwError(const char* errorMessage);
 
+        // Private Member Variables
+
+        // Private Member Functions
+
     protected:
         // Protected Member Constants
         const std::string M_NEURONDATATYPE;
@@ -39,9 +43,12 @@ namespace Theseus88 {
         std::vector<NeuronConnection<T>> m_neuronConnections;
         NeuronConnection<T> m_biasConnection;
         bool m_isFinalized;
+        T m_weightedSum, m_output;
 
         // Protected Member Functions
         void updateNeuronConnections();
+        void calculateWeightedSum(); // Still working on code here...
+        void calculateOutput(); // Still working on code here...
 
     public:
         // Public Member Constructors
@@ -64,7 +71,7 @@ namespace Theseus88 {
         //virtual std::unique_ptr<NeuronBase<T>> cloneLayerNeuron() const = 0; // Still working on code here...
         virtual void finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParameterOne, const T randomizeParameterTwo) = 0; // Still working on code here...
         virtual void saveLayerNeuron(JsonWriter& writer) const; // Still working on code here...
-        //virtual const T propagateForward(const std::vector<T>& inputVector) = 0; // Still working on code here...
+        virtual const T propagateForward(const std::vector<T>& inputVector) = 0; // Still working on code here...
 
     };
 

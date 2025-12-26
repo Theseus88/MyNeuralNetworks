@@ -67,9 +67,21 @@ void testThree() {
     myNeuralNetwork.saveNeuralNetwork("../build/debug/TestThreeData.json");
 };
 
+void testFour() {
+    // ADD COMMENT HERE LATER
+    NeuralNetwork<float> myNeuralNetwork("Buddy", 20, 10);
+    for (int i = 0; i < 3; i++) myNeuralNetwork.addNetworkLayer<LayerType::Dense>(10);
+    myNeuralNetwork.finalizeNeuralNetwork();
+
+    // Need to test forward propagation here...
+
+    myNeuralNetwork.saveNeuralNetwork("../build/debug/TestFourData.json");
+};
+
 int main() {
     //testOne();
     //testTwo();
-    testThree();
+    //testThree();
+    testFour();
     return 0;
 };

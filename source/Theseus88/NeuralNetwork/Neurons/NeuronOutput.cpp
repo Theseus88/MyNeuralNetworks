@@ -10,14 +10,10 @@ namespace Theseus88 {
     };
 
     // Private Member Functions
-    template <typename T> void NeuronOutput<T>::calculateWeightedSum() { // Still working on code here...
-        m_weightedSum = static_cast<T>(0);
-        for (const auto& connection : NeuronBase<T>::m_neuronConnections) m_weightedSum += connection.getWeightedInput();
-    };
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronOutput<T>::NeuronOutput()
-    : NeuronBase<T>(NeuronType::Output), m_weightedSum(0) {};
+    : NeuronBase<T>(NeuronType::Output) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronOutput<T>::~NeuronOutput() {};
@@ -32,12 +28,14 @@ namespace Theseus88 {
     };
     template <typename T> void NeuronOutput<T>::saveLayerNeuron(JsonWriter& writer) const { // Still working on code here...
         NeuronBase<T>::saveLayerNeuron(writer);
-        writer.writeNumber("Weighted Sum", m_weightedSum);
+        //writer.writeNumber("Weighted Sum", m_weightedSum);
         writer.writeObjectEnd();
     };
-    /*template <typename T> const T NeuronInput<T>::propagateForward(const std::vector<T>& inputVector) { // Still working on code here...
-
-    };*/
+    template <typename T> const T NeuronOutput<T>::propagateForward(const std::vector<T>& inputVector) { // Still working on code here...
+        NeuronBase<T>::calculateWeightedSum();
+        NeuronBase<T>::calculateOutput();
+        return NeuronBase<T>::m_output;
+    };
 
     // ADD COMMENT HERE LATER
     template class NeuronOutput<float>;

@@ -33,7 +33,7 @@ namespace Theseus88 {
     // Public Member Mutators
     template <typename T> void LayerBase<T>::setInputVectorSize(const std::size_t inputVectorSize) {
         if (inputVectorSize == m_inputVectorSize) return;
-        if (inputVectorSize <= 0) throwError("Input Vector Size must be greater than 0.");
+        if (inputVectorSize <= 0) throwError("Input vector size must be greater than 0.");
         m_isFinalized = false;
         m_inputVectorSize = inputVectorSize;
     };
@@ -70,8 +70,8 @@ namespace Theseus88 {
     };
     template <typename T> void LayerBase<T>::setLayerNeuronsCapacity(const std::size_t neuronCapacity) {
         if (neuronCapacity == m_layerNeurons.capacity()) return;
-        if (neuronCapacity < m_neuronCount) throwError("ADD ERROR MESSAGE HERE LATER.");
-        if (neuronCapacity < m_layerNeurons.size()) throwError("ADD ERROR MESSAGE HERE LATER.");
+        if (neuronCapacity < m_neuronCount) throwError("Neuron capacity cannot be less than neuron count.");
+        if (neuronCapacity < m_layerNeurons.size()) throwError("Neuron capacity cannot be less than current layer neurons size.");
         m_isFinalized = false;
         m_layerNeurons.reserve(neuronCapacity);
     };
@@ -144,7 +144,7 @@ namespace Theseus88 {
         } else if (M_LAYERTYPE == LayerType::Output || M_LAYERTYPE == LayerType::Dense) {
             for (auto& neuron : m_layerNeurons) neuron->finalizeLayerNeuron(m_inputVectorSize, m_randomizeParameterOne, m_randomizeParameterTwo);
         } else {
-            throwError("ADD ERROR MESSAGE HERE LATER.");
+            throwError("Unsupported layer type for finalization.");
         };        
         m_isFinalized = true;
         return m_outputVector.size();

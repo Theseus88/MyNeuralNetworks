@@ -29,9 +29,9 @@ namespace Theseus88 {
         NeuronBase<T>::saveLayerNeuron(writer);
         writer.writeObjectEnd();
     };
-    /*template <typename T> const T NeuronInput<T>::propagateForward(const std::vector<T>& inputVector) { // Still working on code here...
+    template <typename T> const T NeuronInput<T>::propagateForward(const std::vector<T>& inputVector) { // Still working on code here...
 
-    };*/
+    };
 
     // ADD COMMENT HERE LATER
     template class NeuronInput<float>;
