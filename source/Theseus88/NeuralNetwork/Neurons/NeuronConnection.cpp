@@ -23,6 +23,18 @@ namespace Theseus88 {
         return m_input * m_lookaheadWeight;
     };
 
+    // Public Member Functions
+    template <typename T> void NeuronConnection<T>::saveNeuronConnection(JsonWriter& writer, const bool wroteKeyAlready) const {
+        writer.writeObjectStart(!wroteKeyAlready);
+        //writer.writeNumber("Connection Input", m_input);
+        writer.writeNumber("Connection Weight", m_weight);
+        //writer.writeNumber("Connection Gradient", m_gradient);
+        writer.writeNumber("Connection Velocity", m_velocity);
+        //writer.writeNumber("Connection Lookahead Weight", m_lookaheadWeight);
+        //writer.writeNumber("Connection Lookahead Gradient", m_lookaheadGradient);
+        writer.writeObjectEnd();
+    };
+
     // Explicit Template Instantiations
     template class NeuronConnection<float>;
     template class NeuronConnection<double>;

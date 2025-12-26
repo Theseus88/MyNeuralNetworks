@@ -58,22 +58,11 @@ namespace Theseus88 {
         writer.writeNumber("Neuron Connection Count", m_connectionCount);
         writer.writeArrayStart("Neuron Connections");
         for (auto& connection : m_neuronConnections) {
-            writer.writeObjectStart();
-            writer.writeNumber("Connection Weight", connection.m_weight);
-            writer.writeNumber("Connection Gradient", connection.m_gradient);
-            writer.writeNumber("Connection Velocity", connection.m_velocity);
-            writer.writeNumber("Connection Lookahead Weight", connection.m_lookaheadWeight);
-            writer.writeNumber("Connection Lookahead Gradient", connection.m_lookaheadGradient);
-            writer.writeObjectEnd();
+            connection.saveNeuronConnection(writer);
         };
         writer.writeArrayEnd();
-        writer.writeObjectStart("Neuron Bias Connection");
-        writer.writeNumber("Connection Weight", m_biasConnection.m_weight);
-        writer.writeNumber("Connection Gradient", m_biasConnection.m_gradient);
-        writer.writeNumber("Connection Velocity", m_biasConnection.m_velocity);
-        writer.writeNumber("Connection Lookahead Weight", m_biasConnection.m_lookaheadWeight);
-        writer.writeNumber("Connection Lookahead Gradient", m_biasConnection.m_lookaheadGradient);
-        writer.writeObjectEnd();
+        writer.writeKeyOnly("Neuron Bias Connection");
+        m_biasConnection.saveNeuronConnection(writer, true);
     };
 
     // ADD COMMENT HERE LATER

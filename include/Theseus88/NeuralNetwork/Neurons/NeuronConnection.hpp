@@ -24,6 +24,9 @@ namespace Theseus88 {
         const T getWeightedInput(void) const;
         const T getLookaheadWeightedInput(void) const;
 
+        // Public Member Functions
+        void saveNeuronConnection(JsonWriter& writer, const bool wroteKeyAlready = false) const;
+
     };
 
 };
