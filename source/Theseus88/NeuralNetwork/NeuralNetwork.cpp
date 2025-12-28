@@ -149,13 +149,40 @@ namespace Theseus88 {
         m_isFinalized = true;
     };
     template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<float>& inputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, float>) throwError("ADD ERROR MESSAGE HERE LATER.");
+        if constexpr (!std::is_same_v<T, float>) {
+            throwError("Data type mismatch. The network expects float.");
+        } else {
+            if (!m_isFinalized) throwError("The network is not finalized.");
+            if (inputVector.size() != m_inputVector.size()) throwError("Input vector size mismatch.");
+            m_inputVector = inputVector;
+            const std::vector<float>* ioVectorPtr = &m_inputVector;
+            for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
+            m_outputVectorPtr = ioVectorPtr;
+        };
     };
     template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<double>& inputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, double>) throwError("ADD ERROR MESSAGE HERE LATER.");
+        if constexpr (!std::is_same_v<T, double>) {
+            throwError("Data type mismatch. The network expects double.");
+        } else {
+            if (!m_isFinalized) throwError("The network is not finalized.");
+            if (inputVector.size() != m_inputVector.size()) throwError("Input vector size mismatch.");
+            m_inputVector = inputVector;
+            const std::vector<double>* ioVectorPtr = &m_inputVector;
+            for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
+            m_outputVectorPtr = ioVectorPtr;
+        };
     };
     template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<long double>& inputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, long double>) throwError("ADD ERROR MESSAGE HERE LATER.");
+        if constexpr (!std::is_same_v<T, long double>) {
+            throwError("Data type mismatch. The network expects long double.");
+        } else {
+            if (!m_isFinalized) throwError("The network is not finalized.");
+            if (inputVector.size() != m_inputVector.size()) throwError("Input vector size mismatch.");
+            m_inputVector = inputVector;
+            const std::vector<long double>* ioVectorPtr = &m_inputVector;
+            for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
+            m_outputVectorPtr = ioVectorPtr;
+        };
     };
     template <typename T> void NeuralNetwork<T>::saveNeuralNetwork(const std::filesystem::path& path) {
         std::ofstream outputFile(path);

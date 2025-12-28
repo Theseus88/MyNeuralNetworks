@@ -89,24 +89,24 @@
 					"Neuron Connection Count": 4,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.0272331238,
+							"Connection Weight": 0.274255157,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.925837398,
+							"Connection Weight": -0.494806528,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.498297513,
+							"Connection Weight": 0.638517976,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.985079646,
+							"Connection Weight": -0.407037556,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.641344428,
+						"Connection Weight": 0.17155385,
 						"Connection Velocity": 0
 					}
 				},
@@ -116,24 +116,24 @@
 					"Neuron Connection Count": 4,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.143458962,
+							"Connection Weight": -0.797710717,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.54166609,
+							"Connection Weight": -0.177790105,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.449581981,
+							"Connection Weight": -0.287596703,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.21200645,
+							"Connection Weight": 0.306610107,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": -0.00299620628,
+						"Connection Weight": 0.436425805,
 						"Connection Velocity": 0
 					}
 				}
@@ -160,16 +160,16 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -0.997430921,
+							"Connection Weight": 0.525668621,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": 0.469311476,
+							"Connection Weight": 0.842893958,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": -0.663348079,
+						"Connection Weight": 0.556036472,
 						"Connection Velocity": 0
 					}
 				},
@@ -179,16 +179,16 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -0.671343446,
+							"Connection Weight": 0.997193575,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.67072922,
+							"Connection Weight": 0.363301396,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.122563124,
+						"Connection Weight": -0.664336979,
 						"Connection Velocity": 0
 					}
 				}
@@ -215,16 +215,16 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.992126226,
+							"Connection Weight": -0.748461902,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": 0.207161784,
+							"Connection Weight": 0.282389641,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": -0.122583866,
+						"Connection Weight": -0.384041011,
 						"Connection Velocity": 0
 					}
 				},
@@ -234,16 +234,16 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -0.764046073,
+							"Connection Weight": -0.262393653,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.932241738,
+							"Connection Weight": 0.119408607,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.904209137,
+						"Connection Weight": -0.203948081,
 						"Connection Velocity": 0
 					}
 				}
@@ -270,16 +270,16 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.489008427,
+							"Connection Weight": -0.487302363,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": 0.799023986,
+							"Connection Weight": -0.40338999,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.0349273682,
+						"Connection Weight": -0.977496862,
 						"Connection Velocity": 0
 					}
 				},
@@ -289,16 +289,16 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.602075934,
+							"Connection Weight": -0.638799548,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.61317122,
+							"Connection Weight": -0.271672666,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.434539437,
+						"Connection Weight": -0.95583123,
 						"Connection Velocity": 0
 					}
 				},
@@ -308,16 +308,16 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -0.927666068,
+							"Connection Weight": 0.753595591,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.062893033,
+							"Connection Weight": 0.932200551,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.0470676422,
+						"Connection Weight": 0.941828012,
 						"Connection Velocity": 0
 					}
 				},
@@ -327,16 +327,16 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -0.0977445245,
+							"Connection Weight": 0.267192245,
 							"Connection Velocity": 0
 						},
 						{
-							"Connection Weight": -0.990505934,
+							"Connection Weight": 0.824821353,
 							"Connection Velocity": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.327603221,
+						"Connection Weight": -0.573112965,
 						"Connection Velocity": 0
 					}
 				}

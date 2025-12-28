@@ -74,8 +74,10 @@ void testFour() {
     myNeuralNetwork.finalizeNeuralNetwork();
 
     // Still working on code here...
-    std::vector<float> inputVector = {1, 2, 3, 4};
+    std::vector<float> inputVector = {1, 2, 3, 4}, outputVector;
+    outputVector.reserve(4);
     myNeuralNetwork.propagateForward(inputVector);
+    outputVector = myNeuralNetwork.getOutputVector();
 
     myNeuralNetwork.saveNeuralNetwork("../build/debug/TestFourData.json");
 };

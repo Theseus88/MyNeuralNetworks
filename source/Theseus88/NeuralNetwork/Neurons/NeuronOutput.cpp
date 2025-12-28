@@ -32,6 +32,7 @@ namespace Theseus88 {
         writer.writeObjectEnd();
     };
     template <typename T> const T NeuronOutput<T>::propagateForward(const std::vector<T>& inputVector) { // Still working on code here...
+        for (std::size_t i = 0; i < inputVector.size(); i++) NeuronBase<T>::m_neuronConnections[i].m_input = inputVector[i];
         NeuronBase<T>::calculateWeightedSum();
         NeuronBase<T>::calculateOutput();
         return NeuronBase<T>::m_output;

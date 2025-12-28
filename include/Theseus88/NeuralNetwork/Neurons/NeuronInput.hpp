@@ -17,9 +17,6 @@ namespace Theseus88 {
         // Private Static Functions
         static void throwError(const char* errorMessage);
 
-        // Private Member Variables
-        std::size_t m_index;
-
     public:
         // Default Constructors
         NeuronInput();
