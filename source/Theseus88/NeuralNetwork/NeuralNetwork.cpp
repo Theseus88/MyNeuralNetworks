@@ -148,7 +148,7 @@ namespace Theseus88 {
         for (auto& layer : m_networkLayers) ioVectorSize = layer->finalizeNetworkLayer(ioVectorSize);
         m_isFinalized = true;
     };
-    template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<float>& inputVector) { // Still working on code here...
+    template <typename T> const std::vector<float>& NeuralNetwork<T>::propagateForward(const std::vector<float>& inputVector) { // Still working on code here...
         if constexpr (!std::is_same_v<T, float>) {
             throwError("Data type mismatch. The network expects float.");
         } else {
@@ -158,9 +158,10 @@ namespace Theseus88 {
             const std::vector<float>* ioVectorPtr = &m_inputVector;
             for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
             m_outputVectorPtr = ioVectorPtr;
+            return *m_outputVectorPtr;
         };
     };
-    template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<double>& inputVector) { // Still working on code here...
+    template <typename T> const std::vector<double>& NeuralNetwork<T>::propagateForward(const std::vector<double>& inputVector) { // Still working on code here...
         if constexpr (!std::is_same_v<T, double>) {
             throwError("Data type mismatch. The network expects double.");
         } else {
@@ -170,9 +171,10 @@ namespace Theseus88 {
             const std::vector<double>* ioVectorPtr = &m_inputVector;
             for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
             m_outputVectorPtr = ioVectorPtr;
+            return *m_outputVectorPtr;
         };
     };
-    template <typename T> void NeuralNetwork<T>::propagateForward(const std::vector<long double>& inputVector) { // Still working on code here...
+    template <typename T> const std::vector<long double>& NeuralNetwork<T>::propagateForward(const std::vector<long double>& inputVector) { // Still working on code here...
         if constexpr (!std::is_same_v<T, long double>) {
             throwError("Data type mismatch. The network expects long double.");
         } else {
@@ -182,6 +184,7 @@ namespace Theseus88 {
             const std::vector<long double>* ioVectorPtr = &m_inputVector;
             for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
             m_outputVectorPtr = ioVectorPtr;
+            return *m_outputVectorPtr;
         };
     };
     template <typename T> void NeuralNetwork<T>::saveNeuralNetwork(const std::filesystem::path& path) {

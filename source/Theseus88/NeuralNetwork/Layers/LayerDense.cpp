@@ -40,9 +40,15 @@ namespace Theseus88 {
         LayerBase<T>::m_inputVectorPtr = &inputVector;
 
         // Still working on code here...
-        for (std::size_t i = 0; i < LayerBase<T>::m_outputVector.size(); i++) {
-            LayerBase<T>::m_outputVector[i] = LayerBase<T>::m_layerNeurons[i]->propagateForward(*LayerBase<T>::m_inputVectorPtr);
-        };
+        std::transform(
+            //std::execution::par,
+            LayerBase<T>::m_layerNeurons.begin(),
+            LayerBase<T>::m_layerNeurons.end(),
+            LayerBase<T>::m_outputVector.begin(),
+            [&inputVector](const std::unique_ptr<NeuronBase<T>>& neuron) {
+                return neuron->propagateForward(inputVector);
+            }
+        );
 
         return LayerBase<T>::m_outputVector;
     };
