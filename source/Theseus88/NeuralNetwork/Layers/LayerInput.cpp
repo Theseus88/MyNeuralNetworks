@@ -38,6 +38,10 @@ namespace Theseus88 {
 
         return LayerBase<T>::m_outputVector;
     };
+    template <typename T> const std::vector<T>& LayerInput<T>::propagateBackward(const std::vector<T>& targetOutputVector) { // Still working on code here...
+        return LayerBase<T>::m_errorVector; // Input layer has no weights to update and no previous layer to propagate to.
+    };
+    
 
     // ADD COMMENT HERE LATER
     template class LayerInput<float>;

@@ -1,5 +1,8 @@
 // source/MyNeuralNetworks.cpp
 #include "../include/Theseus88/NeuralNetwork/NeuralNetwork.hpp"
+#include <chrono>
+#include <iostream>
+#include <limits>
 
 using namespace Theseus88;
 
@@ -70,22 +73,46 @@ void testThree() {
 void testFour() {
     // ADD COMMENT HERE LATER
     NeuralNetwork<float> myNeuralNetwork("Buddy", 4, 4);
-    for (int i = 0; i < 3; i++) myNeuralNetwork.addNetworkLayer<LayerType::Dense>(2);
-    myNeuralNetwork.finalizeNeuralNetwork();
+    std::vector<float> inputVector = {1, 2, 3, 4}, outputVector = {0, 0, 0, 0};
 
     // Still working on code here...
-    std::vector<float> inputVector = {1, 2, 3, 4}, outputVector;
-    outputVector.reserve(4);
+    for (int i = 0; i < 3; i++) myNeuralNetwork.addNetworkLayer<LayerType::Dense>(2);
+    myNeuralNetwork.finalizeNeuralNetwork();
     outputVector = myNeuralNetwork.propagateForward(inputVector);
 
     myNeuralNetwork.saveNeuralNetwork("../build/debug/TestFourData.json");
+};
+
+void testFive() {
+    // ADD COMMENT HERE LATER
+    NeuralNetwork<float> myNeuralNetwork("Buddy", 4, 4);
+    std::vector<float> inputVector = {1, 2, 3, 4}, outputVector = {0, 0, 0, 0}, targetOutputVector = {1, 0, 0, 0};
+
+    // Still working on code here...
+    for (int i = 0; i < 3; i++) myNeuralNetwork.addNetworkLayer<LayerType::Dense>(2);
+    myNeuralNetwork.finalizeNeuralNetwork();
+    
+    char input = 0;
+    do {
+        outputVector = myNeuralNetwork.propagateForward(inputVector);
+        myNeuralNetwork.propagateBackward(targetOutputVector); // Still working on code here...
+
+        std::cout << "Output: ";
+        for (const auto& val : outputVector) std::cout << val << " ";
+        std::cout << "\nPress Enter to continue, or type 'x' (or Escape) and Enter to exit: ";
+        std::cin.get(input);
+        if (input != '\n') std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (input != 'x' && input != 27);
+
+    myNeuralNetwork.saveNeuralNetwork("../build/debug/TestFiveData.json");
 };
 
 int main() {
     //testOne();
     //testTwo();
     //testThree();
-    testFour();
+    //testFour();
+    testFive();
 
     return 0;
 };

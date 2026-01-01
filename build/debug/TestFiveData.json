@@ -1,0 +1,346 @@
+{
+	"Network Data Type": "float",
+	"Network Name": "Buddy",
+	"Network Learning Rate": 0.0099999997764825821,
+	"Network Momentum": 0.89999997615814209,
+	"Network Input Vector Size": 4,
+	"Network Output Vector Size": 4,
+	"Network Layer Count": 5,
+	"Network Layers": [
+		{
+			"Layer Data Type": "float",
+			"Layer Type": "Input",
+			"Layer Input Vector Size": 4,
+			"Layer Output Vector Size": 4,
+			"Layer Neuron Type": "Input",
+			"Layer Neuron Randomize Parameter One": 0,
+			"Layer Neuron Randomize Parameter Two": 0,
+			"Layer Neuron Randomize Method": "None",
+			"Layer Neuron Activation Method": "None",
+			"Layer Neuron Derivative Method": "None",
+			"Layer Neuron Error Method": "None",
+			"Layer Neuron Optimizer Method": "None",
+			"Layer Neuron Count": 4,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Input",
+					"Neuron Connection Count": 1,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 1,
+							"Connection Velocity": 0
+						}
+					]
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Input",
+					"Neuron Connection Count": 1,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 1,
+							"Connection Velocity": 0
+						}
+					]
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Input",
+					"Neuron Connection Count": 1,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 1,
+							"Connection Velocity": 0
+						}
+					]
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Input",
+					"Neuron Connection Count": 1,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 1,
+							"Connection Velocity": 0
+						}
+					]
+				}
+			]
+		},
+		{
+			"Layer Data Type": "float",
+			"Layer Type": "Dense",
+			"Layer Input Vector Size": 4,
+			"Layer Output Vector Size": 2,
+			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "None",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
+			"Layer Neuron Count": 2,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Feedforward",
+					"Neuron Connection Count": 4,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 0.515676618,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": 0.461903691,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": 0.508615732,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": 0.675614595,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": 0.574460745,
+						"Connection Velocity": 0
+					}
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Feedforward",
+					"Neuron Connection Count": 4,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 0.629232764,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": 0.901022792,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": 0.419419885,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": -0.851686835,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": 0.342567205,
+						"Connection Velocity": 0
+					}
+				}
+			]
+		},
+		{
+			"Layer Data Type": "float",
+			"Layer Type": "Dense",
+			"Layer Input Vector Size": 2,
+			"Layer Output Vector Size": 2,
+			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "None",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
+			"Layer Neuron Count": 2,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Feedforward",
+					"Neuron Connection Count": 2,
+					"Neuron Connections": [
+						{
+							"Connection Weight": -0.491723537,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": -0.7142694,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": 0.703650236,
+						"Connection Velocity": 0
+					}
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Feedforward",
+					"Neuron Connection Count": 2,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 0.690502405,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": -0.39362514,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": 0.404749751,
+						"Connection Velocity": 0
+					}
+				}
+			]
+		},
+		{
+			"Layer Data Type": "float",
+			"Layer Type": "Dense",
+			"Layer Input Vector Size": 2,
+			"Layer Output Vector Size": 2,
+			"Layer Neuron Type": "Feedforward",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "None",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
+			"Layer Neuron Count": 2,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Feedforward",
+					"Neuron Connection Count": 2,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 0.983020544,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": 0.181206584,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": -0.823907852,
+						"Connection Velocity": 0
+					}
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Feedforward",
+					"Neuron Connection Count": 2,
+					"Neuron Connections": [
+						{
+							"Connection Weight": -0.877681077,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": 0.0410484076,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": 0.906881928,
+						"Connection Velocity": 0
+					}
+				}
+			]
+		},
+		{
+			"Layer Data Type": "float",
+			"Layer Type": "Output",
+			"Layer Input Vector Size": 2,
+			"Layer Output Vector Size": 4,
+			"Layer Neuron Type": "Output",
+			"Layer Neuron Randomize Parameter One": -1,
+			"Layer Neuron Randomize Parameter Two": 1,
+			"Layer Neuron Randomize Method": "Uniform",
+			"Layer Neuron Activation Method": "Sigmoid",
+			"Layer Neuron Derivative Method": "Sigmoid Derivative",
+			"Layer Neuron Error Method": "Mean Squared Error",
+			"Layer Neuron Optimizer Method": "Stochastic Gradient Descent",
+			"Layer Neuron Count": 4,
+			"Layer Neurons": [
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Output",
+					"Neuron Connection Count": 2,
+					"Neuron Connections": [
+						{
+							"Connection Weight": 0.659925759,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": 1.36892569,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": 1.18556547,
+						"Connection Velocity": 0
+					}
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Output",
+					"Neuron Connection Count": 2,
+					"Neuron Connections": [
+						{
+							"Connection Weight": -0.957397819,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": -0.763748586,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": -1.56787276,
+						"Connection Velocity": 0
+					}
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Output",
+					"Neuron Connection Count": 2,
+					"Neuron Connections": [
+						{
+							"Connection Weight": -0.714815319,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": -0.741437912,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": -1.58129406,
+						"Connection Velocity": 0
+					}
+				},
+				{
+					"Neuron Data Type": "float",
+					"Neuron Type": "Output",
+					"Neuron Connection Count": 2,
+					"Neuron Connections": [
+						{
+							"Connection Weight": -1.63063884,
+							"Connection Velocity": 0
+						},
+						{
+							"Connection Weight": -1.63603687,
+							"Connection Velocity": 0
+						}
+					],
+					"Neuron Bias Connection": {
+						"Connection Weight": -0.649015665,
+						"Connection Velocity": 0
+					}
+				}
+			]
+		}
+	]
+}

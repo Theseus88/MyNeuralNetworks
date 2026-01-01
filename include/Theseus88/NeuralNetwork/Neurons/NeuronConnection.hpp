@@ -17,7 +17,6 @@ namespace Theseus88 {
         NeuronConnection();
 
         // Public Member Mutators
-        void setGradient(const T gradient);
         void setLookaheadGradient(const T gradient);
 
         // Public Member Accessors

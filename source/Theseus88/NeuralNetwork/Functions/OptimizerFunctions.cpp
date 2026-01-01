@@ -1,5 +1,7 @@
 // source/Theseus88/NeuralNetwork/Functions/OptimizerFunctions.cpp
 #include "../../../../include/Theseus88/NeuralNetwork/Functions/OptimizerFunctions.hpp"
+#include "../../../../include/Theseus88/NeuralNetwork/Neurons/NeuronBase.hpp"
+
 
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
@@ -23,15 +25,10 @@ namespace Theseus88 {
         throw std::runtime_error("Optimizer Functions Error: ADD ERROR MESSAGE HERE LATER.\n");
     };
     template <typename T> void OptimizerFunctions<T>::stochasticGradientDescent(NeuronBase<T>& neuron) {
-        //const T& gradient = neuron.getGradient();
-        //std::vector<NeuralNetworkConnection<T>>& neuronConnections = neuron.getNeuronConnections();
-        //NeuralNetworkConnection<T>& biasConnection = neuron.getBiasConnection();
-        //const T& learningRate = neuron.getLearningRate();
-
-        //for (auto& connection : neuronConnections) {
-        //    connection.setWeight(connection.getWeight() - (learningRate * gradient * connection.getInput()));
-        //};
-        //biasConnection.setWeight(biasConnection.getWeight() - (learningRate * gradient * biasConnection.getInput()));
+        for (auto& connection : neuron.m_neuronConnections) {
+            connection.m_weight -= neuron.m_learningRate * connection.m_gradient;
+        };
+        neuron.m_biasConnection.m_weight -= neuron.m_learningRate * neuron.m_biasConnection.m_gradient;
     };
     template <typename T> void OptimizerFunctions<T>::stochasticGradientDescentWithClassicalMomentum(NeuronBase<T>& neuron) {
         //const T& gradient = neuron.getGradient();

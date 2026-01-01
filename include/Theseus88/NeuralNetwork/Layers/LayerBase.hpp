@@ -41,6 +41,7 @@ namespace Theseus88 {
         std::vector<std::unique_ptr<NeuronBase<T>>> m_layerNeurons;
         const std::vector<T>* m_inputVectorPtr;
         std::vector<T> m_outputVector;
+        std::vector<T> m_errorVector;
         bool m_isFinalized;
 
         // Protected Member Functions
@@ -91,6 +92,7 @@ namespace Theseus88 {
         virtual const size_t finalizeNetworkLayer(const size_t inputVectorSize); // Still working on code here...
         virtual void saveNetworkLayer(JsonWriter& writer) const; // Still working on code here...
         virtual const std::vector<T>& propagateForward(const std::vector<T>& inputVector) = 0; // Still working on code here...
+        virtual const std::vector<T>& propagateBackward(const std::vector<T>& targetOutputVector) = 0; // Still working on code here...
 
     };
 

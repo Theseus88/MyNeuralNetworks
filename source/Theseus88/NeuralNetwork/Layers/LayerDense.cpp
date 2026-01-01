@@ -19,7 +19,6 @@ namespace Theseus88 {
         LayerBase<T>::setRandomizeMethod(RandomizeFunctions<T>::Method::Uniform);
         LayerBase<T>::setActivationMethod(ActivationFunctions<T>::Method::Sigmoid);
         LayerBase<T>::setDerivativeMethod(ActivationFunctions<T>::Method::SigmoidDerivative);
-        LayerBase<T>::setErrorMethod(ErrorFunctions<T>::Method::MeanSquaredError);
         LayerBase<T>::setOptimizerMethod(OptimizerFunctions<T>::Method::StochasticGradientDescent);
     };
 
@@ -40,17 +39,34 @@ namespace Theseus88 {
         LayerBase<T>::m_inputVectorPtr = &inputVector;
 
         // Still working on code here...
-        std::transform(
-            //std::execution::par,
-            LayerBase<T>::m_layerNeurons.begin(),
-            LayerBase<T>::m_layerNeurons.end(),
-            LayerBase<T>::m_outputVector.begin(),
-            [&inputVector](const std::unique_ptr<NeuronBase<T>>& neuron) {
-                return neuron->propagateForward(inputVector);
-            }
-        );
+        std::size_t totalConnections = LayerBase<T>::m_layerNeurons.size() * inputVector.size();
+        if (totalConnections >= 20000) {
+            std::transform(
+                //std::execution::par_unseq, // or std::execution::par
+                LayerBase<T>::m_layerNeurons.begin(),
+                LayerBase<T>::m_layerNeurons.end(),
+                LayerBase<T>::m_outputVector.begin(),
+                [&inputVector](const std::unique_ptr<NeuronBase<T>>& neuron) {
+                    return neuron->propagateForward(inputVector);
+                }
+            );
+        } else {
+            std::transform(
+                LayerBase<T>::m_layerNeurons.begin(),
+                LayerBase<T>::m_layerNeurons.end(),
+                LayerBase<T>::m_outputVector.begin(),
+                [&inputVector](const std::unique_ptr<NeuronBase<T>>& neuron) {
+                    return neuron->propagateForward(inputVector);
+                }
+            );
+        };
 
         return LayerBase<T>::m_outputVector;
+    };
+    template <typename T> const std::vector<T>& LayerDense<T>::propagateBackward(const std::vector<T>& targetOutputVector) { // Still working on code here...
+        // Note: For Dense layers, 'targetOutputVector' is actually the error vector from the next layer.
+        
+        return LayerBase<T>::m_errorVector;
     };
 
     // ADD COMMENT HERE LATER

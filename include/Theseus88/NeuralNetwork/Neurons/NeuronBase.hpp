@@ -17,7 +17,7 @@ namespace Theseus88 {
     template <typename T> class NeuronBase {
     private:
         // Private Friends
-        //friend class NeuralNetwork<T>;
+        friend class OptimizerFunctions<T>;
 
         // Private Static Functions
         static void throwError(const char* errorMessage);
@@ -44,6 +44,9 @@ namespace Theseus88 {
         NeuronConnection<T> m_biasConnection;
         bool m_isFinalized;
         T m_weightedSum, m_output;
+        std::vector<T> m_errorVector;
+        T m_learningRate;
+
 
         // Protected Member Functions
         void updateNeuronConnections();
@@ -66,12 +69,14 @@ namespace Theseus88 {
 
         // Public Member Mutators
         void setConnectionCount(const std::size_t connectionCount);
+        void setLearningRate(const T learningRate);
 
         // Public Member Functions
         //virtual std::unique_ptr<NeuronBase<T>> cloneLayerNeuron() const = 0; // Still working on code here...
         virtual void finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParameterOne, const T randomizeParameterTwo) = 0; // Still working on code here...
         virtual void saveLayerNeuron(JsonWriter& writer) const; // Still working on code here...
         virtual const T propagateForward(const std::vector<T>& inputVector) = 0; // Still working on code here...
+        virtual const std::vector<T>& propagateBackward(const T targetOutputValue) = 0; // Still working on code here...
 
     };
 

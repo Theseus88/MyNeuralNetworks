@@ -44,6 +44,9 @@ namespace Theseus88 {
         virtual const std::vector<float>& propagateForward(const std::vector<float>& inputVector) = 0;
         virtual const std::vector<double>& propagateForward(const std::vector<double>& inputVector) = 0;
         virtual const std::vector<long double>& propagateForward(const std::vector<long double>& inputVector) = 0;
+        virtual void propagateBackward(const std::vector<float>& targetOutputVector) = 0;
+        virtual void propagateBackward(const std::vector<double>& targetOutputVector) = 0;
+        virtual void propagateBackward(const std::vector<long double>& targetOutputVector) = 0;
         virtual void saveNeuralNetwork(const std::filesystem::path& path) = 0;
         virtual void loadNeuralNetwork() = 0;
     

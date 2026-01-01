@@ -40,6 +40,9 @@ namespace Theseus88 {
         NeuronBase<T>::m_output = inputVector[0];
         return NeuronBase<T>::m_output;
     };
+    template <typename T> const std::vector<T>& NeuronInput<T>::propagateBackward(const T targetOutputValue) { // Still working on code here
+
+    };
 
     // ADD COMMENT HERE LATER
     template class NeuronInput<float>;

@@ -40,17 +40,45 @@ namespace Theseus88 {
         LayerBase<T>::m_inputVectorPtr = &inputVector;
 
         // Still working on code here...
-        std::transform(
-            //std::execution::par,
-            LayerBase<T>::m_layerNeurons.begin(),
-            LayerBase<T>::m_layerNeurons.end(),
-            LayerBase<T>::m_outputVector.begin(),
-            [&inputVector](const std::unique_ptr<NeuronBase<T>>& neuron) {
-                return neuron->propagateForward(inputVector);
-            }
-        );
+        std::size_t totalConnections = LayerBase<T>::m_layerNeurons.size() * inputVector.size();
+        if (totalConnections >= 20000) {
+            std::transform(
+                //std::execution::par_unseq, // or std::execution::par
+                LayerBase<T>::m_layerNeurons.begin(),
+                LayerBase<T>::m_layerNeurons.end(),
+                LayerBase<T>::m_outputVector.begin(),
+                [&inputVector](const std::unique_ptr<NeuronBase<T>>& neuron) {
+                    return neuron->propagateForward(inputVector);
+                }
+            );
+        } else {
+            std::transform(
+                LayerBase<T>::m_layerNeurons.begin(),
+                LayerBase<T>::m_layerNeurons.end(),
+                LayerBase<T>::m_outputVector.begin(),
+                [&inputVector](const std::unique_ptr<NeuronBase<T>>& neuron) {
+                    return neuron->propagateForward(inputVector);
+                }
+            );
+        };
 
         return LayerBase<T>::m_outputVector;
+    };
+    template <typename T> const std::vector<T>& LayerOutput<T>::propagateBackward(const std::vector<T>& targetOutputVector) { // Still working on code here...
+        // Note: For Dense layers, 'targetOutputVector' is actually the error vector from the next layer.
+
+        if (!LayerBase<T>::m_isFinalized) throwError("The network layer is not finalized.");
+        if (targetOutputVector.size() != LayerBase<T>::m_outputVector.size()) throwError("The target output vector size does not match the layer output vector size.");
+        
+        if (LayerBase<T>::m_errorVector.size() != LayerBase<T>::m_inputVectorSize) LayerBase<T>::m_errorVector.resize(LayerBase<T>::m_inputVectorSize);
+        std::fill(LayerBase<T>::m_errorVector.begin(), LayerBase<T>::m_errorVector.end(), static_cast<T>(0));
+
+        for (size_t i = 0; i < LayerBase<T>::m_layerNeurons.size(); i++) {
+            const std::vector<T>& neuronErrors = LayerBase<T>::m_layerNeurons[i]->propagateBackward(targetOutputVector[i]);
+            for (size_t j = 0; j < LayerBase<T>::m_inputVectorSize; j++) LayerBase<T>::m_errorVector[j] += neuronErrors[j];
+        };
+
+        return LayerBase<T>::m_errorVector;
     };
 
     // ADD COMMENT HERE LATER

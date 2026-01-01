@@ -8,9 +8,7 @@ namespace Theseus88 {
     template <typename T> NeuronConnection<T>::NeuronConnection()
     : m_input(static_cast<T>(0.0)), m_weight(static_cast<T>(0.0)), m_gradient(static_cast<T>(0.0)), m_velocity(static_cast<T>(0.0)), m_lookaheadWeight(static_cast<T>(0.0)), m_lookaheadGradient(static_cast<T>(0.0)) {};
 
-    template <typename T> void NeuronConnection<T>::setGradient(const T gradient) {
-        m_gradient = m_weight * gradient; // should this be m_gradient = m_weight * m_input * gradient; instead?
-    };
+
     template <typename T> void NeuronConnection<T>::setLookaheadGradient(const T gradient) {
         m_lookaheadGradient = m_lookaheadWeight * gradient; // should this be m_lookaheadGradient = m_lookaheadWeight * m_input * gradient; instead?
     };

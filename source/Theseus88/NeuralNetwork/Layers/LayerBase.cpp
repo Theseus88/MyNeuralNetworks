@@ -145,7 +145,9 @@ namespace Theseus88 {
             for (auto& neuron : m_layerNeurons) neuron->finalizeLayerNeuron(m_inputVectorSize, m_randomizeParameterOne, m_randomizeParameterTwo);
         } else {
             throwError("Unsupported layer type for finalization.");
-        };        
+        };
+        m_errorVector.clear();
+        m_errorVector.resize(m_inputVectorSize);
         m_isFinalized = true;
         return m_outputVector.size();
     };

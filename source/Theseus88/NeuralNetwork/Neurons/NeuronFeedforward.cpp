@@ -37,6 +37,9 @@ namespace Theseus88 {
         NeuronBase<T>::calculateOutput();
         return NeuronBase<T>::m_output;
     };
+    template <typename T> const std::vector<T>& NeuronFeedforward<T>::propagateBackward(const T targetOutputValue) { // Still working on code here
+
+    };
 
     // ADD COMMENT HERE LATER
     template class NeuronFeedforward<float>;
