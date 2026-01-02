@@ -37,8 +37,26 @@ namespace Theseus88 {
         NeuronBase<T>::calculateOutput();
         return NeuronBase<T>::m_output;
     };
-    template <typename T> const std::vector<T>& NeuronFeedforward<T>::propagateBackward(const T targetOutputValue) { // Still working on code here
+    template <typename T> const std::vector<T>& NeuronFeedforward<T>::propagateBackward(const T targetOutputValue) {
+        // Note: For Feedforward neurons, 'targetOutputValue' is actually the error gradient (dE/dy) from the next layer.
+        T activationDerivative = NeuronBase<T>::m_derivativeFunction(NeuronBase<T>::m_weightedSum);
+        T delta = targetOutputValue * activationDerivative;
 
+        if (NeuronBase<T>::m_errorVector.size() != NeuronBase<T>::m_neuronConnections.size()) NeuronBase<T>::m_errorVector.resize(NeuronBase<T>::m_neuronConnections.size());
+
+        for (std::size_t i = 0; i < NeuronBase<T>::m_neuronConnections.size(); i++) {
+            // Calculate gradient for the weight: dE/dW = delta * Input
+            NeuronBase<T>::m_neuronConnections[i].m_gradient = delta * NeuronBase<T>::m_neuronConnections[i].m_input;
+            // Calculate error to propagate to the previous layer: dE/dInput = delta * Weight
+            NeuronBase<T>::m_errorVector[i] = delta * NeuronBase<T>::m_neuronConnections[i].m_weight;
+        };
+
+        NeuronBase<T>::m_biasConnection.m_gradient = delta * NeuronBase<T>::m_biasConnection.m_input;
+
+        // Update weights using the optimizer
+        NeuronBase<T>::m_optimizerFunction(*this);
+
+        return NeuronBase<T>::m_errorVector;
     };
 
     // ADD COMMENT HERE LATER

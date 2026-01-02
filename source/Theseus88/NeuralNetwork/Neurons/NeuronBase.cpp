@@ -30,7 +30,7 @@ namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::NeuronBase(const NeuronType neuronType)
-    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType), m_connectionCount(0), m_isFinalized(false), m_weightedSum(static_cast<T>(0)), m_output(static_cast<T>(0)), m_learningRate(static_cast<T>(0.01)) {};
+    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType), m_connectionCount(0), m_isFinalized(false), m_weightedSum(static_cast<T>(0)), m_output(static_cast<T>(0)), m_learningRate(static_cast<T>(0.01)), m_momentum(static_cast<T>(0.9)) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::~NeuronBase() {};
@@ -61,6 +61,9 @@ namespace Theseus88 {
     };
     template <typename T> void NeuronBase<T>::setLearningRate(const T learningRate) {
         m_learningRate = learningRate;
+    };
+    template <typename T> void NeuronBase<T>::setMomentum(const T momentum) {
+        m_momentum = momentum;
     };
 
     // ADD COMMENT HERE LATER

@@ -66,6 +66,8 @@ namespace Theseus88 {
         void setOptimizerMethod(const typename OptimizerFunctions<T>::Method optimizerMethod);
         void setNeuronCount(const std::size_t neuronCount);
         void setLayerNeuronsCapacity(const std::size_t neuronCapacity);
+        void setLearningRate(const T learningRate);
+        void setMomentum(const T momentum);
 
         // Public Member Accessors
         const std::string getLayerDataType() const;

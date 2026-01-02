@@ -75,6 +75,12 @@ namespace Theseus88 {
         m_isFinalized = false;
         m_layerNeurons.reserve(neuronCapacity);
     };
+    template <typename T> void LayerBase<T>::setLearningRate(const T learningRate) {
+        for (auto& neuron : m_layerNeurons) neuron->setLearningRate(learningRate);
+    };
+    template <typename T> void LayerBase<T>::setMomentum(const T momentum) {
+        for (auto& neuron : m_layerNeurons) neuron->setMomentum(momentum);
+    };
 
     // Public Member Accessors
     template <typename T> const std::string LayerBase<T>::getLayerDataType() const {

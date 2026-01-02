@@ -66,6 +66,17 @@ namespace Theseus88 {
     template <typename T> const std::vector<T>& LayerDense<T>::propagateBackward(const std::vector<T>& targetOutputVector) { // Still working on code here...
         // Note: For Dense layers, 'targetOutputVector' is actually the error vector from the next layer.
         
+        if (!LayerBase<T>::m_isFinalized) throwError("The network layer is not finalized.");
+        if (targetOutputVector.size() != LayerBase<T>::m_outputVector.size()) throwError("The target output vector size does not match the layer output vector size.");
+
+        if (LayerBase<T>::m_errorVector.size() != LayerBase<T>::m_inputVectorSize) LayerBase<T>::m_errorVector.resize(LayerBase<T>::m_inputVectorSize);
+        std::fill(LayerBase<T>::m_errorVector.begin(), LayerBase<T>::m_errorVector.end(), static_cast<T>(0));
+
+        for (size_t i = 0; i < LayerBase<T>::m_layerNeurons.size(); i++) {
+            const std::vector<T>& neuronErrors = LayerBase<T>::m_layerNeurons[i]->propagateBackward(targetOutputVector[i]);
+            for (size_t j = 0; j < LayerBase<T>::m_inputVectorSize; j++) LayerBase<T>::m_errorVector[j] += neuronErrors[j];
+        };
+
         return LayerBase<T>::m_errorVector;
     };
 

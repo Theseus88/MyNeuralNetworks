@@ -46,6 +46,7 @@ namespace Theseus88 {
         T m_weightedSum, m_output;
         std::vector<T> m_errorVector;
         T m_learningRate;
+        T m_momentum;
 
 
         // Protected Member Functions
@@ -70,6 +71,7 @@ namespace Theseus88 {
         // Public Member Mutators
         void setConnectionCount(const std::size_t connectionCount);
         void setLearningRate(const T learningRate);
+        void setMomentum(const T momentum);
 
         // Public Member Functions
         //virtual std::unique_ptr<NeuronBase<T>> cloneLayerNeuron() const = 0; // Still working on code here...

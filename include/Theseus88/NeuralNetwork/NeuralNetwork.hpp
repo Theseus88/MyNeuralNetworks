@@ -39,6 +39,8 @@ namespace Theseus88 {
         // Private Static Functions
         static void throwError(const char* errorMessage);
         void verifyLayerIndex(const std::size_t layerIndex) const;
+        template <typename U> const std::vector<U>& propagateForwardImpl(const std::vector<U>& inputVector);
+        template <typename U> void propagateBackwardImpl(const std::vector<U>& targetOutputVector);
 
     public:
         // Public Member Constructors

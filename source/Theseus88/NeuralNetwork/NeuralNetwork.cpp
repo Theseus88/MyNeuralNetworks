@@ -11,6 +11,31 @@ namespace Theseus88 {
     template <typename T> void NeuralNetwork<T>::verifyLayerIndex(const std::size_t layerIndex) const {
          if (layerIndex >= m_networkLayers.size()) throwError("Layer index is out of bounds.");
     };
+    template <typename T> template <typename U> const std::vector<U>& NeuralNetwork<T>::propagateForwardImpl(const std::vector<U>& inputVector) {
+        if constexpr (!std::is_same_v<T, U>) {
+            std::string errorMessage = "Data type mismatch. The network expects " + std::string(dataTypeToString(T())) + ".";
+            throwError(errorMessage.c_str());
+            static const std::vector<U> emptyVector;
+            return emptyVector;
+        } else {
+            if (!m_isFinalized) throwError("The network is not finalized.");
+            if (inputVector.size() != m_inputVector.size()) throwError("Input vector size mismatch.");
+            m_inputVector = inputVector;
+            const std::vector<U>* ioVectorPtr = &m_inputVector;
+            for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
+            m_outputVectorPtr = ioVectorPtr;
+            return *m_outputVectorPtr;
+        };
+    };
+    template <typename T> template <typename U> void NeuralNetwork<T>::propagateBackwardImpl(const std::vector<U>& targetOutputVector) {
+        if constexpr (!std::is_same_v<T, U>) {
+            std::string errorMessage = "Data type mismatch. The network expects " + std::string(dataTypeToString(T())) + ".";
+            throwError(errorMessage.c_str());
+        } else {
+            const std::vector<U>* ioVectorPtr = &targetOutputVector;
+            for (auto& layer : m_networkLayers | std::views::reverse) ioVectorPtr = &layer->propagateBackward(*ioVectorPtr);
+        };
+    };
 
     // Public Member Constructors
     template <typename T> NeuralNetwork<T>::NeuralNetwork()
@@ -145,77 +170,30 @@ namespace Theseus88 {
         if (m_networkLayers[0]->getLayerNeuronsSize() != m_inputVector.size()) m_networkLayers[0]->setNeuronCount(m_inputVector.size());
         if (m_networkLayers.back()->getLayerNeuronsSize() != m_outputVectorSize) m_networkLayers.back()->setNeuronCount(m_outputVectorSize);
         std::size_t ioVectorSize = m_inputVector.size();
-        for (auto& layer : m_networkLayers) ioVectorSize = layer->finalizeNetworkLayer(ioVectorSize);
+        for (auto& layer : m_networkLayers) {
+            ioVectorSize = layer->finalizeNetworkLayer(ioVectorSize);
+            layer->setLearningRate(m_learningRate);
+            layer->setMomentum(m_momentum);
+        };
         m_isFinalized = true;
     };
     template <typename T> const std::vector<float>& NeuralNetwork<T>::propagateForward(const std::vector<float>& inputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, float>) {
-            throwError("Data type mismatch. The network expects float.");
-            static const std::vector<float> emptyVector;
-            return emptyVector;
-        } else {
-            if (!m_isFinalized) throwError("The network is not finalized.");
-            if (inputVector.size() != m_inputVector.size()) throwError("Input vector size mismatch.");
-            m_inputVector = inputVector;
-            const std::vector<float>* ioVectorPtr = &m_inputVector;
-            for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
-            m_outputVectorPtr = ioVectorPtr;
-            return *m_outputVectorPtr;
-        };
+        return propagateForwardImpl(inputVector);
     };
     template <typename T> const std::vector<double>& NeuralNetwork<T>::propagateForward(const std::vector<double>& inputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, double>) {
-            throwError("Data type mismatch. The network expects double.");
-            static const std::vector<double> emptyVector;
-            return emptyVector;
-        } else {
-            if (!m_isFinalized) throwError("The network is not finalized.");
-            if (inputVector.size() != m_inputVector.size()) throwError("Input vector size mismatch.");
-            m_inputVector = inputVector;
-            const std::vector<double>* ioVectorPtr = &m_inputVector;
-            for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
-            m_outputVectorPtr = ioVectorPtr;
-            return *m_outputVectorPtr;
-        };
+        return propagateForwardImpl(inputVector);
     };
     template <typename T> const std::vector<long double>& NeuralNetwork<T>::propagateForward(const std::vector<long double>& inputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, long double>) {
-            throwError("Data type mismatch. The network expects long double.");
-            static const std::vector<long double> emptyVector;
-            return emptyVector;
-        } else {
-            if (!m_isFinalized) throwError("The network is not finalized.");
-            if (inputVector.size() != m_inputVector.size()) throwError("Input vector size mismatch.");
-            m_inputVector = inputVector;
-            const std::vector<long double>* ioVectorPtr = &m_inputVector;
-            for (const auto& layer : m_networkLayers) ioVectorPtr = &layer->propagateForward(*ioVectorPtr);
-            m_outputVectorPtr = ioVectorPtr;
-            return *m_outputVectorPtr;
-        };
+        return propagateForwardImpl(inputVector);
     };
     template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<float>& targetOutputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, float>) {
-            throwError("Data type mismatch. The network expects float.");
-        } else {
-            const std::vector<float>* ioVectorPtr = &targetOutputVector;
-            for (auto& layer : m_networkLayers | std::views::reverse) ioVectorPtr = &layer->propagateBackward(*ioVectorPtr);
-        };
+        propagateBackwardImpl(targetOutputVector);
     };
     template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<double>& targetOutputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, double>) {
-            throwError("Data type mismatch. The network expects double.");
-        } else {
-            const std::vector<double>* ioVectorPtr = &targetOutputVector;
-            for (auto& layer : m_networkLayers | std::views::reverse) ioVectorPtr = &layer->propagateBackward(*ioVectorPtr);
-        };
+        propagateBackwardImpl(targetOutputVector);
     };
     template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<long double>& targetOutputVector) { // Still working on code here...
-        if constexpr (!std::is_same_v<T, long double>) {
-            throwError("Data type mismatch. The network expects long double.");
-        } else {
-            const std::vector<long double>* ioVectorPtr = &targetOutputVector;
-            for (auto& layer : m_networkLayers | std::views::reverse) ioVectorPtr = &layer->propagateBackward(*ioVectorPtr);
-        };
+        propagateBackwardImpl(targetOutputVector);
     };
     template <typename T> void NeuralNetwork<T>::saveNeuralNetwork(const std::filesystem::path& path) {
         std::ofstream outputFile(path);

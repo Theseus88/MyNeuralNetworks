@@ -99,7 +99,7 @@ void testFive() {
 
         std::cout << "Output: ";
         for (const auto& val : outputVector) std::cout << val << " ";
-        std::cout << "\nPress Enter to continue, or type 'x' (or Escape) and Enter to exit: ";
+        std::cout << "\nPress Enter to continue, or type 'x' then Enter to exit: ";
         std::cin.get(input);
         if (input != '\n') std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     } while (input != 'x' && input != 27);
