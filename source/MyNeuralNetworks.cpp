@@ -89,7 +89,12 @@ void testFive() {
     std::vector<float> inputVector = {1, 2, 3, 4}, outputVector = {0, 0, 0, 0}, targetOutputVector = {1, 0, 0, 0};
 
     // Still working on code here...
-    for (int i = 0; i < 3; i++) myNeuralNetwork.addNetworkLayer<LayerType::Dense>(2);
+    for (int i = 0; i < 3; i++) {
+        std::size_t layerIndex = myNeuralNetwork.addNetworkLayer<LayerType::Dense>(2);
+        myNeuralNetwork.getNetworkLayer(layerIndex).setOptimizerMethod(OptimizerFunctions<float>::Method::StochasticGradientDescent);
+    };
+    myNeuralNetwork.addNetworkLayer<LayerType::Output>(4);
+    myNeuralNetwork.getNetworkLayer(myNeuralNetwork.getNetworkLayersSize() - 1).setOptimizerMethod(OptimizerFunctions<float>::Method::StochasticGradientDescent);
     myNeuralNetwork.finalizeNeuralNetwork();
     
     char input = 0;
@@ -102,7 +107,7 @@ void testFive() {
         std::cout << "\nPress Enter to continue, or type 'x' then Enter to exit: ";
         std::cin.get(input);
         if (input != '\n') std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    } while (input != 'x' && input != 27);
+    } while (input != 'x');
 
     myNeuralNetwork.saveNeuralNetwork("../build/debug/TestFiveData.json");
 };

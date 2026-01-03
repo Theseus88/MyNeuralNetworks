@@ -11,17 +11,13 @@ namespace Theseus88 {
     template <typename T> class NeuronConnection {
     public:
         // Public Member Variables
-        T m_input, m_weight, m_gradient, m_velocity, m_lookaheadWeight, m_lookaheadGradient;
+        T m_input, m_weight, m_gradient, m_velocity, m_moment1, m_moment2;
 
         // Public Member Constructors
         NeuronConnection();
 
-        // Public Member Mutators
-        void setLookaheadGradient(const T gradient);
-
         // Public Member Accessors
         const T getWeightedInput(void) const;
-        const T getLookaheadWeightedInput(void) const;
 
         // Public Member Functions
         void saveNeuronConnection(JsonWriter& writer, const bool wroteKeyAlready = false) const;

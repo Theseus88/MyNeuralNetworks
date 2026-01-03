@@ -219,154 +219,36 @@ namespace Theseus88 {
     template class NeuralNetwork<double>;
     template class NeuralNetwork<long double>;
 
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Input>(int& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Input>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Input>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Input>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Input>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Input>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Input>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Input>(size_t&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Input>(int& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Input>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Input>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Input>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Input>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Input>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Input>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Input>(size_t&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Input>(int& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Input>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Input>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Input>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Input>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Input>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Input>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Input>(size_t&& neuronCount, NeuronType&& neuronType);
+    #define INSTANTIATE_ADD_LAYER(T, LType) \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(int&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(int&&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(int&, NeuronType&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(int&&, NeuronType&&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&, NeuronType&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&&, NeuronType&&)
 
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Output>(int& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Output>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Output>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Output>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Output>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Output>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Output>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Output>(size_t&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Output>(int& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Output>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Output>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Output>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Output>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Output>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Output>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Output>(size_t&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Output>(int& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Output>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Output>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Output>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Output>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Output>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Output>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Output>(size_t&& neuronCount, NeuronType&& neuronType);
+    #define INSTANTIATE_INSERT_LAYER(T, LType) \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, int&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, int&&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, int&, NeuronType&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, int&&, NeuronType&&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&, NeuronType&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&&, NeuronType&&)
 
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Dense>(int& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Dense>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Dense>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Dense>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Dense>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Dense>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Dense>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<float>::addNetworkLayer<LayerType::Dense>(size_t&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Dense>(int& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Dense>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Dense>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Dense>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Dense>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Dense>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Dense>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<double>::addNetworkLayer<LayerType::Dense>(size_t&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Dense>(int& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Dense>(int&& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Dense>(int& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Dense>(int&& neuronCount, NeuronType&& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Dense>(size_t& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Dense>(size_t&& neuronCount);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Dense>(size_t& neuronCount, NeuronType& neuronType);
-    template const std::size_t NeuralNetwork<long double>::addNetworkLayer<LayerType::Dense>(size_t&& neuronCount, NeuronType&& neuronType);
+    #define INSTANTIATE_ALL_LAYERS(T) \
+        INSTANTIATE_ADD_LAYER(T, LayerType::Input); \
+        INSTANTIATE_ADD_LAYER(T, LayerType::Output); \
+        INSTANTIATE_ADD_LAYER(T, LayerType::Dense); \
+        INSTANTIATE_INSERT_LAYER(T, LayerType::Input); \
+        INSTANTIATE_INSERT_LAYER(T, LayerType::Output); \
+        INSTANTIATE_INSERT_LAYER(T, LayerType::Dense)
 
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Input>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
-
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Output>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
-
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<float>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int&& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, int&& neuronCount, NeuronType&& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t&& neuronCount);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t& neuronCount, NeuronType& neuronType);
-    template void NeuralNetwork<long double>::insertNetworkLayer<LayerType::Dense>(const std::size_t layerIndex, size_t&& neuronCount, NeuronType&& neuronType);
+    INSTANTIATE_ALL_LAYERS(float);
+    INSTANTIATE_ALL_LAYERS(double);
+    INSTANTIATE_ALL_LAYERS(long double);
 
 };

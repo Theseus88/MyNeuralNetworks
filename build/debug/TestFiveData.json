@@ -29,7 +29,9 @@
 					"Neuron Connections": [
 						{
 							"Connection Weight": 1,
-							"Connection Velocity": 0
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					]
 				},
@@ -40,7 +42,9 @@
 					"Neuron Connections": [
 						{
 							"Connection Weight": 1,
-							"Connection Velocity": 0
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					]
 				},
@@ -51,7 +55,9 @@
 					"Neuron Connections": [
 						{
 							"Connection Weight": 1,
-							"Connection Velocity": 0
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					]
 				},
@@ -62,7 +68,9 @@
 					"Neuron Connections": [
 						{
 							"Connection Weight": 1,
-							"Connection Velocity": 0
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					]
 				}
@@ -89,25 +97,35 @@
 					"Neuron Connection Count": 4,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -0.42229706,
-							"Connection Velocity": 0
+							"Connection Weight": -0.363036245,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": -0.0699019283,
-							"Connection Velocity": 0
+							"Connection Weight": 0.927531183,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": 0.26045838,
-							"Connection Velocity": 0
+							"Connection Weight": -0.0602983087,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": -0.00740356045,
-							"Connection Velocity": 0
+							"Connection Weight": 0.457985938,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.893882513,
-						"Connection Velocity": 0
+						"Connection Weight": 0.475992352,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				},
 				{
@@ -116,25 +134,35 @@
 					"Neuron Connection Count": 4,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.330489248,
-							"Connection Velocity": 0
+							"Connection Weight": 0.825626612,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": -0.226374,
-							"Connection Velocity": 0
+							"Connection Weight": -0.712692678,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": 0.172513351,
-							"Connection Velocity": 0
+							"Connection Weight": 0.876600146,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": -0.646242917,
-							"Connection Velocity": 0
+							"Connection Weight": -0.955006242,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": -0.128207192,
-						"Connection Velocity": 0
+						"Connection Weight": -0.854389668,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				}
 			]
@@ -160,17 +188,23 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.649460196,
-							"Connection Velocity": 0
+							"Connection Weight": -0.694707632,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": 0.717358112,
-							"Connection Velocity": 0
+							"Connection Weight": -0.224979743,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.0519845784,
-						"Connection Velocity": 0
+						"Connection Weight": -0.558550775,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				},
 				{
@@ -179,17 +213,23 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.196557447,
-							"Connection Velocity": 0
+							"Connection Weight": -0.916463375,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": 0.0242022593,
-							"Connection Velocity": 0
+							"Connection Weight": -0.593670905,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.428726435,
-						"Connection Velocity": 0
+						"Connection Weight": -0.898686588,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				}
 			]
@@ -215,17 +255,23 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.537472367,
-							"Connection Velocity": 0
+							"Connection Weight": 0.411778212,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": 0.800277293,
-							"Connection Velocity": 0
+							"Connection Weight": 0.120982498,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.323479712,
-						"Connection Velocity": 0
+						"Connection Weight": -0.108784489,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				},
 				{
@@ -234,17 +280,23 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -0.0701395795,
-							"Connection Velocity": 0
+							"Connection Weight": 0.793366611,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": -0.1023679,
-							"Connection Velocity": 0
+							"Connection Weight": 0.649674594,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": -0.199262887,
-						"Connection Velocity": 0
+						"Connection Weight": -0.0103936233,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				}
 			]
@@ -270,17 +322,23 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.960475326,
-							"Connection Velocity": 0
+							"Connection Weight": -0.806172192,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": 0.378258169,
-							"Connection Velocity": 0
+							"Connection Weight": -0.519835949,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": 0.993033111,
-						"Connection Velocity": 0
+						"Connection Weight": -0.206057325,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				},
 				{
@@ -289,17 +347,23 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": 0.30365783,
-							"Connection Velocity": 0
+							"Connection Weight": 0.828585863,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": -0.714299262,
-							"Connection Velocity": 0
+							"Connection Weight": 0.13738279,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": -1.29867053,
-						"Connection Velocity": 0
+						"Connection Weight": -0.348605096,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				},
 				{
@@ -308,17 +372,23 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -1.47782755,
-							"Connection Velocity": 0
+							"Connection Weight": 0.470719129,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": -0.137494504,
-							"Connection Velocity": 0
+							"Connection Weight": 0.319057763,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": -0.123314507,
-						"Connection Velocity": 0
+						"Connection Weight": -1.03269923,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				},
 				{
@@ -327,17 +397,23 @@
 					"Neuron Connection Count": 2,
 					"Neuron Connections": [
 						{
-							"Connection Weight": -0.394475073,
-							"Connection Velocity": 0
+							"Connection Weight": 0.761863053,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						},
 						{
-							"Connection Weight": -0.473396301,
-							"Connection Velocity": 0
+							"Connection Weight": 0.262980163,
+							"Connection Velocity": 0,
+							"Connection Moment 1": 0,
+							"Connection Moment 2": 0
 						}
 					],
 					"Neuron Bias Connection": {
-						"Connection Weight": -1.28076124,
-						"Connection Velocity": 0
+						"Connection Weight": -0.719826519,
+						"Connection Velocity": 0,
+						"Connection Moment 1": 0,
+						"Connection Moment 2": 0
 					}
 				}
 			]
