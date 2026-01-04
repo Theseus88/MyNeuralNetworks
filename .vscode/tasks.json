@@ -27,7 +27,7 @@
                 "${workspaceFolder}\\source\\Theseus88\\NeuralNetwork\\Factories\\FactoryLayer.cpp",
                 "${workspaceFolder}\\source\\Theseus88\\NeuralNetwork\\INeuralNetwork.cpp",
                 "${workspaceFolder}\\source\\Theseus88\\NeuralNetwork\\NeuralNetwork.cpp",
-                "${file}",
+                "${workspaceFolder}\\source\\MyNeuralNetworks.cpp",
                 "-ltbb12",
                 "-o",
                 "${workspaceFolder}\\build\\debug\\MyNeuralNetworksDebug.exe"
@@ -71,7 +71,7 @@
                 "${workspaceFolder}\\source\\Theseus88\\NeuralNetwork\\Factories\\FactoryLayer.cpp",
                 "${workspaceFolder}\\source\\Theseus88\\NeuralNetwork\\INeuralNetwork.cpp",
                 "${workspaceFolder}\\source\\Theseus88\\NeuralNetwork\\NeuralNetwork.cpp",
-                "${file}",
+                "${workspaceFolder}\\source\\MyNeuralNetworks.cpp",
                 "-ltbb12",
                 "-o",
                 "${workspaceFolder}\\build\\release\\MyNeuralNetworksRelease.exe"
