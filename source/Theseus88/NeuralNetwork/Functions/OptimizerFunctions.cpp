@@ -7,15 +7,15 @@
 namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
-    template <typename T> std::function<void(NeuronBase<T>&)> OptimizerFunctions<T>::getOptimizerFunction(const Method method) {
+    template <typename T> std::function<void(NeuronBase<T>&)> OptimizerFunctions<T>::getOptimizerFunction(const OptimizerMethod method) {
         switch (method) {
-            case Method::None: return none;
-            case Method::StochasticGradientDescent: return stochasticGradientDescent;
-            case Method::StochasticGradientDescentWithClassicalMomentum: return stochasticGradientDescentWithClassicalMomentum;
-            case Method::StochasticGradientDescentWithNesterovMomentum: return stochasticGradientDescentWithNesterovMomentum;
-            case Method::AdaptiveGradient: return adaptiveGradient;
-            case Method::RootMeanSquaredPropagation: return rootMeanSquaredPropagation;
-            case Method::AdaptiveMomentEstimation: return adaptiveMomentEstimation;
+            case OptimizerMethod::None: return none;
+            case OptimizerMethod::StochasticGradientDescent: return stochasticGradientDescent;
+            case OptimizerMethod::StochasticGradientDescentWithClassicalMomentum: return stochasticGradientDescentWithClassicalMomentum;
+            case OptimizerMethod::StochasticGradientDescentWithNesterovMomentum: return stochasticGradientDescentWithNesterovMomentum;
+            case OptimizerMethod::AdaptiveGradient: return adaptiveGradient;
+            case OptimizerMethod::RootMeanSquaredPropagation: return rootMeanSquaredPropagation;
+            case OptimizerMethod::AdaptiveMomentEstimation: return adaptiveMomentEstimation;
             default: throw std::runtime_error("Optimizer Functions Error: ADD ERROR MESSAGE HERE LATER.\n");
         };
     };

@@ -12,18 +12,18 @@ namespace Theseus88 {
     template <typename T> class RandomizeFunctions {
     public:
         // ADD COMMENT HERE LATER
-        enum class Method { None, Uniform, Normal };
-        static constexpr const char* randomizeMethodToString(Method type) {
+        //enum class Method { None, Uniform, Normal };
+        static constexpr const char* randomizeMethodToString(RandomizeMethod type) {
             switch (type) {
-                case Method::None: return "None";
-                case Method::Uniform: return "Uniform";
-                case Method::Normal: return "Normal";
+                case RandomizeMethod::None: return "None";
+                case RandomizeMethod::Uniform: return "Uniform";
+                case RandomizeMethod::Normal: return "Normal";
                 default: return "Unknown";
             };
         };
 
         // ADD COMMENT HERE LATER
-        static std::function<void(std::vector<NeuronConnection<T>>&, NeuronConnection<T>&, const T, const T)> getRandomizeFunction(const Method method);
+        static std::function<void(std::vector<NeuronConnection<T>>&, NeuronConnection<T>&, const T, const T)> getRandomizeFunction(const RandomizeMethod method);
 
         // ADD COMMENT HERE LATER
         static void none(std::vector<NeuronConnection<T>>& neuronConnections, NeuronConnection<T>& biasConnection, const T, const T);

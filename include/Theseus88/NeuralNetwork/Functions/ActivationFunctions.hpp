@@ -11,30 +11,30 @@ namespace Theseus88 {
     template <typename T> class ActivationFunctions {
     public:
         // ADD COMMENT HERE LATER
-        enum class Method { None, Sigmoid, SigmoidDerivative, Relu, ReluDerivative, Tanh, TanhDerivative, Linear, LinearDerivative };
-        static constexpr const char* activationMethodToString(Method type) {
+        //enum class Method { None, Sigmoid, SigmoidDerivative, Relu, ReluDerivative, Tanh, TanhDerivative, Linear, LinearDerivative };
+        static constexpr const char* activationMethodToString(ActivationMethod type) {
             switch (type) {
-                case Method::None: return "None";
-                case Method::Sigmoid: return "Sigmoid";
-                case Method::Relu: return "Relu";
-                case Method::Tanh: return "Tanh";
-                case Method::Linear: return "Linear";
+                case ActivationMethod::None: return "None";
+                case ActivationMethod::Sigmoid: return "Sigmoid";
+                case ActivationMethod::Relu: return "Relu";
+                case ActivationMethod::Tanh: return "Tanh";
+                case ActivationMethod::Linear: return "Linear";
                 default: return "Unknown";
             };
         };
-        static constexpr const char* derivativeMethodToString(Method type) {
+        static constexpr const char* derivativeMethodToString(ActivationMethod type) {
             switch (type) {
-                case Method::None: return "None";
-                case Method::SigmoidDerivative: return "Sigmoid Derivative";
-                case Method::ReluDerivative: return "Relu Derivative";
-                case Method::TanhDerivative: return "Tanh Derivative";
-                case Method::LinearDerivative: return "Linear Derivative";
+                case ActivationMethod::None: return "None";
+                case ActivationMethod::SigmoidDerivative: return "Sigmoid Derivative";
+                case ActivationMethod::ReluDerivative: return "Relu Derivative";
+                case ActivationMethod::TanhDerivative: return "Tanh Derivative";
+                case ActivationMethod::LinearDerivative: return "Linear Derivative";
                 default: return "Unknown";
             };
         };
 
         // ADD COMMENT HERE LATER
-        static std::function<const T(const T)> getActivationFunction(const Method& method);
+        static std::function<const T(const T)> getActivationFunction(const ActivationMethod& method);
 
         // ADD COMMENT HERE LATER
         static const T none(const T x);

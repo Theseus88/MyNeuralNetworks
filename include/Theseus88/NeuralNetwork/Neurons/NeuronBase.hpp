@@ -62,11 +62,11 @@ namespace Theseus88 {
         ~NeuronBase();
 
         // Public Member Function Mutators
-        void setRandomizeFunction(const typename RandomizeFunctions<T>::Method randomizeMethod);
-        void setActivationFunction(const typename ActivationFunctions<T>::Method activationMethod);
-        void setDerivativeFunction(const typename ActivationFunctions<T>::Method derivativeMethod);
-        void setErrorFunction(const typename ErrorFunctions<T>::Method errorMethod);
-        void setOptimizerFunction(const typename OptimizerFunctions<T>::Method optimizerMethod);
+        void setRandomizeFunction(const RandomizeMethod randomizeMethod);
+        void setActivationFunction(const ActivationMethod activationMethod);
+        void setDerivativeFunction(const ActivationMethod derivativeMethod);
+        void setErrorFunction(const ErrorMethod errorMethod);
+        void setOptimizerFunction(const OptimizerMethod optimizerMethod);
 
         // Public Member Mutators
         void setConnectionCount(const std::size_t connectionCount);

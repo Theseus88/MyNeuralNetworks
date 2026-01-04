@@ -61,14 +61,19 @@ namespace Theseus88 {
         void setLearningRate(const double learningRate) override;
         void setMomentum(const double momentum) override;
         void setNetworkLayersCapacity(const std::size_t layerCapacity) override;
+        void setRandomizeMethod(const RandomizeMethod randomizeMethod) override;
+        void setActivationMethod(const ActivationMethod activationMethod) override;
+        void setDerivativeMethod(const ActivationMethod derivativeMethod) override;
+        void setErrorMethod(const ErrorMethod errorMethod) override;
+        void setOptimizerMethod(const OptimizerMethod optimizerMethod) override;
 
         // Public Member Accessors
         const std::string getNetworkDataType() const override;
         const std::string getNetworkName() const override;
         const std::size_t getInputVectorSize() const override;
         const std::size_t getOutputVectorSize() const override;
-        const double getLearningRate() const;
-        const double getMomentum() const;
+        const double getLearningRate() const override;
+        const double getMomentum() const override;
         const std::size_t getNetworkLayersCapacity() const override;
         const std::size_t getNetworkLayersSize() const override;
         LayerBase<T>& getNetworkLayer(const int layerIndex);
@@ -82,12 +87,12 @@ namespace Theseus88 {
         template <LayerType LType, typename... Args> void insertNetworkLayer(const std::size_t layerIndex, Args&&... args);
         void removeNetworkLayer(const size_t layerIndex) override;
         void finalizeNeuralNetwork() override;
-        const std::vector<float>& propagateForward(const std::vector<float>& inputVector) override; // Still working on code here...
-        const std::vector<double>& propagateForward(const std::vector<double>& inputVector) override; // Still working on code here...
-        const std::vector<long double>& propagateForward(const std::vector<long double>& inputVector) override; // Still working on code here...
-        void propagateBackward(const std::vector<float>& targetOutputVector) override; // Still working on code here...
-        void propagateBackward(const std::vector<double>& targetOutputVector) override; // Still working on code here...
-        void propagateBackward(const std::vector<long double>& targetOutputVector) override; // Still working on code here...
+        const std::vector<float>& propagateForward(const std::vector<float>& inputVector) override;
+        const std::vector<double>& propagateForward(const std::vector<double>& inputVector) override;
+        const std::vector<long double>& propagateForward(const std::vector<long double>& inputVector) override;
+        void propagateBackward(const std::vector<float>& targetOutputVector) override;
+        void propagateBackward(const std::vector<double>& targetOutputVector) override;
+        void propagateBackward(const std::vector<long double>& targetOutputVector) override;
         void saveNeuralNetwork(const std::filesystem::path& path) override;
         void loadNeuralNetwork() override;
 

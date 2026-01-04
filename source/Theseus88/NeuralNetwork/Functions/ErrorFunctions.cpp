@@ -5,15 +5,15 @@
 namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
-    template <typename T> std::function<const T(NeuronBase<T>&, const T, const T)> ErrorFunctions<T>::getErrorFunction(const Method method) {
+    template <typename T> std::function<const T(NeuronBase<T>&, const T, const T)> ErrorFunctions<T>::getErrorFunction(const ErrorMethod method) {
         switch (method) {
-            case Method::None: return none;
-            case Method::MeanSquaredError: return meanSquaredError;
-            case Method::MeanAbsoluteError: return meanAbsoluteError;
-            case Method::SquaredError: return squaredError;
-            case Method::BinaryCrossEntropy: return binaryCrossEntropy;
-            case Method::HingeLoss: return hingeLoss;
-            case Method::FocalLoss: return focalLoss;
+            case ErrorMethod::None: return none;
+            case ErrorMethod::MeanSquaredError: return meanSquaredError;
+            case ErrorMethod::MeanAbsoluteError: return meanAbsoluteError;
+            case ErrorMethod::SquaredError: return squaredError;
+            case ErrorMethod::BinaryCrossEntropy: return binaryCrossEntropy;
+            case ErrorMethod::HingeLoss: return hingeLoss;
+            case ErrorMethod::FocalLoss: return focalLoss;
             default: throw std::runtime_error("Error Functions Error: ADD ERROR MESSAGE HERE LATER.\n");
         };
     };

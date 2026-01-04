@@ -50,6 +50,12 @@ namespace Theseus88 {
         };
     };
 
+    // Global Method Enums
+    enum class RandomizeMethod { None, Uniform, Normal };
+    enum class ActivationMethod { None, Sigmoid, SigmoidDerivative, Relu, ReluDerivative, Tanh, TanhDerivative, Linear, LinearDerivative };
+    enum class ErrorMethod { None, MeanSquaredError, MeanAbsoluteError, SquaredError, BinaryCrossEntropy, HingeLoss, FocalLoss };
+    enum class OptimizerMethod { None, StochasticGradientDescent, StochasticGradientDescentWithClassicalMomentum, StochasticGradientDescentWithNesterovMomentum, AdaptiveGradient, RootMeanSquaredPropagation, AdaptiveMomentEstimation };
+
     // Forward Declarations
     template <typename T> class NeuronConnection;
     template <typename T> class NeuronBase;

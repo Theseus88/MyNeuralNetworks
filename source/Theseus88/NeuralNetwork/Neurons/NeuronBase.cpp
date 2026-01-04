@@ -36,19 +36,19 @@ namespace Theseus88 {
     template <typename T> NeuronBase<T>::~NeuronBase() {};
 
     // Public Member Function Mutators
-    template <typename T> void NeuronBase<T>::setRandomizeFunction(const typename RandomizeFunctions<T>::Method randomizeMethod) {
+    template <typename T> void NeuronBase<T>::setRandomizeFunction(const RandomizeMethod randomizeMethod) {
         m_randomizeFunction = RandomizeFunctions<T>::getRandomizeFunction(randomizeMethod);
     };
-    template <typename T> void NeuronBase<T>::setActivationFunction(const typename ActivationFunctions<T>::Method activationMethod) {
+    template <typename T> void NeuronBase<T>::setActivationFunction(const ActivationMethod activationMethod) {
         m_activationFunction = ActivationFunctions<T>::getActivationFunction(activationMethod);
     };
-    template <typename T> void NeuronBase<T>::setDerivativeFunction(const typename ActivationFunctions<T>::Method derivativeMethod) {
+    template <typename T> void NeuronBase<T>::setDerivativeFunction(const ActivationMethod derivativeMethod) {
         m_derivativeFunction = ActivationFunctions<T>::getActivationFunction(derivativeMethod);
     };
-    template <typename T> void NeuronBase<T>::setErrorFunction(const typename ErrorFunctions<T>::Method errorMethod) {
+    template <typename T> void NeuronBase<T>::setErrorFunction(const ErrorMethod errorMethod) {
         m_errorFunction = ErrorFunctions<T>::getErrorFunction(errorMethod);
     };
-    template <typename T> void NeuronBase<T>::setOptimizerFunction(const typename OptimizerFunctions<T>::Method optimizerMethod) {
+    template <typename T> void NeuronBase<T>::setOptimizerFunction(const OptimizerMethod optimizerMethod) {
         m_optimizerFunction = OptimizerFunctions<T>::getOptimizerFunction(optimizerMethod);
     };
 

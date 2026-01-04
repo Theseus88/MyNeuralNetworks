@@ -26,6 +26,11 @@ namespace Theseus88 {
         virtual void setLearningRate(const double learningRate) = 0;
         virtual void setMomentum(const double momentum) = 0;
         virtual void setNetworkLayersCapacity(const std::size_t layerCapacity) = 0;
+        virtual void setRandomizeMethod(const RandomizeMethod randomizeMethod) = 0;
+        virtual void setActivationMethod(const ActivationMethod activationMethod) = 0;
+        virtual void setDerivativeMethod(const ActivationMethod derivativeMethod) = 0;
+        virtual void setErrorMethod(const ErrorMethod errorMethod) = 0;
+        virtual void setOptimizerMethod(const OptimizerMethod optimizerMethod) = 0;
 
         // Public Pure Virtual Member Accessors
         virtual const std::string getNetworkDataType() const = 0;

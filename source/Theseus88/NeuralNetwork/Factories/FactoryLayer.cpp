@@ -21,79 +21,27 @@ namespace Theseus88 {
     template class FactoryLayer<double>;
     template class FactoryLayer<long double>;
 
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Input>(int& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Input>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Input>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Input>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Input>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Input>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Input>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Input>(size_t&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Input>(int& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Input>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Input>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Input>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Input>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Input>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Input>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Input>(size_t&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Input>(int& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Input>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Input>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Input>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Input>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Input>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Input>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Input>(size_t&& neuronCount, NeuronType&& neuronType);
+    #define INSTANTIATE_CREATE_LAYER(T, LType) \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(int&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(const int&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(int&&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(int&, NeuronType&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(const int&, const NeuronType&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(int&&, NeuronType&&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(const size_t&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&, NeuronType&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(const size_t&, const NeuronType&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&&, NeuronType&&)
 
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Output>(int& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Output>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Output>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Output>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Output>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Output>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Output>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Output>(size_t&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Output>(int& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Output>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Output>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Output>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Output>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Output>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Output>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Output>(size_t&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Output>(int& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Output>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Output>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Output>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Output>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Output>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Output>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Output>(size_t&& neuronCount, NeuronType&& neuronType);
+    #define INSTANTIATE_ALL_LAYERS(T) \
+        INSTANTIATE_CREATE_LAYER(T, LayerType::Input); \
+        INSTANTIATE_CREATE_LAYER(T, LayerType::Output); \
+        INSTANTIATE_CREATE_LAYER(T, LayerType::Dense)
 
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Dense>(int& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Dense>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Dense>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Dense>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Dense>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Dense>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Dense>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<float>> FactoryLayer<float>::createLayer<LayerType::Dense>(size_t&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Dense>(int& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Dense>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Dense>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Dense>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Dense>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Dense>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Dense>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<double>> FactoryLayer<double>::createLayer<LayerType::Dense>(size_t&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Dense>(int& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Dense>(int&& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Dense>(int& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Dense>(int&& neuronCount, NeuronType&& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Dense>(size_t& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Dense>(size_t&& neuronCount);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Dense>(size_t& neuronCount, NeuronType& neuronType);
-    template std::unique_ptr<LayerBase<long double>> FactoryLayer<long double>::createLayer<LayerType::Dense>(size_t&& neuronCount, NeuronType&& neuronType);
+    INSTANTIATE_ALL_LAYERS(float);
+    INSTANTIATE_ALL_LAYERS(double);
+    INSTANTIATE_ALL_LAYERS(long double);
 
 };

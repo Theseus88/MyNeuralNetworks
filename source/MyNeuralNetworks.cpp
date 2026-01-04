@@ -13,11 +13,11 @@ void testOne() {
     // ADD COMMENT HERE LATER
     std::size_t layerIndex = 0;
     layerIndex = myNeuralNetwork.addNetworkLayer<LayerType::Dense>(2);
-    myNeuralNetwork.getNetworkLayer(layerIndex).setRandomizeMethod(RandomizeFunctions<float>::Method::Normal);
-    myNeuralNetwork.getNetworkLayer(layerIndex).setActivationMethod(ActivationFunctions<float>::Method::Relu);
-    myNeuralNetwork.getNetworkLayer(layerIndex).setDerivativeMethod(ActivationFunctions<float>::Method::ReluDerivative);
-    myNeuralNetwork.getNetworkLayer(layerIndex).setErrorMethod(ErrorFunctions<float>::Method::MeanAbsoluteError);
-    myNeuralNetwork.getNetworkLayer(layerIndex).setOptimizerMethod(OptimizerFunctions<float>::Method::StochasticGradientDescentWithNesterovMomentum);
+    myNeuralNetwork.getNetworkLayer(layerIndex).setRandomizeMethod(RandomizeMethod::Normal);
+    myNeuralNetwork.getNetworkLayer(layerIndex).setActivationMethod(ActivationMethod::Relu);
+    myNeuralNetwork.getNetworkLayer(layerIndex).setDerivativeMethod(ActivationMethod::ReluDerivative);
+    myNeuralNetwork.getNetworkLayer(layerIndex).setErrorMethod(ErrorMethod::MeanAbsoluteError);
+    myNeuralNetwork.getNetworkLayer(layerIndex).setOptimizerMethod(OptimizerMethod::StochasticGradientDescentWithNesterovMomentum);
 
     // ADD COMMENT HERE LATER
     myNeuralNetwork.addNetworkLayer<LayerType::Dense>(4);
@@ -42,11 +42,11 @@ void testTwo() {
     // ADD COMMENT HERE LATER
     std::size_t layerIndex = 0;
     layerIndex = concreteNet->addNetworkLayer<LayerType::Dense>(2);
-    concreteNet->getNetworkLayer(layerIndex).setRandomizeMethod(RandomizeFunctions<float>::Method::Normal);
-    concreteNet->getNetworkLayer(layerIndex).setActivationMethod(ActivationFunctions<float>::Method::Relu);
-    concreteNet->getNetworkLayer(layerIndex).setDerivativeMethod(ActivationFunctions<float>::Method::ReluDerivative);
-    concreteNet->getNetworkLayer(layerIndex).setErrorMethod(ErrorFunctions<float>::Method::MeanAbsoluteError);
-    concreteNet->getNetworkLayer(layerIndex).setOptimizerMethod(OptimizerFunctions<float>::Method::StochasticGradientDescentWithNesterovMomentum);
+    concreteNet->getNetworkLayer(layerIndex).setRandomizeMethod(RandomizeMethod::Normal);
+    concreteNet->getNetworkLayer(layerIndex).setActivationMethod(ActivationMethod::Relu);
+    concreteNet->getNetworkLayer(layerIndex).setDerivativeMethod(ActivationMethod::ReluDerivative);
+    concreteNet->getNetworkLayer(layerIndex).setErrorMethod(ErrorMethod::MeanAbsoluteError);
+    concreteNet->getNetworkLayer(layerIndex).setOptimizerMethod(OptimizerMethod::StochasticGradientDescentWithNesterovMomentum);
 
     // ADD COMMENT HERE LATER
     concreteNet->addNetworkLayer<LayerType::Dense>(4);
@@ -91,10 +91,10 @@ void testFive() {
     // Still working on code here...
     for (int i = 0; i < 3; i++) {
         std::size_t layerIndex = myNeuralNetwork.addNetworkLayer<LayerType::Dense>(2);
-        myNeuralNetwork.getNetworkLayer(layerIndex).setOptimizerMethod(OptimizerFunctions<float>::Method::StochasticGradientDescent);
+        myNeuralNetwork.getNetworkLayer(layerIndex).setOptimizerMethod(OptimizerMethod::StochasticGradientDescent);
     };
     myNeuralNetwork.addNetworkLayer<LayerType::Output>(4);
-    myNeuralNetwork.getNetworkLayer(myNeuralNetwork.getNetworkLayersSize() - 1).setOptimizerMethod(OptimizerFunctions<float>::Method::StochasticGradientDescent);
+    myNeuralNetwork.getNetworkLayer(myNeuralNetwork.getNetworkLayersSize() - 1).setOptimizerMethod(OptimizerMethod::StochasticGradientDescent);
     myNeuralNetwork.finalizeNeuralNetwork();
     
     char input = 0;
@@ -112,12 +112,28 @@ void testFive() {
     myNeuralNetwork.saveNeuralNetwork("../build/debug/TestFiveData.json");
 };
 
+void testSix() {
+    // Local Constant Variables
+    const std::size_t inputLayerVectorSize = 28*28, denseLayerVectorSize = 16, outputLayerVectorSize = 10;
+
+    // ADD COMMENT HERE LATER
+    NeuralNetwork<float> myNeuralNetwork("Buddy", inputLayerVectorSize, outputLayerVectorSize);
+    myNeuralNetwork.addNetworkLayer<LayerType::Dense>(denseLayerVectorSize);
+    myNeuralNetwork.addNetworkLayer<LayerType::Dense>(denseLayerVectorSize);
+    myNeuralNetwork.addNetworkLayer<LayerType::Output>(outputLayerVectorSize);
+    myNeuralNetwork.finalizeNeuralNetwork();
+
+    // ADD COMMENT HERE LATER
+    myNeuralNetwork.saveNeuralNetwork("../build/debug/TestSixData.json");
+};
+
 int main() {
     //testOne();
     //testTwo();
     //testThree();
     //testFour();
-    testFive();
+    //testFive();
+    testSix();
 
     return 0;
 };

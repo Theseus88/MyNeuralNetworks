@@ -25,7 +25,7 @@ namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerBase<T>::LayerBase(const LayerType layerType, const NeuronType neuronType, const size_t neuronCount)
-    : M_LAYERDATATYPE(dataTypeToString(T())), M_LAYERTYPE(layerType), m_neuronType(neuronType), m_randomizeParameterOne(static_cast<T>(0.0)), m_randomizeParameterTwo(static_cast<T>(0.0)), m_randomizeMethod(RandomizeFunctions<T>::Method::None), m_activationMethod(ActivationFunctions<T>::Method::None), m_derivativeMethod(ActivationFunctions<T>::Method::None), m_errorMethod(ErrorFunctions<T>::Method::None), m_optimizerMethod(OptimizerFunctions<T>::Method::None), m_neuronCount(neuronCount), m_layerNeurons(), m_outputVector(), m_isFinalized(false) {};
+    : M_LAYERDATATYPE(dataTypeToString(T())), M_LAYERTYPE(layerType), m_neuronType(neuronType), m_randomizeParameterOne(static_cast<T>(0.0)), m_randomizeParameterTwo(static_cast<T>(0.0)), m_randomizeMethod(RandomizeMethod::None), m_activationMethod(ActivationMethod::None), m_derivativeMethod(ActivationMethod::None), m_errorMethod(ErrorMethod::None), m_optimizerMethod(OptimizerMethod::None), m_neuronCount(neuronCount), m_layerNeurons(), m_outputVector(), m_isFinalized(false) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerBase<T>::~LayerBase() {};
@@ -48,19 +48,19 @@ namespace Theseus88 {
     template <typename T> void LayerBase<T>::setRandomizeParameterTwo(const T randomizeParameterTwo) {
         m_randomizeParameterTwo = randomizeParameterTwo;
     };
-    template <typename T> void LayerBase<T>::setRandomizeMethod(const typename RandomizeFunctions<T>::Method randomizeMethod) {
+    template <typename T> void LayerBase<T>::setRandomizeMethod(const RandomizeMethod randomizeMethod) {
         m_randomizeMethod = randomizeMethod;
     };
-    template <typename T> void LayerBase<T>::setActivationMethod(const typename ActivationFunctions<T>::Method activationMethod) {
+    template <typename T> void LayerBase<T>::setActivationMethod(const ActivationMethod activationMethod) {
         m_activationMethod = activationMethod;
     };
-    template <typename T> void LayerBase<T>::setDerivativeMethod(const typename ActivationFunctions<T>::Method derivativeMethod) {
+    template <typename T> void LayerBase<T>::setDerivativeMethod(const ActivationMethod derivativeMethod) {
         m_derivativeMethod = derivativeMethod;
     };
-    template <typename T> void LayerBase<T>::setErrorMethod(const typename ErrorFunctions<T>::Method errorMethod) {
+    template <typename T> void LayerBase<T>::setErrorMethod(const ErrorMethod errorMethod) {
         m_errorMethod = errorMethod;
     };
-    template <typename T> void LayerBase<T>::setOptimizerMethod(const typename OptimizerFunctions<T>::Method optimizerMethod) {
+    template <typename T> void LayerBase<T>::setOptimizerMethod(const OptimizerMethod optimizerMethod) {
         m_optimizerMethod = optimizerMethod;
     };
     template <typename T> void LayerBase<T>::setNeuronCount(const std::size_t neuronCount) {
@@ -104,19 +104,19 @@ namespace Theseus88 {
     template <typename T> const T LayerBase<T>::getRandomizeParameterTwo() const {
         return m_randomizeParameterTwo;
     };
-    template <typename T> const typename RandomizeFunctions<T>::Method LayerBase<T>::getRandomizeMethod() const {
+    template <typename T> const RandomizeMethod LayerBase<T>::getRandomizeMethod() const {
         return m_randomizeMethod;
     };
-    template <typename T> const typename ActivationFunctions<T>::Method LayerBase<T>::getActivationMethod() const {
+    template <typename T> const ActivationMethod LayerBase<T>::getActivationMethod() const {
         return m_activationMethod;
     };
-    template <typename T> const typename ActivationFunctions<T>::Method LayerBase<T>::getDerivativeMethod() const {
+    template <typename T> const ActivationMethod LayerBase<T>::getDerivativeMethod() const {
         return m_derivativeMethod;
     };
-    template <typename T> const typename ErrorFunctions<T>::Method LayerBase<T>::getErrorMethod() const {
+    template <typename T> const ErrorMethod LayerBase<T>::getErrorMethod() const {
         return m_errorMethod;
     };
-    template <typename T> const typename OptimizerFunctions<T>::Method LayerBase<T>::getOptimizerMethod() const {
+    template <typename T> const OptimizerMethod LayerBase<T>::getOptimizerMethod() const {
         return m_optimizerMethod;
     };
     template <typename T> const std::size_t LayerBase<T>::getNeuronCount() const {

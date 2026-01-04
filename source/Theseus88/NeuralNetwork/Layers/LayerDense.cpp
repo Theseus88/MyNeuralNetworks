@@ -16,10 +16,10 @@ namespace Theseus88 {
     : LayerBase<T>(LayerType::Dense, neuronType, neuronCount) {
         LayerBase<T>::setRandomizeParameterOne(static_cast<T>(-1.0));
         LayerBase<T>::setRandomizeParameterTwo(static_cast<T>(1.0));
-        LayerBase<T>::setRandomizeMethod(RandomizeFunctions<T>::Method::Uniform);
-        LayerBase<T>::setActivationMethod(ActivationFunctions<T>::Method::Sigmoid);
-        LayerBase<T>::setDerivativeMethod(ActivationFunctions<T>::Method::SigmoidDerivative);
-        LayerBase<T>::setOptimizerMethod(OptimizerFunctions<T>::Method::StochasticGradientDescent);
+        LayerBase<T>::setRandomizeMethod(RandomizeMethod::Uniform);
+        LayerBase<T>::setActivationMethod(ActivationMethod::Sigmoid);
+        LayerBase<T>::setDerivativeMethod(ActivationMethod::SigmoidDerivative);
+        LayerBase<T>::setOptimizerMethod(OptimizerMethod::StochasticGradientDescent);
     };
 
     // ADD COMMENT HERE LATER

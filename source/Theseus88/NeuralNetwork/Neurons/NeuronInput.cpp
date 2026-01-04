@@ -25,7 +25,7 @@ namespace Theseus88 {
         NeuronBase<T>::m_biasConnection.m_weight = static_cast<T>(0);
         NeuronBase<T>::m_isFinalized = true;
     };
-    template <typename T> void NeuronInput<T>::saveLayerNeuron(JsonWriter& writer) const { // Still working on code here...
+    template <typename T> void NeuronInput<T>::saveLayerNeuron(JsonWriter& writer) const {
         NeuronBase<T>::saveLayerNeuron(writer);
         writer.writeObjectEnd();
     };

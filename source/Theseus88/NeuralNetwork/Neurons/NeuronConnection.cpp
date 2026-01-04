@@ -18,7 +18,7 @@ namespace Theseus88 {
         writer.writeObjectStart(!wroteKeyAlready);
         //writer.writeNumber("Connection Input", m_input);
         writer.writeNumber("Connection Weight", m_weight);
-        //writer.writeNumber("Connection Gradient", m_gradient);
+        writer.writeNumber("Connection Gradient", m_gradient);
         writer.writeNumber("Connection Velocity", m_velocity);
         writer.writeNumber("Connection Moment 1", m_moment1);
         writer.writeNumber("Connection Moment 2", m_moment2);

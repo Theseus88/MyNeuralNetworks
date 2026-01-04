@@ -11,22 +11,22 @@ namespace Theseus88 {
     template <typename T> class OptimizerFunctions {
     public:
         // ADD COMMENT HERE LATER
-        enum class Method { None, StochasticGradientDescent, StochasticGradientDescentWithClassicalMomentum, StochasticGradientDescentWithNesterovMomentum, AdaptiveGradient, RootMeanSquaredPropagation, AdaptiveMomentEstimation };
-        static constexpr const char* optimizerMethodToString(Method type) {
+        //enum class Method { None, StochasticGradientDescent, StochasticGradientDescentWithClassicalMomentum, StochasticGradientDescentWithNesterovMomentum, AdaptiveGradient, RootMeanSquaredPropagation, AdaptiveMomentEstimation };
+        static constexpr const char* optimizerMethodToString(OptimizerMethod type) {
             switch (type) {
-                case Method::None: return "None";
-                case Method::StochasticGradientDescent: return "Stochastic Gradient Descent";
-                case Method::StochasticGradientDescentWithClassicalMomentum: return "Stochastic Gradient Descent with Classical Momentum";
-                case Method::StochasticGradientDescentWithNesterovMomentum: return "Stochastic Gradient Descent with Nesterov Momentum";
-                case Method::AdaptiveGradient: return "Adaptive Gradient";
-                case Method::RootMeanSquaredPropagation: return "Root Mean Squared Propagation";
-                case Method::AdaptiveMomentEstimation: return "Adaptive Moment Estimation";
+                case OptimizerMethod::None: return "None";
+                case OptimizerMethod::StochasticGradientDescent: return "Stochastic Gradient Descent";
+                case OptimizerMethod::StochasticGradientDescentWithClassicalMomentum: return "Stochastic Gradient Descent with Classical Momentum";
+                case OptimizerMethod::StochasticGradientDescentWithNesterovMomentum: return "Stochastic Gradient Descent with Nesterov Momentum";
+                case OptimizerMethod::AdaptiveGradient: return "Adaptive Gradient";
+                case OptimizerMethod::RootMeanSquaredPropagation: return "Root Mean Squared Propagation";
+                case OptimizerMethod::AdaptiveMomentEstimation: return "Adaptive Moment Estimation";
                 default: return "Unknown";
             };
         };
 
         // ADD COMMENT HERE LATER
-        static std::function<void(NeuronBase<T>&)> getOptimizerFunction(const Method method);
+        static std::function<void(NeuronBase<T>&)> getOptimizerFunction(const OptimizerMethod method);
 
         // ADD COMMENT HERE LATER
         static void none(NeuronBase<T>& neuron);

@@ -4,17 +4,17 @@
 namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
-    template <typename T> std::function<const T(const T)> ActivationFunctions<T>::getActivationFunction(const Method& method) {
+    template <typename T> std::function<const T(const T)> ActivationFunctions<T>::getActivationFunction(const ActivationMethod& method) {
         switch (method) {
-            case Method::None: return none;
-            case Method::Sigmoid: return sigmoid;
-            case Method::SigmoidDerivative: return sigmoidDerivative;
-            case Method::Relu: return relu;
-            case Method::ReluDerivative: return reluDerivative;
-            case Method::Tanh: return tanh;
-            case Method::TanhDerivative: return tanhDerivative;
-            case Method::Linear: return linear;
-            case Method::LinearDerivative: return linearDerivative;
+            case ActivationMethod::None: return none;
+            case ActivationMethod::Sigmoid: return sigmoid;
+            case ActivationMethod::SigmoidDerivative: return sigmoidDerivative;
+            case ActivationMethod::Relu: return relu;
+            case ActivationMethod::ReluDerivative: return reluDerivative;
+            case ActivationMethod::Tanh: return tanh;
+            case ActivationMethod::TanhDerivative: return tanhDerivative;
+            case ActivationMethod::Linear: return linear;
+            case ActivationMethod::LinearDerivative: return linearDerivative;
             default: throw std::runtime_error("Activation Functions Error: ADD ERROR MESSAGE HERE LATER.\n");
         };
     };

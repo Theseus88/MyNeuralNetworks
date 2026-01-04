@@ -5,11 +5,11 @@
 namespace Theseus88 {
 
     // ADD COMMENT HERE LATER
-    template <typename T> std::function<void(std::vector<NeuronConnection<T>>&, NeuronConnection<T>&, const T, const T)> RandomizeFunctions<T>::getRandomizeFunction(const Method method) {
+    template <typename T> std::function<void(std::vector<NeuronConnection<T>>&, NeuronConnection<T>&, const T, const T)> RandomizeFunctions<T>::getRandomizeFunction(const RandomizeMethod method) {
         switch (method) {
-            case Method::None: return none;
-            case Method::Uniform: return uniform;
-            case Method::Normal: return normal;
+            case RandomizeMethod::None: return none;
+            case RandomizeMethod::Uniform: return uniform;
+            case RandomizeMethod::Normal: return normal;
             default: throw std::runtime_error("Randomize Functions Error: ADD ERROR MESSAGE HERE LATER.\n");
         };
     };
