@@ -36,6 +36,7 @@ jobs:
           mingw-w64-ucrt-x86_64-tbb
 
     - name: Create Build Directory
+      shell: bash
       run: mkdir -p build
 
     - name: Compile Project (Linux)
