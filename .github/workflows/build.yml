@@ -13,7 +13,7 @@ jobs:
     strategy:
       # This matrix will create a separate build job for each OS
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-24.04, windows-latest]
 
     steps:
     - name: Checkout code
@@ -50,7 +50,7 @@ jobs:
       if: runner.os == 'Windows'
       shell: msys2 {0}
       run: |
-        g++ -std=c++20 -g -I./source -I./include $(find source -name "*.cpp") -o build/MyNeuralNetworks.exe -ltbb
+        g++ -std=c++20 -g -I./source -I./include $(find source -name "*.cpp") -o build/MyNeuralNetworks.exe -ltbb12
 
     - name: Run Executable (Optional Test)
       shell: bash
