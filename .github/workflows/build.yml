@@ -44,7 +44,7 @@ jobs:
       run: |
         # This command finds all .cpp files and compiles them with the main entry point.
         # The -I flag tells the compiler where to find your library's headers.
-        g++ -std=c++20 -g -I./source -I./include $(find source -name "*.cpp") -o build/MyNeuralNetworks -ltbb
+        g++ -std=c++20 -fpermissive -g -I./source -I./include $(find source -name "*.cpp") -o build/MyNeuralNetworks -ltbb
 
     - name: Compile Project (Windows)
       if: runner.os == 'Windows'
