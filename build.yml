@@ -1,0 +1,57 @@
+name: C++ CI Build
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: ${{ matrix.os }} Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      # This matrix will create a separate build job for each OS
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Linux dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libtbb-dev
+
+    - name: Set up MSYS2 (Windows)
+      if: runner.os == 'Windows'
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: UCRT64
+        update: true
+        pacman: >-
+          mingw-w64-ucrt-x86_64-toolchain
+          mingw-w64-ucrt-x86_64-tbb
+
+    - name: Create Build Directory
+      run: mkdir -p build
+
+    - name: Compile Project (Linux)
+      if: runner.os == 'Linux'
+      shell: bash
+      run: |
+        # This command finds all .cpp files and compiles them with the main entry point.
+        # The -I flag tells the compiler where to find your library's headers.
+        g++ -std=c++20 -g -I./source $(find source -name "*.cpp") examples/main.cpp -o build/MyNeuralNetworks -ltbb
+
+    - name: Compile Project (Windows)
+      if: runner.os == 'Windows'
+      shell: msys2 {0}
+      run: |
+        g++ -std=c++20 -g -I./source $(find source -name "*.cpp") examples/main.cpp -o build/MyNeuralNetworks.exe -ltbb
+
+    - name: Run Executable (Optional Test)
+      shell: bash
+      run: ./build/MyNeuralNetworks*

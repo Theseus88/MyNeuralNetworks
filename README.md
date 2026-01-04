@@ -1,64 +1,37 @@
 # MyNeuralNetworks
 
+[![Language](https://img.shields.io/badge/Language-C%2B%2B20-blue.svg)](https://isocpp.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![C++ CI Build](https://github.com/Theseus88/MyNeuralNetworks/actions/workflows/build.yml/badge.svg)](https://github.com/Theseus88/MyNeuralNetworks/actions/workflows/build.yml)
+
 **MyNeuralNetworks** is a high-performance, object-oriented neural network library written entirely from scratch in C++20. Designed with modularity, extensibility, and modern C++ practices in mind, it provides a flexible framework for deep learning without relying on external machine learning frameworks.
 
-## Project Overview
+## Table of Contents
 
-This project demonstrates a deep understanding of both Neural Network architecture and advanced C++ software engineering. It features a custom-built engine for forward propagation, backpropagation, and network serialization.
+- [Key Features](#key-features)
+- [Quick Start](#quick-start)
+- [Setup and Build Instructions](#setup-and-build-instructions)
+  - [Prerequisites](#prerequisites)
+  - [Windows Setup (MinGW)](#windows-setup-mingw)
+  - [Linux Setup (Guidance)](#linux-setup-guidance)
+  - [Building the Project](#building-the-project)
+- [Architecture Deep Dive](#architecture-deep-dive)
+- [Contributing](#contributing)
+- [License](#license)
 
-### Key Features
+## Key Features
 
-*   **Pure C++ Implementation**: No external ML libraries (like PyTorch or TensorFlow). All math, logic, and data structures are implemented from the ground up.
-*   **Templated Precision**: The entire architecture is templated, allowing networks to be instantiated with `float`, `double`, or `long double` precision depending on performance and accuracy requirements.
-*   **Object-Oriented Architecture**:
-    *   **Polymorphic Layers**: Distinct implementations for `LayerInput`, `LayerDense`, and `LayerOutput` inheriting from a robust `LayerBase`.
-    *   **Factory Pattern**: Utilizes `FactoryLayer` and `FactoryNeuron` for dynamic and extensible component creation.
-*   **Advanced C++20 Features**:
-    *   Utilizes modern standard library features including `<ranges>` and `<filesystem>`.
-    *   **Parallel Execution**: conditional support for `std::execution::par` (Parallel STL) to accelerate computations on heavy layers.
-*   **Custom Serialization**: Includes a bespoke `JsonUtilities` library (Reader/Writer) to save and load network states to JSON, implemented without third-party JSON parsers.
+*   **Pure C++20 Implementation**: Built entirely from scratch without external ML libraries (like PyTorch or TensorFlow).
+*   **Templated Precision**: Supports `float`, `double`, or `long double` to precisely control numerical accuracy and performance.
+*   **Hybrid Architecture**:
+    *   **Object-Oriented**: Composed of polymorphic `Layer` and `Neuron` objects (managed via `std::unique_ptr` and Factory patterns) for readability and extensibility.
+    *   **Parallelized**: Heavy computations utilize C++20 parallel algorithms (`std::execution::par`) to mitigate OOP overhead.
+*   **Modern C++ Features**: Leverages `<ranges>`, `std::views` (for reverse iteration during backpropagation), and `<filesystem>`.
+*   **Custom Serialization (`JsonUtilities`)**: A bespoke, zero-dependency JSON parser/writer designed for high-performance serialization of network states, using `std::to_chars` for fast, locale-independent numerical formatting.
 
-## Design Philosophy & Technical Decisions
+## Quick Start
 
-### 1. Zero-Dependency & Custom Serialization
-A core constraint of this project is to avoid external dependencies. This necessitated the creation of **`JsonUtilities`**, a bespoke JSON parser and writer.
-*   **Why?** To maintain full control over the serialization format and to implement high-performance, stream-based parsing tailored specifically for large arrays of weights and biases.
-*   **Tech Stack**: It utilizes `std::charconv` for fast numerical conversions and manages its own stream buffers to minimize I/O overhead.
-
-### 2. Object-Oriented vs. Data-Oriented
-While many ML libraries are purely Data-Oriented (relying on large tensor operations), **MyNeuralNetworks** adopts a hybrid Object-Oriented approach.
-*   **Structure**: The network is composed of `Layer` objects, which contain `Neuron` objects.
-*   **Benefit**: This makes the code highly readable and extensible. Adding a new type of Neuron or Layer involves creating a new class that inherits from `NeuronBase` or `LayerBase`, rather than rewriting matrix kernels.
-*   **Performance**: To mitigate the overhead of OOP, heavy computations (like dense layer propagation) are parallelized using C++20 parallel algorithms (`std::execution::par`).
-
-### 3. Modern C++ Standards (C++20)
-The codebase leverages modern language features to ensure safety and expressiveness:
-*   **`std::views`**: Used in backpropagation to elegantly iterate layers in reverse without manual index manipulation.
-*   **Templates & Type Safety**: The engine is fully templated (`float`, `double`, `long double`), allowing for precise control over numerical accuracy.
-*   **Smart Pointers**: `std::unique_ptr` is used extensively for ownership management of layers and neurons, ensuring no memory leaks occur during network restructuring.
-
-## Architecture
-
-The codebase is organized under the `Theseus88` namespace.
-
-*   **`NeuralNetwork<T>`**: The primary interface. It manages the lifecycle of layers, handles the input/output vectors, and orchestrates propagation.
-*   **`LayerBase<T>`**: The abstract base class defining the contract for all network layers.
-*   **`NeuronBase<T>`**: Represents individual processing units, managing connections, weights, biases, and activation states.
-*   **Math & Optimization**:
-    *   **Activations**: Sigmoid, ReLU, Tanh, Linear (and their derivatives).
-    *   **Optimizers**: Stochastic Gradient Descent (SGD), Momentum, Nesterov, Adam, RMSProp.
-    *   **Error Functions**: MSE, CrossEntropy, etc.
-
-## Build Requirements
-
-*   **Environment**: **MSYS2** on Windows (UCRT64 environment).
-*   **Compiler**: **G++** (MinGW-w64) with C++20 support.
-    *   The build tasks are configured for `C:\msys64\ucrt64\bin\g++.exe`.
-*   **Dependencies**:
-    *   Standard C++ Library.
-    *   **Intel TBB** (Threading Building Blocks): Required for parallel execution policies (`<execution>`) if building with GCC/MinGW (linked as `-ltbb12`).
-
-## Usage Example
+Here is a brief example of how to define, train, and save a network.
 
 ```cpp
 #include "Theseus88/NeuralNetwork/NeuralNetwork.hpp"
@@ -66,32 +39,108 @@ The codebase is organized under the `Theseus88` namespace.
 using namespace Theseus88;
 
 int main() {
-    // Initialize a network with double precision
+    // 1. Initialize a network with double precision
     // Name: "DemoNet", Input Size: 2, Output Size: 1
     NeuralNetwork<double> nn("DemoNet", 2, 1);
 
-    // Add a hidden dense layer with 3 neurons
-    // The Input and Output layers are handled automatically or can be explicitly defined
+    // 2. Add a hidden dense layer with 3 neurons
+    // The Input and Output layers are handled automatically
     nn.addNetworkLayer<LayerType::Dense>(3);
 
-    // Configure hyperparameters
+    // 3. Configure hyperparameters
     nn.setLearningRate(0.05);
     nn.setMomentum(0.9);
 
-    // Finalize the network structure (links layers and allocates memory)
+    // 4. Finalize the network structure (links layers and allocates memory)
     nn.finalizeNeuralNetwork();
 
-    // Forward Propagation
+    // 5. Propagate forward with some input
     std::vector<double> inputs = { 1.0, 0.0 };
     const auto& results = nn.propagateForward(inputs);
 
-    // Backpropagation (Training)
+    // 6. Train the network by propagating backward with target values
     std::vector<double> targets = { 1.0 };
     nn.propagateBackward(targets);
 
-    // Save the network state to JSON
+    // 7. Save the trained network state to a JSON file
     nn.saveNeuralNetwork("network_state.json");
 
     return 0;
 }
 ```
+
+## Setup and Build Instructions
+
+### Prerequisites
+
+- **Visual Studio Code**: With the following Microsoft extensions:
+  - `C/C++`
+  - `C/C++ Extension Pack`
+- **A C++20 Compliant Compiler**: (e.g., GCC 10+, Clang 12+, MSVC v19.29+).
+- **Intel TBB (Threading Building Blocks)**: Required for parallel execution support with GCC/MinGW.
+
+### Windows Setup (MinGW)
+
+The recommended toolchain on Windows is MinGW-w64 installed via MSYS2.
+
+1.  **Install MSYS2 and Toolchain**:
+    - Download and run the installer from the **[MSYS2 website](https://www.msys2.org/)**.
+    - After installation, an MSYS2 terminal will open. Install the toolchain and TBB with `pacman`:
+      ```sh
+      # Installs g++, gdb, and other development tools
+      pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
+      # Installs the TBB library for parallel execution
+      pacman -S mingw-w64-ucrt-x86_64-tbb
+      ```
+
+2.  **Update Windows PATH**:
+    - Add the MinGW-w64 `bin` folder to your Windows `PATH` environment variable. The default location is `C:\msys64\ucrt64\bin`.
+
+3.  **Verify Installation**:
+    - Open a **new** Command Prompt and run `g++ --version` and `gdb --version` to confirm they are accessible.
+
+> For a complete video walkthrough, see the official VS Code guide: **[Using GCC with MinGW](https://code.visualstudio.com/docs/cpp/config-mingw)**.
+
+### Linux Setup (Guidance)
+
+For Debian-based systems (like Ubuntu), you can install the necessary tools with `apt`:
+```sh
+sudo apt update
+sudo apt install build-essential gdb libtbb-dev
+```
+The provided VS Code build tasks are currently configured for Windows but can be adapted for Linux.
+
+### Building the Project
+
+This repository is configured with VS Code build tasks.
+1.  Open the project folder in VS Code.
+2.  Open the main file you wish to compile (e.g., a `main.cpp` that uses the library).
+3.  Press `Ctrl+Shift+B` to run the default build task.
+4.  Select from the available tasks:
+    *   `C/C++: g++.exe build active file (Debug C++20)`
+    *   `C/C++: g++.exe build active file (Release C++20)`
+
+The executable will be placed in the `build/debug` or `build/release` directory.
+
+## Architecture Deep Dive
+
+The library is designed with a clear, object-oriented structure that prioritizes readability and extensibility.
+
+-   **`NeuralNetwork<T>`**: The primary interface. It manages the lifecycle of layers, handles I/O, and orchestrates propagation.
+-   **`LayerBase<T>`**: The abstract base class for all network layers (`LayerInput`, `LayerDense`, `LayerOutput`). This polymorphic design makes it easy to add new layer types.
+-   **`NeuronBase<T>`**: Represents individual processing units, managing connections, weights, biases, and activation states.
+-   **Factories**: `FactoryLayer` and `FactoryNeuron` are used for dynamic and extensible component creation, simplifying network construction from files.
+-   **Math & Optimization**: A rich set of functions are provided for:
+    *   **Activations**: Sigmoid, ReLU, Tanh, Linear (and their derivatives).
+    *   **Optimizers**: SGD, Momentum, Nesterov, Adam, RMSProp.
+    *   **Error Functions**: MSE, Cross-Entropy, etc.
+
+## Contributing
+
+Contributions are welcome! If you'd like to help improve the library, please feel free to fork the repository, make your changes, and submit a pull request. For major changes, please open an issue first to discuss what you would like to change.
+
+*(A more formal `CONTRIBUTING.md` guide is planned for the future.)*
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
