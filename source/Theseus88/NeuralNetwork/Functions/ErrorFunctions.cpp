@@ -33,25 +33,27 @@ namespace Theseus88 {
         return 2 * (predicted - target);
     };
     template <typename T> const T ErrorFunctions<T>::binaryCrossEntropy(NeuronBase<T>& neuron, const T predicted, const T target) {
-        //const T& epsilon = neuron.getEpsilon();
-        //return -(target / (predicted + epsilon)) + ((1 - target) / (1 - predicted + epsilon));
+        const T epsilon = static_cast<T>(1e-8);
+        return -(target / (predicted + epsilon)) + ((static_cast<T>(1.0) - target) / (static_cast<T>(1.0) - predicted + epsilon));
     };
     template <typename T> const T ErrorFunctions<T>::hingeLoss(NeuronBase<T>& neuron, const T predicted, const T target) {
         return (1 - target * predicted < 0) ? static_cast<T>(0.0) : -target;
     };
     template <typename T> const T ErrorFunctions<T>::focalLoss(NeuronBase<T>& neuron, const T predicted, const T target) {
-        //const T& epsilon = neuron.getEpsilon();
-        //const T& alpha = neuron.getAlpha();
-        //const T& gamma = neuron.getGamma();
+        const T epsilon = static_cast<T>(1e-8);
+        const T alpha = static_cast<T>(0.25);
+        const T gamma = static_cast<T>(2.0);
 
-        //const T pt = (target == 1) ? predicted : (1 - predicted);
-        //const T modulating_factor = std::pow((1 - pt), gamma);
+        const T p = std::max(epsilon, std::min(predicted, static_cast<T>(1.0) - epsilon));
+        const T one_minus_p = static_cast<T>(1.0) - p;
 
-        //if (target == 1) {
-        //    return -alpha * modulating_factor * (std::log(predicted + epsilon) + (gamma * (1 - pt) / (predicted + epsilon)));
-        //} else {
-        //    return (1 - alpha) * modulating_factor * (-std::log(1 - predicted + epsilon) - (gamma * pt / (1 - predicted + epsilon)));
-        //};
+        if (target > static_cast<T>(0.5)) {
+            // y = 1
+            return alpha * std::pow(one_minus_p, gamma - static_cast<T>(1.0)) * ((gamma * std::log(p)) - (one_minus_p / p));
+        } else {
+            // y = 0
+            return (static_cast<T>(1.0) - alpha) * std::pow(p, gamma - static_cast<T>(1.0)) * ((p / one_minus_p) - (gamma * std::log(one_minus_p)));
+        };
     };
 
     // Explicit Template Instantiations

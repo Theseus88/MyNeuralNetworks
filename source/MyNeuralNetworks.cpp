@@ -64,7 +64,7 @@ void testTwo() {
 
 void testThree() {
     // ADD COMMENT HERE LATER
-    NeuralNetwork<float> myNeuralNetwork("Buddy", 24*24, 10);
+    NeuralNetwork<float> myNeuralNetwork("Buddy", 28*28, 10);
     for (int i = 0; i < 8; i++) myNeuralNetwork.addNetworkLayer<LayerType::Dense>(10);
     myNeuralNetwork.finalizeNeuralNetwork();
     myNeuralNetwork.saveNeuralNetwork("../build/debug/TestThreeData.json");

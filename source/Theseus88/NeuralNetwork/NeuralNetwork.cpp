@@ -92,19 +92,19 @@ namespace Theseus88 {
         m_isFinalized = false;
         m_networkLayers.reserve(layerCapacity);
     };
-    template <typename T> void NeuralNetwork<T>::setRandomizeMethod(const RandomizeMethod randomizeMethod) {
+    template <typename T> void NeuralNetwork<T>::setRandomizeMethod(const RandomizeMethod randomizeMethod) { // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setRandomizeMethod(randomizeMethod);
     };
-    template <typename T> void NeuralNetwork<T>::setActivationMethod(const ActivationMethod activationMethod) {
+    template <typename T> void NeuralNetwork<T>::setActivationMethod(const ActivationMethod activationMethod) { // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setActivationMethod(activationMethod);
     };
-    template <typename T> void NeuralNetwork<T>::setDerivativeMethod(const ActivationMethod derivativeMethod) {
+    template <typename T> void NeuralNetwork<T>::setDerivativeMethod(const ActivationMethod derivativeMethod) { // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setDerivativeMethod(derivativeMethod);
     };
-    template <typename T> void NeuralNetwork<T>::setErrorMethod(const ErrorMethod errorMethod) {
+    template <typename T> void NeuralNetwork<T>::setErrorMethod(const ErrorMethod errorMethod) { // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setErrorMethod(errorMethod);
     };
-    template <typename T> void NeuralNetwork<T>::setOptimizerMethod(const OptimizerMethod optimizerMethod) {
+    template <typename T> void NeuralNetwork<T>::setOptimizerMethod(const OptimizerMethod optimizerMethod) { // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setOptimizerMethod(optimizerMethod);
     };
 
@@ -192,22 +192,22 @@ namespace Theseus88 {
         };
         m_isFinalized = true;
     };
-    template <typename T> const std::vector<float>& NeuralNetwork<T>::propagateForward(const std::vector<float>& inputVector) { // Still working on code here...
+    template <typename T> const std::vector<float>& NeuralNetwork<T>::propagateForward(const std::vector<float>& inputVector) {
         return propagateForwardImpl(inputVector);
     };
-    template <typename T> const std::vector<double>& NeuralNetwork<T>::propagateForward(const std::vector<double>& inputVector) { // Still working on code here...
+    template <typename T> const std::vector<double>& NeuralNetwork<T>::propagateForward(const std::vector<double>& inputVector) {
         return propagateForwardImpl(inputVector);
     };
-    template <typename T> const std::vector<long double>& NeuralNetwork<T>::propagateForward(const std::vector<long double>& inputVector) { // Still working on code here...
+    template <typename T> const std::vector<long double>& NeuralNetwork<T>::propagateForward(const std::vector<long double>& inputVector) {
         return propagateForwardImpl(inputVector);
     };
-    template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<float>& targetOutputVector) { // Still working on code here...
+    template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<float>& targetOutputVector) {
         propagateBackwardImpl(targetOutputVector);
     };
-    template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<double>& targetOutputVector) { // Still working on code here...
+    template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<double>& targetOutputVector) {
         propagateBackwardImpl(targetOutputVector);
     };
-    template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<long double>& targetOutputVector) { // Still working on code here...
+    template <typename T> void NeuralNetwork<T>::propagateBackward(const std::vector<long double>& targetOutputVector) {
         propagateBackwardImpl(targetOutputVector);
     };
     template <typename T> void NeuralNetwork<T>::saveNeuralNetwork(const std::filesystem::path& path) {
