@@ -1,8 +1,7 @@
 // source/MyNeuralNetworks.cpp
 #include "../include/Theseus88/NeuralNetwork/NeuralNetwork.hpp"
-#include <chrono>
-#include <iostream>
-#include <limits>
+
+#include "../include/Theseus88/EMNIST/EMNIST.hpp"
 
 using namespace Theseus88;
 
@@ -117,6 +116,9 @@ void testSix() {
     const std::size_t inputLayerVectorSize = 28*28, denseLayerVectorSize = 16, outputLayerVectorSize = 10;
 
     // ADD COMMENT HERE LATER
+    Theseus88::EMNIST::downloadAndUnzip("assets");
+
+    // ADD COMMENT HERE LATER
     NeuralNetwork<float> myNeuralNetwork("Buddy", inputLayerVectorSize, outputLayerVectorSize);
     myNeuralNetwork.addNetworkLayer<LayerType::Dense>(denseLayerVectorSize);
     myNeuralNetwork.addNetworkLayer<LayerType::Dense>(denseLayerVectorSize);
@@ -124,7 +126,7 @@ void testSix() {
     myNeuralNetwork.finalizeNeuralNetwork();
 
     // ADD COMMENT HERE LATER
-    myNeuralNetwork.saveNeuralNetwork("TestSixData.json");
+    myNeuralNetwork.saveNeuralNetwork("build/debug/TestSixData.json");
 };
 
 int main() {

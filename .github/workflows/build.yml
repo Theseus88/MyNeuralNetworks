@@ -35,9 +35,11 @@ jobs:
           mingw-w64-ucrt-x86_64-toolchain
           mingw-w64-ucrt-x86_64-tbb
 
-    - name: Create Build Directory
+    - name: Create Project Directories
       shell: bash
-      run: mkdir -p build
+      run: |
+        mkdir -p build
+        mkdir -p assets
 
     - name: Compile Project (Linux)
       if: runner.os == 'Linux'
