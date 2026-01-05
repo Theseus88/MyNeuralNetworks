@@ -47,11 +47,11 @@ namespace Theseus88 {
 
             // 2. Unzip the dataset
             std::cout << "[EMNIST] Unzipping dataset..." << std::endl;
-            std::string command = "tar -xf \"" + zipPath.generic_string() + "\" -C \"" + targetDirectory.generic_string() + "\"";
+            std::string command = "unzip -o -q \"" + zipPath.generic_string() + "\" -d \"" + targetDirectory.generic_string() + "\"";
             
             int result = std::system(command.c_str());
             if (result != 0) {
-                throw std::runtime_error("Failed to unzip EMNIST dataset. Ensure 'tar' is installed.");
+                throw std::runtime_error("Failed to unzip EMNIST dataset. Ensure 'unzip' is installed.");
             }
             std::cout << "[EMNIST] Unzip complete." << std::endl;
 
