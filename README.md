@@ -112,15 +112,21 @@ The provided VS Code build tasks are currently configured for Windows but can be
 
 ### Building the Project
 
-This repository is configured with VS Code build tasks.
+This repository is configured with VS Code build tasks that compile the entire project.
 1.  Open the project folder in VS Code.
-2.  Open the main file you wish to compile (e.g., a `main.cpp` that uses the library).
-3.  Press `Ctrl+Shift+B` to run the default build task.
-4.  Select from the available tasks:
-    *   `C/C++: g++.exe build active file (Debug C++20)`
-    *   `C/C++: g++.exe build active file (Release C++20)`
+2.  Press `Ctrl+Shift+B` to run the default build task (Debug).
+3.  Alternatively, go to **Terminal > Run Build Task...** and select:
+    *   `Build (Debug)`: Compiles with debug symbols.
+    *   `Build (Release)`: Compiles with `-O3` optimization.
 
 The executable will be placed in the `build/debug` or `build/release` directory.
+
+### Running and Debugging
+
+Launch configurations are provided to run and debug the application directly from VS Code:
+1.  Open the **Run and Debug** view (`Ctrl+Shift+D`).
+2.  Select `Debug MyNeuralNetworks` or `Release MyNeuralNetworks` from the dropdown.
+3.  Press `F5` to build and run the application.
 
 ## Architecture Deep Dive
 

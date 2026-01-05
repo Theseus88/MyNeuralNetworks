@@ -1,0 +1,61 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug MyNeuralNetworks",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/debug/MyNeuralNetworksDebug",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Build (Debug)",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "windows": {
+                "program": "${workspaceFolder}/build/debug/MyNeuralNetworksDebug.exe",
+                "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe"
+            },
+            "linux": {
+                "program": "${workspaceFolder}/build/debug/MyNeuralNetworksDebug",
+                "miDebuggerPath": "/usr/bin/gdb"
+            }
+        },
+        {
+            "name": "Release MyNeuralNetworks",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/release/MyNeuralNetworksRelease",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Build (Release)",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "windows": {
+                "program": "${workspaceFolder}/build/release/MyNeuralNetworksRelease.exe",
+                "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe"
+            },
+            "linux": {
+                "program": "${workspaceFolder}/build/release/MyNeuralNetworksRelease",
+                "miDebuggerPath": "/usr/bin/gdb"
+            }
+        }
+    ]
+}
