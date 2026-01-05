@@ -126,7 +126,7 @@ void testSix() {
     myNeuralNetwork.finalizeNeuralNetwork();
 
     // ADD COMMENT HERE LATER
-    myNeuralNetwork.saveNeuralNetwork("build/debug/TestSixData.json");
+    //myNeuralNetwork.saveNeuralNetwork("build/debug/TestSixData.json");
 };
 
 int main() {
