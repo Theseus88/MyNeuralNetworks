@@ -13,6 +13,7 @@ namespace Theseus88 {
     // ADD COMMENT HERE LATER
     class EMNIST {
     public:
+        // ADD COMMENT HERE LATER
         static void downloadAndUnzip(const std::filesystem::path& targetDirectory) {
             namespace fs = std::filesystem;
 
@@ -38,14 +39,13 @@ namespace Theseus88 {
             };
 
             // 2. Unzip the dataset
-            std::cout << "[EMNIST] Unzipping dataset..." << std::endl;
             #ifdef _WIN32
             std::string command = "powershell -Command \"Expand-Archive -Path '" + zipPath.generic_string() + "' -DestinationPath '" + targetDirectory.generic_string() + "' -Force\"";
             #else
             std::string command = "unzip -o \"" + zipPath.generic_string() + "\" -d \"" + targetDirectory.generic_string() + "\"";
             #endif
-            
             std::cout << "[EMNIST] Command: " << command << std::endl;
+            std::cout << "[EMNIST] Unzipping dataset..." << std::endl;
             int result = std::system(command.c_str());
             if (result != 0) throw std::runtime_error("Failed to unzip EMNIST dataset. Exit code: " + std::to_string(result));
             std::cout << "[EMNIST] Unzip complete." << std::endl;
