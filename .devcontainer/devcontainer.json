@@ -4,10 +4,9 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-vscode.cpptools",
-                "ms-vscode.cpptools-themes"
+                "ms-vscode.cpptools-extension-pack"
             ]
         }
     },
-    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y libtbb-dev curl unzip"
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y libtbb-dev curl unzip build-essential gdb"
 }
