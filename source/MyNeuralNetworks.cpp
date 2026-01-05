@@ -116,7 +116,7 @@ void testSix() {
     const std::size_t inputLayerVectorSize = 28*28, denseLayerVectorSize = 16, outputLayerVectorSize = 10;
 
     // ADD COMMENT HERE LATER
-    Theseus88::EMNIST::downloadAndUnzip("assets");
+    EMNIST::downloadAndUnzip("assets");
 
     // ADD COMMENT HERE LATER
     NeuralNetwork<float> myNeuralNetwork("Buddy", inputLayerVectorSize, outputLayerVectorSize);
