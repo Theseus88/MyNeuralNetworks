@@ -13,7 +13,7 @@
 - [Setup and Build Instructions](#setup-and-build-instructions)
   - [Prerequisites](#prerequisites)
   - [Windows Setup (MinGW)](#windows-setup-mingw)
-  - [Linux Setup (Guidance)](#linux-setup-guidance)
+  - [Linux Setup (GCC)](#linux-setup-gcc)
   - [Building the Project](#building-the-project)
 - [Architecture Deep Dive](#architecture-deep-dive)
 - [Contributing](#contributing)
@@ -28,6 +28,19 @@
     *   **Parallelized**: Heavy computations utilize C++20 parallel algorithms (`std::execution::par`) to mitigate OOP overhead.
 *   **Modern C++ Features**: Leverages `<ranges>`, `std::views` (for reverse iteration during backpropagation), and `<filesystem>`.
 *   **Custom Serialization (`JsonUtilities`)**: A bespoke, zero-dependency JSON parser/writer designed for high-performance serialization of network states, using `std::to_chars` for fast, locale-independent numerical formatting.
+
+## Project Status & Roadmap
+
+**Note:** This project is currently a **Work in Progress**. While the core training and saving mechanisms are functional, several key features are actively being developed and are expected to be completed within the next few days.
+
+*   **Serialization**:
+    *   `saveNeuralNetwork` is implemented using a custom `JsonWriter`.
+    *   `loadNeuralNetwork` is currently **pending implementation**.
+    *   `JsonReader` requires a revamp to align with the architecture of `JsonWriter` to ensure seamless state restoration.
+*   **Datasets**:
+    *   Work is underway on an `EMNIST` class to automatically download datasets (gzip format) and generate test cases for benchmarking.
+
+These components are interdependent, and full save/load functionality will be available once the JSON parsing logic is finalized.
 
 ## Quick Start
 
@@ -104,13 +117,13 @@ The recommended toolchain on Windows is MinGW-w64 installed via MSYS2.
 
 > For a complete video walkthrough, see the official VS Code guide: **[Using GCC with MinGW](https://code.visualstudio.com/docs/cpp/config-mingw)**.
 
-### Linux Setup
+### Linux Setup (GCC)
 
 For Debian-based systems (like Ubuntu), you can install the necessary tools with `apt`:
 
 ```sh
 sudo apt update
-sudo apt install build-essential gdb libtbb-dev
+sudo apt install build-essential gdb libtbb-dev curl unzip
 ```
 
 The provided VS Code build tasks and launch configurations are configured for both Windows and Linux support.
@@ -137,14 +150,28 @@ Launch configurations are provided to run and debug the application directly fro
 
 The library is designed with a clear, object-oriented structure that prioritizes readability and extensibility.
 
--   **`NeuralNetwork<T>`**: The primary interface. It manages the lifecycle of layers, handles I/O, and orchestrates propagation.
--   **`LayerBase<T>`**: The abstract base class for all network layers (`LayerInput`, `LayerDense`, `LayerOutput`). This polymorphic design makes it easy to add new layer types.
--   **`NeuronBase<T>`**: Represents individual processing units, managing connections, weights, biases, and activation states.
--   **Factories**: `FactoryLayer` and `FactoryNeuron` are used for dynamic and extensible component creation, simplifying network construction from files.
--   **Math & Optimization**: A rich set of functions are provided for:
-    *   **Activations**: Sigmoid, ReLU, Tanh, Linear (and their derivatives).
-    *   **Optimizers**: SGD, Momentum, Nesterov, Adam, RMSProp.
-    *   **Error Functions**: MSE, Cross-Entropy, etc.
+-   **`NeuralNetwork<T>` (The Orchestrator)**:
+    -   Acts as the primary container and interface for the user.
+    -   Manages the lifecycle of all layers using `std::unique_ptr` for RAII-compliant memory management.
+    -   Orchestrates data flow (Forward Propagation) and error correction (Backpropagation) across the entire topology.
+
+-   **`LayerBase<T>` (Polymorphic Abstraction)**:
+    -   Defines a unified interface for all layer types (`LayerInput`, `LayerDense`, `LayerOutput`).
+    -   Enables the network to iterate through heterogeneous layers generically.
+    -   Encapsulates layer-specific logic, such as neuron management and error calculation.
+
+-   **`NeuronBase<T>` (The Computational Unit)**:
+    -   Stores individual weights, biases, and activation states.
+    -   Designed to be lightweight while maintaining encapsulation of gradients and deltas.
+
+-   **Factories & Serialization**:
+    -   `FactoryLayer` and `FactoryNeuron` decouple object creation from implementation, facilitating dynamic network construction.
+    -   This architecture supports the custom `JsonReader` (planned) to reconstruct complex topologies from disk without recompilation.
+
+-   **Math & Optimization Modules**:
+    -   **Activations**: Highly optimized implementations of Sigmoid, ReLU, Tanh, and Linear functions (plus derivatives).
+    -   **Optimizers**: Modular implementations of SGD, Momentum, Nesterov, Adam, and RMSProp allow for flexible training strategies per layer.
+    -   **Error Functions**: Pluggable loss functions like Mean Squared Error (MSE) and Cross-Entropy.
 
 ## Contributing
 
