@@ -31,7 +31,7 @@
 
 ## Quick Start
 
-Here is a brief example of how to define, train, and save a network.
+Here is a brief example of how to define, train, and save a network. This logic can be placed in your main entry point (e.g., `source/MyNeuralNetworks.cpp`).
 
 ```cpp
 #include "Theseus88/NeuralNetwork/NeuralNetwork.hpp"
@@ -86,6 +86,7 @@ The recommended toolchain on Windows is MinGW-w64 installed via MSYS2.
 1.  **Install MSYS2 and Toolchain**:
     - Download and run the installer from the **[MSYS2 website](https://www.msys2.org/)**.
     - After installation, an MSYS2 terminal will open. Install the toolchain and TBB with `pacman`:
+    
       ```sh
       # Installs g++, gdb, and other development tools
       pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain
@@ -99,16 +100,20 @@ The recommended toolchain on Windows is MinGW-w64 installed via MSYS2.
 3.  **Verify Installation**:
     - Open a **new** Command Prompt and run `g++ --version` and `gdb --version` to confirm they are accessible.
 
+> **Note**: The provided `tasks.json` and `launch.json` files assume the default MSYS2 installation path (`C:\msys64\ucrt64`). If you installed MSYS2 in a different location, you will need to update the paths in the `.vscode` configuration files.
+
 > For a complete video walkthrough, see the official VS Code guide: **[Using GCC with MinGW](https://code.visualstudio.com/docs/cpp/config-mingw)**.
 
-### Linux Setup (Guidance)
+### Linux Setup
 
 For Debian-based systems (like Ubuntu), you can install the necessary tools with `apt`:
+
 ```sh
 sudo apt update
 sudo apt install build-essential gdb libtbb-dev
 ```
-The provided VS Code build tasks are currently configured for Windows but can be adapted for Linux.
+
+The provided VS Code build tasks and launch configurations are configured for both Windows and Linux support.
 
 ### Building the Project
 
