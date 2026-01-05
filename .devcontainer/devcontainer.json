@@ -9,5 +9,6 @@
                 "ms-vscode.cpptools-extension-pack"
             ]
         }
-    }
+    },
+    "postCreateCommand": "mkdir -p build/debug build/release assets"
 }
