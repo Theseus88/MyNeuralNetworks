@@ -304,12 +304,12 @@ namespace Theseus88 {
     template unsigned long JsonReader::readNumber<unsigned long>();
     template unsigned long JsonReader::readNumber<unsigned long>(const char* expectedKey);
     template unsigned long JsonReader::readNumber<unsigned long>(const std::string& expectedKey);
-    //template unsigned long long JsonReader::readNumber<unsigned long long>();
-    //template unsigned long long JsonReader::readNumber<unsigned long long>(const char* expectedKey);
-    //template unsigned long long JsonReader::readNumber<unsigned long long>(const std::string& expectedKey);
-    template std::size_t JsonReader::readNumber<std::size_t>();
-    template std::size_t JsonReader::readNumber<std::size_t>(const char* expectedKey);
-    template std::size_t JsonReader::readNumber<std::size_t>(const std::string& expectedKey);
+    template unsigned long long JsonReader::readNumber<unsigned long long>();
+    template unsigned long long JsonReader::readNumber<unsigned long long>(const char* expectedKey);
+    template unsigned long long JsonReader::readNumber<unsigned long long>(const std::string& expectedKey);
+    //template std::size_t JsonReader::readNumber<std::size_t>();
+    //template std::size_t JsonReader::readNumber<std::size_t>(const char* expectedKey);
+    //template std::size_t JsonReader::readNumber<std::size_t>(const std::string& expectedKey);
     template float JsonReader::readNumber<float>();
     template float JsonReader::readNumber<float>(const char* expectedKey);
     template float JsonReader::readNumber<float>(const std::string& expectedKey);

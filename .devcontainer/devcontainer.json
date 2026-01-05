@@ -10,5 +10,5 @@
             ]
         }
     },
-    "postCreateCommand": "mkdir -p build/debug build/release assets"
+    "postStartCommand": "mkdir -p build/debug build/release assets"
 }
