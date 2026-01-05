@@ -130,7 +130,6 @@ void testSix() {
 };
 
 int main() {
-    // Main entry point for the application.
     //testOne();
     //testTwo();
     //testThree();

@@ -24,7 +24,7 @@ namespace Theseus88 {
             const fs::path extractedPath = targetDirectory / "gzip";
 
             // If the unzipped folder already exists, we don't need to download or unzip again
-            //if (fs::exists(extractedPath)) return;
+            if (fs::exists(extractedPath)) return;
 
             // 1. Download if the zip file does not exist
             if (!fs::exists(zipPath)) {
