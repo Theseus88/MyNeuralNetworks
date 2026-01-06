@@ -274,51 +274,27 @@ namespace Theseus88 {
     };
 
     // JsonReader Class Public Explicit Template Instantiations For Supported Number Types
-    template signed char JsonReader::readNumber<signed char>();
-    template signed char JsonReader::readNumber<signed char>(const char* expectedKey);
-    template signed char JsonReader::readNumber<signed char>(const std::string& expectedKey);
-    template char JsonReader::readNumber<char>();
-    template char JsonReader::readNumber<char>(const char* expectedKey);
-    template char JsonReader::readNumber<char>(const std::string& expectedKey);
-    template short JsonReader::readNumber<short>();
-    template short JsonReader::readNumber<short>(const char* expectedKey);
-    template short JsonReader::readNumber<short>(const std::string& expectedKey);
-    template int JsonReader::readNumber<int>();
-    template int JsonReader::readNumber<int>(const char* expectedKey);
-    template int JsonReader::readNumber<int>(const std::string& expectedKey);
-    template long JsonReader::readNumber<long>();
-    template long JsonReader::readNumber<long>(const char* expectedKey);
-    template long JsonReader::readNumber<long>(const std::string& expectedKey);
-    template long long JsonReader::readNumber<long long>();
-    template long long JsonReader::readNumber<long long>(const char* expectedKey);
-    template long long JsonReader::readNumber<long long>(const std::string& expectedKey);
-    template unsigned char JsonReader::readNumber<unsigned char>();
-    template unsigned char JsonReader::readNumber<unsigned char>(const char* expectedKey);
-    template unsigned char JsonReader::readNumber<unsigned char>(const std::string& expectedKey);
-    template unsigned short JsonReader::readNumber<unsigned short>();
-    template unsigned short JsonReader::readNumber<unsigned short>(const char* expectedKey);
-    template unsigned short JsonReader::readNumber<unsigned short>(const std::string& expectedKey);
-    template unsigned int JsonReader::readNumber<unsigned int>();
-    template unsigned int JsonReader::readNumber<unsigned int>(const char* expectedKey);
-    template unsigned int JsonReader::readNumber<unsigned int>(const std::string& expectedKey);
-    template unsigned long JsonReader::readNumber<unsigned long>();
-    template unsigned long JsonReader::readNumber<unsigned long>(const char* expectedKey);
-    template unsigned long JsonReader::readNumber<unsigned long>(const std::string& expectedKey);
-    template unsigned long long JsonReader::readNumber<unsigned long long>();
-    template unsigned long long JsonReader::readNumber<unsigned long long>(const char* expectedKey);
-    template unsigned long long JsonReader::readNumber<unsigned long long>(const std::string& expectedKey);
-    //template std::size_t JsonReader::readNumber<std::size_t>();
-    //template std::size_t JsonReader::readNumber<std::size_t>(const char* expectedKey);
-    //template std::size_t JsonReader::readNumber<std::size_t>(const std::string& expectedKey);
-    template float JsonReader::readNumber<float>();
-    template float JsonReader::readNumber<float>(const char* expectedKey);
-    template float JsonReader::readNumber<float>(const std::string& expectedKey);
-    template double JsonReader::readNumber<double>();
-    template double JsonReader::readNumber<double>(const char* expectedKey);
-    template double JsonReader::readNumber<double>(const std::string& expectedKey);
-    template long double JsonReader::readNumber<long double>();
-    template long double JsonReader::readNumber<long double>(const char* expectedKey);
-    template long double JsonReader::readNumber<long double>(const std::string& expectedKey);
+    #define INSTANTIATE_JSON_READER_NUMBER(T) \
+        template T JsonReader::readNumber<T>(); \
+        template T JsonReader::readNumber<T>(const char* expectedKey); \
+        template T JsonReader::readNumber<T>(const std::string& expectedKey)
+
+    INSTANTIATE_JSON_READER_NUMBER(signed char);
+    INSTANTIATE_JSON_READER_NUMBER(char);
+    INSTANTIATE_JSON_READER_NUMBER(short);
+    INSTANTIATE_JSON_READER_NUMBER(int);
+    INSTANTIATE_JSON_READER_NUMBER(long);
+    INSTANTIATE_JSON_READER_NUMBER(long long);
+    INSTANTIATE_JSON_READER_NUMBER(unsigned char);
+    INSTANTIATE_JSON_READER_NUMBER(unsigned short);
+    INSTANTIATE_JSON_READER_NUMBER(unsigned int);
+    INSTANTIATE_JSON_READER_NUMBER(unsigned long);
+    INSTANTIATE_JSON_READER_NUMBER(unsigned long long);
+    INSTANTIATE_JSON_READER_NUMBER(float);
+    INSTANTIATE_JSON_READER_NUMBER(double);
+    INSTANTIATE_JSON_READER_NUMBER(long double);
+
+    #undef INSTANTIATE_JSON_READER_NUMBER
 
     // JsonWriter Class Private Member Functions
     void JsonWriter::increaseIndentation() {
@@ -612,75 +588,25 @@ namespace Theseus88 {
     };    
 
     // JsonWriter Class Public Explicit Template Instantiations For Supported Number Types
-    template void JsonWriter::writeNumber<signed char>(const signed char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<signed char>(const char* key, const signed char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<signed char>(const std::string& key, const signed char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<char>(const char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<char>(const char* key, const char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<char>(const std::string& key, const char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<short>(const short value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<short>(const char* key, const short value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<short>(const std::string& key, const short value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<int>(const int value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<int>(const char* key, const int value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<int>(const std::string& key, const int value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long>(const long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long>(const char* key, const long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long>(const std::string& key, const long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long long>(const long long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long long>(const char* key, const long long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long long>(const std::string& key, const long long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned char>(const unsigned char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned char>(const char* key, const unsigned char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned char>(const std::string& key, const unsigned char value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned short>(const unsigned short value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned short>(const char* key, const unsigned short value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned short>(const std::string& key, const unsigned short value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned int>(const unsigned int value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned int>(const char* key, const unsigned int value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned int>(const std::string& key, const unsigned int value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned long>(const unsigned long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned long>(const char* key, const unsigned long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned long>(const std::string& key, const unsigned long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned long long>(const unsigned long long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned long long>(const char* key, const unsigned long long value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<unsigned long long>(const std::string& key, const unsigned long long value, const bool needsIndentation);
-    /*
-    template void JsonWriter::writeNumber<std::int8_t>(const std::int8_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int8_t>(const char* key, const std::int8_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int8_t>(const std::string& key, const std::int8_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int16_t>(const std::int16_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int16_t>(const char* key, const std::int16_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int16_t>(const std::string& key, const std::int16_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int32_t>(const std::int32_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int32_t>(const char* key, const std::int32_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int32_t>(const std::string& key, const std::int32_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int64_t>(const std::int64_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int64_t>(const char* key, const std::int64_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::int64_t>(const std::string& key, const std::int64_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint8_t>(const std::uint8_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint8_t>(const char* key, const std::uint8_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint8_t>(const std::string& key, const std::uint8_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint16_t>(const std::uint16_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint16_t>(const char* key, const std::uint16_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint16_t>(const std::string& key, const std::uint16_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint32_t>(const std::uint32_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint32_t>(const char* key, const std::uint32_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint32_t>(const std::string& key, const std::uint32_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint64_t>(const std::uint64_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint64_t>(const char* key, const std::uint64_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::uint64_t>(const std::string& key, const std::uint64_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::size_t>(const std::size_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::size_t>(const char* key, const std::size_t value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<std::size_t>(const std::string& key, const std::size_t value, const bool needsIndentation);
-    */
-    template void JsonWriter::writeNumber<float>(const float value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<float>(const char* key, const float value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<float>(const std::string& key, const float value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<double>(const double value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<double>(const char* key, const double value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<double>(const std::string& key, const double value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long double>(const long double value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long double>(const char* key, const long double value, const bool needsIndentation);
-    template void JsonWriter::writeNumber<long double>(const std::string& key, const long double value, const bool needsIndentation);
+    #define INSTANTIATE_JSON_WRITER_NUMBER(T) \
+        template void JsonWriter::writeNumber<T>(const T value, const bool needsIndentation); \
+        template void JsonWriter::writeNumber<T>(const char* key, const T value, const bool needsIndentation); \
+        template void JsonWriter::writeNumber<T>(const std::string& key, const T value, const bool needsIndentation)
+
+    INSTANTIATE_JSON_WRITER_NUMBER(signed char);
+    INSTANTIATE_JSON_WRITER_NUMBER(char);
+    INSTANTIATE_JSON_WRITER_NUMBER(short);
+    INSTANTIATE_JSON_WRITER_NUMBER(int);
+    INSTANTIATE_JSON_WRITER_NUMBER(long);
+    INSTANTIATE_JSON_WRITER_NUMBER(long long);
+    INSTANTIATE_JSON_WRITER_NUMBER(unsigned char);
+    INSTANTIATE_JSON_WRITER_NUMBER(unsigned short);
+    INSTANTIATE_JSON_WRITER_NUMBER(unsigned int);
+    INSTANTIATE_JSON_WRITER_NUMBER(unsigned long);
+    INSTANTIATE_JSON_WRITER_NUMBER(unsigned long long);
+    INSTANTIATE_JSON_WRITER_NUMBER(float);
+    INSTANTIATE_JSON_WRITER_NUMBER(double);
+    INSTANTIATE_JSON_WRITER_NUMBER(long double);
+
+    #undef INSTANTIATE_JSON_WRITER_NUMBER
 };

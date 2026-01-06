@@ -14,6 +14,7 @@
 ## Table of Contents
 
 - [Key Features](#key-features)
+- [Project Status & Roadmap](#project-status-&-roadmap)
 - [Quick Start](#quick-start)
 - [Setup and Build Instructions](#setup-and-build-instructions)
   - [Prerequisites](#prerequisites)
