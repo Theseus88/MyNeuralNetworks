@@ -15,12 +15,14 @@ namespace Theseus88 {
 
         // Private Member Functions
         static void throwError(const char* errorMessage);
+        void initialize();
 
     public:
         // ADD COMMENT HERE LATER
         LayerOutput() = delete;
         LayerOutput(const int neuronCount, const NeuronType neuronType = NeuronType::Output);
         LayerOutput(const size_t neuronCount, const NeuronType neuronType = NeuronType::Output);
+        LayerOutput(const size_t neuronCount, const NeuronType neuronType, const size_t uniqueLayerID);
 
         // ADD COMMENT HERE LATER
         ~LayerOutput();

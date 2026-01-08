@@ -3,10 +3,10 @@
 <p align="center">
   <a href="https://isocpp.org/"><img src="https://img.shields.io/badge/Language-C%2B%2B20-blue.svg" alt="Language"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a>
-  <a href="https://github.com/Theseus88/MyNeuralNetworks/actions/workflows/build.yml"><img src="https://github.com/Theseus88/MyNeuralNetworks/actions/workflows/build.yml/badge.svg" alt="C++ CI Build"></a>
   <a href="https://codespaces.new/Theseus88/MyNeuralNetworks"><img src="https://img.shields.io/badge/Open%20in-GitHub%20Codespaces-blue?logo=github" alt="Open in GitHub Codespaces"></a>
   <a href="https://vscode.dev/github/Theseus88/MyNeuralNetworks"><img src="https://img.shields.io/badge/Open%20in-VS%20Code-blue?logo=visualstudiocode" alt="Open in VS Code"></a>
   <a href="https://github.com/Theseus88/MyNeuralNetworks/commits/main"><img src="https://img.shields.io/github/last-commit/Theseus88/MyNeuralNetworks" alt="Last Commit"></a>
+  <a href="https://github.com/Theseus88/MyNeuralNetworks/actions/workflows/build.yml"><img src="https://github.com/Theseus88/MyNeuralNetworks/actions/workflows/build.yml/badge.svg" alt="C++ CI Build"></a>
 </p>
 
 **MyNeuralNetworks** is a high-performance, object-oriented neural network library written entirely from scratch in C++20. Designed with modularity, extensibility, and modern C++ practices in mind, it provides a flexible framework for deep learning without relying on external machine learning frameworks.

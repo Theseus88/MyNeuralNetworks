@@ -15,7 +15,7 @@ namespace Theseus88 {
         static std::unique_ptr<INeuralNetwork> newNeuralNetwork(const char* dataType, const char* networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
         static std::unique_ptr<INeuralNetwork> newNeuralNetwork(const std::string& dataType, const std::string& networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
         static std::unique_ptr<INeuralNetwork> newNeuralNetwork(std::string&& dataType, std::string&& networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
-        //static std::unique_ptr<INeuralNetwork> loadNeuralNetwork(const std::filesystem::path& path);
+        static std::unique_ptr<INeuralNetwork> loadNeuralNetwork(const std::filesystem::path& path);
 
         // Public Pure Virtual Member Mutators
         virtual void setNetworkName(const char* networkName) = 0;
@@ -53,7 +53,6 @@ namespace Theseus88 {
         virtual void propagateBackward(const std::vector<double>& targetOutputVector) = 0;
         virtual void propagateBackward(const std::vector<long double>& targetOutputVector) = 0;
         virtual void saveNeuralNetwork(const std::filesystem::path& path) = 0;
-        virtual void loadNeuralNetwork() = 0;
     
     };
 

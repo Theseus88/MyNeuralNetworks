@@ -39,7 +39,8 @@ namespace Theseus88 {
 
     // Public Member Constructors
     template <typename T> NeuralNetwork<T>::NeuralNetwork()
-    : NeuralNetwork(std::string(""), static_cast<std::size_t>(0), static_cast<std::size_t>(0)) {}; 
+    : NeuralNetwork(std::string(""), static_cast<std::size_t>(0), static_cast<std::size_t>(0)) {};
+    template <typename T> NeuralNetwork<T>::NeuralNetwork(const std::filesystem::path& path) {}; // Still working on code here...
     template <typename T> NeuralNetwork<T>::NeuralNetwork(const char* networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize)
     : NeuralNetwork(std::string(networkName), inputVectorSize, outputVectorSize) {};    
     template <typename T> NeuralNetwork<T>::NeuralNetwork(const std::string& networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize)
@@ -229,7 +230,6 @@ namespace Theseus88 {
         writer.writeArrayEnd();
         writer.writeObjectEnd();
     };
-    template <typename T> void NeuralNetwork<T>::loadNeuralNetwork() {};
 
     // Explicit Template Instantiations
     template class NeuralNetwork<float>;
@@ -248,7 +248,10 @@ namespace Theseus88 {
         template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&&); \
         template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&, NeuronType&); \
         template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(const size_t&, const NeuronType&); \
-        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&&, NeuronType&&)
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&&, NeuronType&&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&, NeuronType&, size_t&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(const size_t&, const NeuronType&, const size_t&); \
+        template const std::size_t NeuralNetwork<T>::addNetworkLayer<LType>(size_t&&, NeuronType&&, size_t&&)
 
     #define INSTANTIATE_INSERT_LAYER(T, LType) \
         template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, int&); \
@@ -262,7 +265,10 @@ namespace Theseus88 {
         template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&&); \
         template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&, NeuronType&); \
         template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, const size_t&, const NeuronType&); \
-        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&&, NeuronType&&)
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&&, NeuronType&&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&, NeuronType&, size_t&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, const size_t&, const NeuronType&, const size_t&); \
+        template void NeuralNetwork<T>::insertNetworkLayer<LType>(const std::size_t, size_t&&, NeuronType&&, size_t&&)
 
     #define INSTANTIATE_ALL_LAYERS(T) \
         INSTANTIATE_ADD_LAYER(T, LayerType::Input); \

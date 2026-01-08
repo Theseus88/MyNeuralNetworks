@@ -12,8 +12,8 @@ namespace Theseus88 {
     // Private Member Functions
 
     // ADD COMMENT HERE LATER
-    template <typename T> NeuronOutput<T>::NeuronOutput()
-    : NeuronBase<T>(NeuronType::Output) {};
+    template <typename T> NeuronOutput<T>::NeuronOutput(const std::size_t uniqueNeuronId)
+    : NeuronBase<T>(NeuronType::Output, uniqueNeuronId) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronOutput<T>::~NeuronOutput() {};

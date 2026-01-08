@@ -23,8 +23,12 @@ namespace Theseus88 {
     template class FactoryNeuron<double>;
     template class FactoryNeuron<long double>;
 
-    template std::unique_ptr<NeuronBase<float>> FactoryNeuron<float>::createNeuron(const NeuronType neuronType);
-    template std::unique_ptr<NeuronBase<double>> FactoryNeuron<double>::createNeuron(const NeuronType neuronType);
-    template std::unique_ptr<NeuronBase<long double>> FactoryNeuron<long double>::createNeuron(const NeuronType neuronType);
+    #define INSTANTIATE_CREATE_NEURON(T) \
+        template std::unique_ptr<NeuronBase<T>> FactoryNeuron<T>::createNeuron(const NeuronType neuronType); \
+        template std::unique_ptr<NeuronBase<T>> FactoryNeuron<T>::createNeuron(const NeuronType neuronType, const std::size_t&); \
+        template std::unique_ptr<NeuronBase<T>> FactoryNeuron<T>::createNeuron(const NeuronType neuronType, std::size_t&&)
 
+    INSTANTIATE_CREATE_NEURON(float);
+    INSTANTIATE_CREATE_NEURON(double);
+    INSTANTIATE_CREATE_NEURON(long double);
 };

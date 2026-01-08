@@ -12,8 +12,8 @@ namespace Theseus88 {
     // Private Member Functions
 
     // ADD COMMENT HERE LATER
-    template <typename T> NeuronFeedforward<T>::NeuronFeedforward()
-    : NeuronBase<T>(NeuronType::Feedforward) {};
+    template <typename T> NeuronFeedforward<T>::NeuronFeedforward(const std::size_t uniqueNeuronId)
+    : NeuronBase<T>(NeuronType::Feedforward, uniqueNeuronId) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronFeedforward<T>::~NeuronFeedforward() {};

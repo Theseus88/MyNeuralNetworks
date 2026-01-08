@@ -4,6 +4,9 @@
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
 
+    // Private Static Variables
+    template <typename T> std::size_t LayerBase<T>::s_nextUniqueLayerId = 0;
+
     // ADD COMMENT HERE LATER
     template <typename T> void LayerBase<T>::throwError(const char* errorMessage) {
         throw std::runtime_error(std::string("Layer Base Error: ") + errorMessage + "\n");
@@ -24,11 +27,16 @@ namespace Theseus88 {
     };
 
     // ADD COMMENT HERE LATER
-    template <typename T> LayerBase<T>::LayerBase(const LayerType layerType, const NeuronType neuronType, const size_t neuronCount)
-    : M_LAYERDATATYPE(dataTypeToString(T())), M_LAYERTYPE(layerType), m_neuronType(neuronType), m_randomizeParameterOne(static_cast<T>(0.0)), m_randomizeParameterTwo(static_cast<T>(0.0)), m_randomizeMethod(RandomizeMethod::None), m_activationMethod(ActivationMethod::None), m_derivativeMethod(ActivationMethod::None), m_errorMethod(ErrorMethod::None), m_optimizerMethod(OptimizerMethod::None), m_neuronCount(neuronCount), m_layerNeurons(), m_outputVector(), m_isFinalized(false) {};
+    template <typename T> LayerBase<T>::LayerBase(const LayerType layerType, const NeuronType neuronType, const size_t neuronCount, const std::size_t uniqueLayerId)
+    : M_LAYERDATATYPE(dataTypeToString(T())), M_LAYERTYPE(layerType), M_UNIQUELAYERID(uniqueLayerId), m_neuronType(neuronType), m_randomizeParameterOne(static_cast<T>(0.0)), m_randomizeParameterTwo(static_cast<T>(0.0)), m_randomizeMethod(RandomizeMethod::None), m_activationMethod(ActivationMethod::None), m_derivativeMethod(ActivationMethod::None), m_errorMethod(ErrorMethod::None), m_optimizerMethod(OptimizerMethod::None), m_neuronCount(neuronCount), m_layerNeurons(), m_outputVector(), m_isFinalized(false) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerBase<T>::~LayerBase() {};
+
+    // Public Static Mutators
+    template <typename T> void LayerBase<T>::setNextUniqueLayerId(const std::size_t nextUniqueLayerId) {
+        s_nextUniqueLayerId = nextUniqueLayerId;
+    };
 
     // Public Member Mutators
     template <typename T> void LayerBase<T>::setInputVectorSize(const std::size_t inputVectorSize) {
@@ -82,12 +90,20 @@ namespace Theseus88 {
         for (auto& neuron : m_layerNeurons) neuron->setMomentum(momentum);
     };
 
+    // Public Static Accessors
+    template <typename T> const std::size_t LayerBase<T>::getNextUniqueLayerId() {
+        return s_nextUniqueLayerId;
+    };
+
     // Public Member Accessors
     template <typename T> const std::string LayerBase<T>::getLayerDataType() const {
         return M_LAYERDATATYPE;
     };
     template <typename T> const LayerType LayerBase<T>::getLayerType() const {
         return M_LAYERTYPE;
+    };
+    template <typename T> const std::size_t LayerBase<T>::getUniqueLayerId() const {
+        return M_UNIQUELAYERID;
     };
     template <typename T> const std::size_t LayerBase<T>::getInputVectorSize() const {
         return m_inputVectorSize;
@@ -137,6 +153,13 @@ namespace Theseus88 {
     template <typename T> const bool LayerBase<T>::getIsFinalized() const {
         return m_isFinalized;
     };
+    template <typename T> const std::size_t LayerBase<T>::getMaxNeuronId() const {
+        std::size_t maxId = 0;
+        for (const auto& neuron : m_layerNeurons) {
+            if (neuron->getUniqueNeuronId() > maxId) maxId = neuron->getUniqueNeuronId();
+        };
+        return maxId;
+    };
 
     // Public Member Functions
     template <typename T> const std::size_t LayerBase<T>::finalizeNetworkLayer(const std::size_t inputVectorSize) { // Still working on code here...
@@ -161,6 +184,7 @@ namespace Theseus88 {
         writer.writeObjectStart();
         writer.writeString("Layer Data Type", M_LAYERDATATYPE);
         writer.writeString("Layer Type", layerTypeToString(M_LAYERTYPE));
+        writer.writeNumber("Layer Unique Id", M_UNIQUELAYERID);
         writer.writeNumber("Layer Input Vector Size", m_inputVectorSize);
         writer.writeNumber("Layer Output Vector Size", m_outputVector.size());
         writer.writeString("Layer Neuron Type", neuronTypeToString(m_neuronType));

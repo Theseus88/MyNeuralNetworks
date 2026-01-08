@@ -10,16 +10,25 @@ namespace Theseus88 {
     };
 
     // ADD COMMENT HERE LATER
-    template <typename T> LayerDense<T>::LayerDense(const int neuronCount, const NeuronType neuronType)
-    : LayerDense<T>(std::size_t(neuronCount), neuronType) {};
-    template <typename T> LayerDense<T>::LayerDense(const size_t neuronCount, const NeuronType neuronType)
-    : LayerBase<T>(LayerType::Dense, neuronType, neuronCount) {
+    template <typename T> void LayerDense<T>::initialize() {
         LayerBase<T>::setRandomizeParameterOne(static_cast<T>(-1.0));
         LayerBase<T>::setRandomizeParameterTwo(static_cast<T>(1.0));
         LayerBase<T>::setRandomizeMethod(RandomizeMethod::Uniform);
         LayerBase<T>::setActivationMethod(ActivationMethod::Sigmoid);
         LayerBase<T>::setDerivativeMethod(ActivationMethod::SigmoidDerivative);
         LayerBase<T>::setOptimizerMethod(OptimizerMethod::StochasticGradientDescent);
+    };
+
+    // ADD COMMENT HERE LATER
+    template <typename T> LayerDense<T>::LayerDense(const int neuronCount, const NeuronType neuronType)
+    : LayerDense<T>(std::size_t(neuronCount), neuronType) {};
+    template <typename T> LayerDense<T>::LayerDense(const size_t neuronCount, const NeuronType neuronType)
+    : LayerBase<T>(LayerType::Dense, neuronType, neuronCount) {
+        initialize();
+    };
+    template <typename T> LayerDense<T>::LayerDense(const size_t neuronCount, const NeuronType neuronType, const size_t uniqueLayerID)
+    : LayerBase<T>(LayerType::Dense, neuronType, neuronCount, uniqueLayerID) {
+        initialize();
     };
 
     // ADD COMMENT HERE LATER

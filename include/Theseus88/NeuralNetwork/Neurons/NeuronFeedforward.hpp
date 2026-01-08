@@ -23,7 +23,7 @@ namespace Theseus88 {
 
     public:
         // Default Constructors
-        NeuronFeedforward();
+        NeuronFeedforward(const std::size_t uniqueNeuronId = NeuronBase<T>::s_nextUniqueNeuronId++);
 
         // Default Destructor
         ~NeuronFeedforward();

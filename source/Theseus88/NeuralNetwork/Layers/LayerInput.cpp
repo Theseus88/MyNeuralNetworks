@@ -14,6 +14,8 @@ namespace Theseus88 {
     : LayerInput<T>(std::size_t(neuronCount), neuronType) {};
     template <typename T> LayerInput<T>::LayerInput(const size_t neuronCount, const NeuronType neuronType)
     : LayerBase<T>(LayerType::Input, neuronType, neuronCount) {};
+    template <typename T> LayerInput<T>::LayerInput(const size_t neuronCount, const NeuronType neuronType, const size_t uniqueLayerID)
+    : LayerBase<T>(LayerType::Input, neuronType, neuronCount, uniqueLayerID) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> LayerInput<T>::~LayerInput() {};

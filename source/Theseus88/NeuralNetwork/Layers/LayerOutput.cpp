@@ -10,10 +10,7 @@ namespace Theseus88 {
     };
 
     // ADD COMMENT HERE LATER
-    template <typename T> LayerOutput<T>::LayerOutput(const int neuronCount, const NeuronType neuronType)
-    : LayerOutput<T>(std::size_t(neuronCount), neuronType) {};
-    template <typename T> LayerOutput<T>::LayerOutput(const size_t neuronCount, const NeuronType neuronType)
-    : LayerBase<T>(LayerType::Output, neuronType, neuronCount) {
+    template <typename T> void LayerOutput<T>::initialize() {
         LayerBase<T>::setRandomizeParameterOne(static_cast<T>(-1.0));
         LayerBase<T>::setRandomizeParameterTwo(static_cast<T>(1.0));
         LayerBase<T>::setRandomizeMethod(RandomizeMethod::Uniform);
@@ -21,6 +18,18 @@ namespace Theseus88 {
         LayerBase<T>::setDerivativeMethod(ActivationMethod::SigmoidDerivative);
         LayerBase<T>::setErrorMethod(ErrorMethod::MeanSquaredError);
         LayerBase<T>::setOptimizerMethod(OptimizerMethod::StochasticGradientDescent);
+    };
+
+    // ADD COMMENT HERE LATER
+    template <typename T> LayerOutput<T>::LayerOutput(const int neuronCount, const NeuronType neuronType)
+    : LayerOutput<T>(std::size_t(neuronCount), neuronType) {};
+    template <typename T> LayerOutput<T>::LayerOutput(const size_t neuronCount, const NeuronType neuronType)
+    : LayerBase<T>(LayerType::Output, neuronType, neuronCount) {
+        initialize();
+    };
+    template <typename T> LayerOutput<T>::LayerOutput(const size_t neuronCount, const NeuronType neuronType, const size_t uniqueLayerID)
+    : LayerBase<T>(LayerType::Output, neuronType, neuronCount, uniqueLayerID) {
+        initialize();
     };
 
     // ADD COMMENT HERE LATER

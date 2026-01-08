@@ -21,6 +21,7 @@ namespace Theseus88 {
         LayerInput() = delete;
         LayerInput(const int neuronCount, const NeuronType neuronType = NeuronType::Input);
         LayerInput(const size_t neuronCount, const NeuronType neuronType = NeuronType::Input);
+        LayerInput(const size_t neuronCount, const NeuronType neuronType, const size_t uniqueLayerID);
 
         // ADD COMMENT HERE LATER
         ~LayerInput();

@@ -20,6 +20,9 @@ namespace Theseus88 {
         // Private Friends
         //friend class NeuralNetwork<T>;
 
+        // Private Static Variables
+        static std::size_t s_nextUniqueLayerId;
+
         // Private Static Functions
         static void throwError(const char* errorMessage);
     
@@ -27,6 +30,7 @@ namespace Theseus88 {
         // Protected Member Constants
         const std::string M_LAYERDATATYPE;
         const LayerType M_LAYERTYPE;
+        const std::size_t M_UNIQUELAYERID;
 
         // Protected Member Variables
         std::size_t m_inputVectorSize;
@@ -49,10 +53,13 @@ namespace Theseus88 {
 
     public:
         // Public Member Constructors
-        LayerBase(const LayerType layerType, const NeuronType neuronType, const size_t neuronCount);
+        LayerBase(const LayerType layerType, const NeuronType neuronType, const size_t neuronCount, const std::size_t uniqueLayerId = s_nextUniqueLayerId++);
 
         // Public Member Destructor
         ~LayerBase();
+
+        // Public Static Mutators
+        static void setNextUniqueLayerId(const std::size_t nextUniqueLayerId);
 
         // Public Member Mutators
         void setInputVectorSize(const std::size_t inputVectorSize);
@@ -69,9 +76,13 @@ namespace Theseus88 {
         void setLearningRate(const T learningRate);
         void setMomentum(const T momentum);
 
+        // Public Static Accessors
+        static const std::size_t getNextUniqueLayerId();
+
         // Public Member Accessors
         const std::string getLayerDataType() const;
         const LayerType getLayerType() const;
+        const std::size_t getUniqueLayerId() const;
         const std::size_t getInputVectorSize() const;
         const std::size_t getOutputVectorSize() const;
         const NeuronType getNeuronType() const;
@@ -88,6 +99,7 @@ namespace Theseus88 {
         const std::vector<T>& getInputVector() const;
         const std::vector<T>& getOutputVector() const;
         const bool getIsFinalized() const;
+        const std::size_t getMaxNeuronId() const;
 
         // Public Member Functions
         //virtual std::unique_ptr<LayerBase<T>> cloneNetworkLayer() const = 0; // Still working on code here...
