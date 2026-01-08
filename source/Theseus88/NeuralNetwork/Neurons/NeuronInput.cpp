@@ -10,8 +10,8 @@ namespace Theseus88 {
     };
 
     // ADD COMMENT HERE LATER
-    template <typename T> NeuronInput<T>::NeuronInput()
-    : NeuronBase<T>(NeuronType::Input) {};
+    template <typename T> NeuronInput<T>::NeuronInput(const std::size_t uniqueNeuronId)
+    : NeuronBase<T>(NeuronType::Input, uniqueNeuronId) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronInput<T>::~NeuronInput() {};

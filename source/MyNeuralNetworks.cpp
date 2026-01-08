@@ -126,7 +126,12 @@ void testSix() {
     myNeuralNetwork.finalizeNeuralNetwork();
 
     // ADD COMMENT HERE LATER
-    //myNeuralNetwork.saveNeuralNetwork("build/debug/TestSixData.json");
+    myNeuralNetwork.saveNeuralNetwork("build/debug/TestSixData.json");
+
+    // ADD COMMENT HERE LATER
+    auto myLoadedNeuralNetwork = INeuralNetwork::loadNeuralNetwork("build/debug/TestSixData.json");
+    auto* concreteNet = dynamic_cast<NeuralNetwork<float>*>(myLoadedNeuralNetwork.get());
+
 };
 
 int main() {

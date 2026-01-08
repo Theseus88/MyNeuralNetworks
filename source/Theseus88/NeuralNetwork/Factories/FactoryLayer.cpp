@@ -33,7 +33,10 @@ namespace Theseus88 {
         template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&&); \
         template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&, NeuronType&); \
         template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(const size_t&, const NeuronType&); \
-        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&&, NeuronType&&)
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&&, NeuronType&&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&, NeuronType&, size_t&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(const size_t&, const NeuronType&, const size_t&); \
+        template std::unique_ptr<LayerBase<T>> FactoryLayer<T>::createLayer<LType>(size_t&&, NeuronType&&, size_t&&)
 
     #define INSTANTIATE_ALL_LAYERS(T) \
         INSTANTIATE_CREATE_LAYER(T, LayerType::Input); \

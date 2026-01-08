@@ -45,6 +45,7 @@ namespace Theseus88 {
     public:
         // Public Member Constructors
         NeuralNetwork();
+        NeuralNetwork(const std::filesystem::path& path);
         NeuralNetwork(const char* networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
         NeuralNetwork(const std::string& networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
         NeuralNetwork(std::string&& networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
@@ -94,7 +95,6 @@ namespace Theseus88 {
         void propagateBackward(const std::vector<double>& targetOutputVector) override;
         void propagateBackward(const std::vector<long double>& targetOutputVector) override;
         void saveNeuralNetwork(const std::filesystem::path& path) override;
-        void loadNeuralNetwork() override;
 
     };
 

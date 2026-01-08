@@ -27,9 +27,13 @@ namespace Theseus88 {
         // Private Member Functions
 
     protected:
+        // Protected Static Variables
+        static std::size_t s_nextUniqueNeuronId;
+
         // Protected Member Constants
         const std::string M_NEURONDATATYPE;
         const NeuronType M_NEURONTYPE;
+        const std::size_t M_UNIQUENEURONID;
 
         // Protected Member Function Variables
         std::function<void(std::vector<NeuronConnection<T>>&, NeuronConnection<T>&, const T, const T)> m_randomizeFunction;
@@ -48,7 +52,6 @@ namespace Theseus88 {
         T m_learningRate;
         T m_momentum;
 
-
         // Protected Member Functions
         void updateNeuronConnections();
         void calculateWeightedSum(); // Still working on code here...
@@ -56,10 +59,13 @@ namespace Theseus88 {
 
     public:
         // Public Member Constructors
-        NeuronBase(const NeuronType neuronType);
+        NeuronBase(const NeuronType neuronType, const std::size_t uniqueNeuronId = s_nextUniqueNeuronId++);
 
         // Public Member Destructor
         ~NeuronBase();
+
+        // Public Static Mutators
+        static void setNextUniqueNeuronId(const std::size_t nextUniqueNeuronId);
 
         // Public Member Function Mutators
         void setRandomizeFunction(const RandomizeMethod randomizeMethod);
@@ -73,6 +79,14 @@ namespace Theseus88 {
         void setLearningRate(const T learningRate);
         void setMomentum(const T momentum);
 
+        // Public Static Accessors
+        static const std::size_t getNextUniqueNeuronId();
+
+        // Public Member Accessors
+        //const std::string getNeuronDataType() const;
+        //const NeuronType getNeuronType() const;
+        const std::size_t getUniqueNeuronId() const;
+    
         // Public Member Functions
         //virtual std::unique_ptr<NeuronBase<T>> cloneLayerNeuron() const = 0; // Still working on code here...
         virtual void finalizeLayerNeuron(const size_t inputVectorSize, const T randomizeParameterOne, const T randomizeParameterTwo) = 0; // Still working on code here...

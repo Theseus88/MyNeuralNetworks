@@ -4,6 +4,9 @@
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
 
+    // Protected Static Variables
+    template <typename T> std::size_t NeuronBase<T>::s_nextUniqueNeuronId = 0;
+
     // Private Static Functions
     template <typename T> void NeuronBase<T>::throwError(const char* errorMessage) {
         throw std::runtime_error(std::string("Neuron Base Error: ") + errorMessage + "\n");
@@ -29,11 +32,16 @@ namespace Theseus88 {
     };
 
     // ADD COMMENT HERE LATER
-    template <typename T> NeuronBase<T>::NeuronBase(const NeuronType neuronType)
-    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType), m_connectionCount(0), m_isFinalized(false), m_weightedSum(static_cast<T>(0)), m_output(static_cast<T>(0)), m_learningRate(static_cast<T>(0.01)), m_momentum(static_cast<T>(0.9)) {};
+    template <typename T> NeuronBase<T>::NeuronBase(const NeuronType neuronType, const std::size_t uniqueNeuronId)
+    : M_NEURONDATATYPE(dataTypeToString(T())), M_NEURONTYPE(neuronType), M_UNIQUENEURONID(uniqueNeuronId), m_connectionCount(0), m_isFinalized(false), m_weightedSum(static_cast<T>(0)), m_output(static_cast<T>(0)), m_learningRate(static_cast<T>(0.01)), m_momentum(static_cast<T>(0.9)) {};
 
     // ADD COMMENT HERE LATER
     template <typename T> NeuronBase<T>::~NeuronBase() {};
+
+    // Public Static Mutators
+    template <typename T> void NeuronBase<T>::setNextUniqueNeuronId(const std::size_t nextUniqueNeuronId) {
+        s_nextUniqueNeuronId = nextUniqueNeuronId;
+    };
 
     // Public Member Function Mutators
     template <typename T> void NeuronBase<T>::setRandomizeFunction(const RandomizeMethod randomizeMethod) {
@@ -66,11 +74,22 @@ namespace Theseus88 {
         m_momentum = momentum;
     };
 
+    // Public Static Accessors
+    template <typename T> const std::size_t NeuronBase<T>::getNextUniqueNeuronId() {
+        return s_nextUniqueNeuronId;
+    };
+
+    // Public Member Accessors
+    template <typename T> const std::size_t NeuronBase<T>::getUniqueNeuronId() const {
+        return M_UNIQUENEURONID;
+    };
+
     // ADD COMMENT HERE LATER
     template <typename T> void NeuronBase<T>::saveLayerNeuron(JsonWriter& writer) const {
         writer.writeObjectStart();
         writer.writeString("Neuron Data Type", M_NEURONDATATYPE);
         writer.writeString("Neuron Type", neuronTypeToString(M_NEURONTYPE));
+        writer.writeNumber("Neuron Unique Id", M_UNIQUENEURONID);
         writer.writeNumber("Neuron Connection Count", m_connectionCount);
         writer.writeArrayStart("Neuron Connections");
         for (auto& connection : m_neuronConnections) {

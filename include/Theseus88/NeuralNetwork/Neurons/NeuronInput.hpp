@@ -19,7 +19,7 @@ namespace Theseus88 {
 
     public:
         // Default Constructors
-        NeuronInput();
+        NeuronInput(const std::size_t uniqueNeuronId = NeuronBase<T>::s_nextUniqueNeuronId++);
 
         // Default Destructor
         ~NeuronInput();
