@@ -41,14 +41,15 @@ namespace Theseus88 {
         void verifyLayerIndex(const std::size_t layerIndex) const;
         template <typename U> const std::vector<U>& propagateForwardImpl(const std::vector<U>& inputVector);
         template <typename U> void propagateBackwardImpl(const std::vector<U>& targetOutputVector);
+        void load(JsonReader& reader) override;
 
     public:
         // Public Member Constructors
         NeuralNetwork();
         NeuralNetwork(const std::filesystem::path& path);
-        NeuralNetwork(const char* networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
-        NeuralNetwork(const std::string& networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
-        NeuralNetwork(std::string&& networkName, const std::size_t inputVectorSize = 0, const std::size_t outputVectorSize = 0);
+        NeuralNetwork(const char* networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize);
+        NeuralNetwork(const std::string& networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize);
+        NeuralNetwork(std::string&& networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize);
 
         // Public Member Destructor
         ~NeuralNetwork();

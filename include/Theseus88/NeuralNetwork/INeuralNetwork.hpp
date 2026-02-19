@@ -6,6 +6,9 @@
 
 namespace Theseus88 {
 
+    // Forward declaration to avoid including the full JsonUtilities header here.
+    class JsonReader;
+
     class INeuralNetwork {
     public:
         INeuralNetwork() = default;
@@ -53,6 +56,9 @@ namespace Theseus88 {
         virtual void propagateBackward(const std::vector<double>& targetOutputVector) = 0;
         virtual void propagateBackward(const std::vector<long double>& targetOutputVector) = 0;
         virtual void saveNeuralNetwork(const std::filesystem::path& path) = 0;
+
+    protected:
+        virtual void load(JsonReader& reader) = 0;
     
     };
 

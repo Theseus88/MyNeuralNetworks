@@ -132,6 +132,7 @@ void testSix() {
     auto myLoadedNeuralNetwork = INeuralNetwork::loadNeuralNetwork("TestSixData.json");
     auto* concreteNet = dynamic_cast<NeuralNetwork<float>*>(myLoadedNeuralNetwork.get());
 
+
 };
 
 int main() {

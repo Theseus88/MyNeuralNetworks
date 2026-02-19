@@ -40,6 +40,14 @@ namespace Theseus88 {
             default: return "Unknown";
         };
     };
+    inline NeuronType stringToNeuronType(const std::string& str) {
+        if (str == "Input") return NeuronType::Input;
+        if (str == "Output") return NeuronType::Output;
+        if (str == "Feedforward") return NeuronType::Feedforward;
+        throw std::runtime_error("Unknown NeuronType: " + str);
+    };
+
+    // ADD COMMENT HERE LATER
     enum class LayerType : int { Input, Output, Dense };
     constexpr const char* layerTypeToString(LayerType type) {
         switch (type) {
@@ -49,12 +57,59 @@ namespace Theseus88 {
             default: return "Unknown";
         };
     };
+    inline LayerType stringToLayerType(const std::string& str) {
+        if (str == "Input") return LayerType::Input;
+        if (str == "Output") return LayerType::Output;
+        if (str == "Dense") return LayerType::Dense;
+        throw std::runtime_error("Unknown LayerType: " + str);
+    };
 
     // Global Method Enums
     enum class RandomizeMethod { None, Uniform, Normal };
+    inline RandomizeMethod stringToRandomizeMethod(const std::string& str) {
+        if (str == "None") return RandomizeMethod::None;
+        if (str == "Uniform") return RandomizeMethod::Uniform;
+        if (str == "Normal") return RandomizeMethod::Normal;
+        throw std::runtime_error("Unknown RandomizeMethod: " + str);
+    };
+
     enum class ActivationMethod { None, Sigmoid, SigmoidDerivative, Relu, ReluDerivative, Tanh, TanhDerivative, Linear, LinearDerivative };
+    inline ActivationMethod stringToActivationMethod(const std::string& str) {
+        if (str == "None") return ActivationMethod::None;
+        if (str == "Sigmoid") return ActivationMethod::Sigmoid;
+        if (str == "Sigmoid Derivative") return ActivationMethod::SigmoidDerivative;
+        if (str == "Relu") return ActivationMethod::Relu;
+        if (str == "Relu Derivative") return ActivationMethod::ReluDerivative;
+        if (str == "Tanh") return ActivationMethod::Tanh;
+        if (str == "Tanh Derivative") return ActivationMethod::TanhDerivative;
+        if (str == "Linear") return ActivationMethod::Linear;
+        if (str == "Linear Derivative") return ActivationMethod::LinearDerivative;
+        throw std::runtime_error("Unknown ActivationMethod: " + str);
+    };
+
     enum class ErrorMethod { None, MeanSquaredError, MeanAbsoluteError, SquaredError, BinaryCrossEntropy, HingeLoss, FocalLoss };
+    inline ErrorMethod stringToErrorMethod(const std::string& str) {
+        if (str == "None") return ErrorMethod::None;
+        if (str == "Mean Squared Error") return ErrorMethod::MeanSquaredError;
+        if (str == "Mean Absolute Error") return ErrorMethod::MeanAbsoluteError;
+        if (str == "Squared Error") return ErrorMethod::SquaredError;
+        if (str == "Binary Cross Entropy") return ErrorMethod::BinaryCrossEntropy;
+        if (str == "Hinge Loss") return ErrorMethod::HingeLoss;
+        if (str == "Focal Loss") return ErrorMethod::FocalLoss;
+        throw std::runtime_error("Unknown ErrorMethod: " + str);
+    };
+
     enum class OptimizerMethod { None, StochasticGradientDescent, StochasticGradientDescentWithClassicalMomentum, StochasticGradientDescentWithNesterovMomentum, AdaptiveGradient, RootMeanSquaredPropagation, AdaptiveMomentEstimation };
+    inline OptimizerMethod stringToOptimizerMethod(const std::string& str) {
+        if (str == "None") return OptimizerMethod::None;
+        if (str == "Stochastic Gradient Descent") return OptimizerMethod::StochasticGradientDescent;
+        if (str == "Stochastic Gradient Descent With Classical Momentum") return OptimizerMethod::StochasticGradientDescentWithClassicalMomentum;
+        if (str == "Stochastic Gradient Descent With Nesterov Momentum") return OptimizerMethod::StochasticGradientDescentWithNesterovMomentum;
+        if (str == "Adaptive Gradient") return OptimizerMethod::AdaptiveGradient;
+        if (str == "Root Mean Squared Propagation") return OptimizerMethod::RootMeanSquaredPropagation;
+        if (str == "Adaptive Moment Estimation") return OptimizerMethod::AdaptiveMomentEstimation;
+        throw std::runtime_error("Unknown OptimizerMethod: " + str);
+    };
 
     // Forward Declarations
     template <typename T> class NeuronConnection;

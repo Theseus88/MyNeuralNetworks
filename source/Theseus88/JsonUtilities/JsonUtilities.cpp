@@ -4,12 +4,12 @@
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
     // JsonReader Class Private Member Functions
-    void JsonReader::verifyFileStream() {
-        if (!m_fileStream.good()) throw std::invalid_argument("Error: The file stream passed to JsonReader is not in a 'good' state for reading.");
+    void JsonReader::verifyInputStream() {
+        if (!m_inputStream.good()) throw std::invalid_argument("Error: The input stream passed to JsonReader is not in a 'good' state for reading.");
     };
     char JsonReader::readCharacterAndTrackPosition() {
         char c;
-        if (!m_fileStream.get(c)) return '\0'; // Return null char on EOF
+        if (!m_inputStream.get(c)) return '\0'; // Return null char on EOF
         if (c == '\n') {
             m_lineNumber++;
             m_characterPosition = 0; // Reset character position on newline
@@ -19,15 +19,18 @@ namespace Theseus88 {
         return c;
     };
     void JsonReader::skipWhitespace() {
-        char c;
-        while (m_fileStream.peek() != EOF) {
-            c = m_fileStream.peek(); // Peek at the character, but don't consume it yet
+        while (true) {
+            char c = m_inputStream.peek(); // Peek at the character, but don't consume it yet
             if (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
                 readCharacterAndTrackPosition(); // If it is whitespace, consume it using the tracking function
             } else {
                 return; // Non-whitespace character found, leave it in the stream
             };
         };
+    };
+    char JsonReader::peekCharacter() {
+        skipWhitespace();
+        return m_inputStream.peek();
     };
     void JsonReader::expectCharacter(const char expectedChar) {
         skipWhitespace();
@@ -36,7 +39,6 @@ namespace Theseus88 {
         char actualChar = readCharacterAndTrackPosition();
         if (actualChar == '\0') throw std::runtime_error("Error: Unexpected end of file. Expected JSON character '" + std::string(1, expectedChar) + "' (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
         if (actualChar != expectedChar) throw std::runtime_error("Error: Expected JSON character '" + std::string(1, expectedChar) + "', but found '" + std::string(1, actualChar) + "'(Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
-
     };
     std::string JsonReader::readQuotedString() {
         expectCharacter('"');
@@ -53,14 +55,16 @@ namespace Theseus88 {
                 c = readCharacterAndTrackPosition();
                 if (c == '\0') throw std::runtime_error("Error: Unexpected end of file while reading escape sequence (Line: " + std::to_string(escapeLine) + ", Char: " + std::to_string(escapeChar) + ").");
                 // Decode common JSON escapes
-                if (c == 'n') value += '\n';
-                else if (c == 't') value += '\t';
-                else if (c == 'r') value += '\r';
-                else if (c == 'f') value += '\f';
-                else if (c == 'b') value += '\b';
-                else if (c == '"' || c == '\\' || c == '/') value += c;
-                // NOTE: 'uXXXX' (unicode) is complex and omitted here for simplicity
-                else throw std::runtime_error("Error: Invalid escape sequence '\\" + std::string(1, c) + "' (Line: " + std::to_string(escapeLine) + ", Char: " + std::to_string(escapeChar) + ").");
+                switch (c) {
+                    case 'n': value += '\n'; break;
+                    case 't': value += '\t'; break;
+                    case 'r': value += '\r'; break;
+                    case 'f': value += '\f'; break;
+                    case 'b': value += '\b'; break;
+                    case '"': case '\\': case '/': value += c; break;
+                    // NOTE: 'uXXXX' (unicode) is complex and omitted here for simplicity
+                    default: throw std::runtime_error("Error: Invalid escape sequence '\\" + std::string(1, c) + "' (Line: " + std::to_string(escapeLine) + ", Char: " + std::to_string(escapeChar) + ").");
+                };
             } else {
                 value += c;
             };
@@ -72,150 +76,80 @@ namespace Theseus88 {
         if (actualKey != expectedKey) throw std::runtime_error("Error: Expected key '" + expectedKey + "', but found '" + actualKey + "'.");
         expectCharacter(':');
     };
-    void JsonReader::consumeComma() {
+    void JsonReader::prepareToReadKey() {
         skipWhitespace();
-        char c = m_fileStream.peek();
-        if (c == ',') {
-            readCharacterAndTrackPosition();
-            m_commaPresent = true;
-        } else {
-            m_commaPresent = false;
-        };
-    };
-
-    // JsonReader Class Public Member Constructors
-    JsonReader::JsonReader(const std::filesystem::path& path) : m_fileStream(path, std::ios::in), m_lineNumber(1), m_characterPosition(0), m_commaPresent(false) {
-        if (!m_fileStream.is_open()) throw std::runtime_error("Error: Could not open file for reading: " + path.string() + "\n");
-        m_fileStream.imbue(std::locale::classic());
-    };
-
-    // JsonReader Class Public Member Destructor
-    JsonReader::~JsonReader() {
-        if (m_fileStream.is_open()) m_fileStream.close();
-    };
-
-    // JsonReader Class Public Member General Functions
-    bool JsonReader::commaPresent() {
-        return m_commaPresent;
-    };
-
-    // JsonReader Class Public Member JSON Array Functions
-    void JsonReader::readArrayStart() {
-        verifyFileStream();
-        expectCharacter('[');
-    };
-    void JsonReader::readArrayStart(const char* expectedKey) {
-        verifyFileStream();
-        expectKey(std::string(expectedKey));
-        expectCharacter('[');
-    };
-    void JsonReader::readArrayStart(const std::string& expectedKey) {
-        verifyFileStream();
-        expectKey(expectedKey);
-        expectCharacter('[');
-    };
-    void JsonReader::readArrayEnd() {
-        verifyFileStream();
-        expectCharacter(']');
-        consumeComma();
-    };
-
-    // JsonReader Class Public Member JSON Object Functions
-    void JsonReader::readObjectStart() {
-        verifyFileStream();
-        expectCharacter('{');
-    };
-    void JsonReader::readObjectStart(const char* expectedKey) {
-        verifyFileStream();
-        expectKey(std::string(expectedKey));
-        expectCharacter('{');
-    };
-    void JsonReader::readObjectStart(const std::string& expectedKey) {
-        verifyFileStream();
-        expectKey(expectedKey);
-        expectCharacter('{');
-    };
-    void JsonReader::readObjectEnd() {
-        verifyFileStream();
-        expectCharacter('}');
-        consumeComma();
-    };
-
-    // JsonReader Class Public Member JSON Boolean Functions
-    bool JsonReader::readBoolean() {
-        verifyFileStream();
+        if (m_scopeStack.top().type != JsonScopeType::Object) {
+            throw std::runtime_error("Error: Attempting to read a key outside of a JSON object.");
+        }
+        if (m_scopeStack.top().itemCount > 0) {
+            if (peekCharacter() == '}') return;
+            expectCharacter(',');
+        }
+    }
+    void JsonReader::prepareToReadValue() {
+        skipWhitespace();
+        auto& scope = m_scopeStack.top();
+        if (scope.type == JsonScopeType::Root) {
+            if (scope.itemCount > 0) throw std::runtime_error("Error: Only one root element is allowed.");
+            return;
+        }
+        if (scope.type == JsonScopeType::Array) {
+            if (scope.itemCount > 0) {
+                if (peekCharacter() == ']') return;
+                expectCharacter(',');
+            }
+        }
+        // For objects, the value is preceded by a ':', which is consumed by expectKey.
+        // No preparation is needed here for an object's value.
+    }
+    bool JsonReader::parseBoolean() {
         skipWhitespace();
         std::size_t errorLine = m_lineNumber;
         std::size_t errorChar = m_characterPosition + 1;
-        bool value;
-        char c = m_fileStream.peek();
-        if (c == 't') {            
-            char buffer[5] = {0};
-            for (int i = 0; i < 4; ++i) buffer[i] = readCharacterAndTrackPosition(); // Read "true" (4 characters)
-            (std::string(buffer) == "true") ? value = true : throw std::runtime_error("Error: Expected JSON boolean value ('true'), but found '" + std::string(buffer) + "' (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
-        } else if (c == 'f') {
-            char buffer[6] = {0};
-            for (int i = 0; i < 5; ++i) buffer[i] = readCharacterAndTrackPosition(); // Read "false" (5 characters)
-            (std::string(buffer) == "false") ? value = false : throw std::runtime_error("Error: Expected JSON boolean value ('false'), but found '" + std::string(buffer) + "' (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
-        } else {
-            std::string actual = (c == EOF || c == '\0') ? "end of file" : ("'" + std::string(1, c) + "'");
-            throw std::runtime_error("Error: Expected JSON boolean value ('true' or 'false'), but found " + actual + " (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
-        };
-        consumeComma();
-        return value;
-    };
-    bool JsonReader::readBoolean(const char* expectedKey) {
-        verifyFileStream();
-        expectKey(std::string(expectedKey));
-        return readBoolean();
-    };
-    bool JsonReader::readBoolean(const std::string& expectedKey) {
-        verifyFileStream();
-        expectKey(expectedKey);
-        return readBoolean();
-    };
-
-    // JsonReader Class Public Member JSON Null Functions
-    void JsonReader::readNull() {
-        verifyFileStream();
+        char c = peekCharacter();
+        if (c == 't') {
+            std::string buffer;
+            for (int i = 0; i < 4; ++i) buffer += readCharacterAndTrackPosition();
+            if (buffer == "true") return true;
+            throw std::runtime_error("Error: Expected JSON boolean value ('true'), but found '" + buffer + "' (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
+        }
+        if (c == 'f') {
+            std::string buffer;
+            for (int i = 0; i < 5; ++i) buffer += readCharacterAndTrackPosition();
+            if (buffer == "false") return false;
+            throw std::runtime_error("Error: Expected JSON boolean value ('false'), but found '" + buffer + "' (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
+        }
+        std::string actual = (c == EOF || c == '\0') ? "end of file" : ("'" + std::string(1, c) + "'");
+        throw std::runtime_error("Error: Expected JSON boolean value ('true' or 'false'), but found " + actual + " (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
+    }
+    void JsonReader::parseNull() {
         skipWhitespace();
         std::size_t errorLine = m_lineNumber;
         std::size_t errorChar = m_characterPosition + 1;
-        char c = m_fileStream.peek();
+        char c = peekCharacter();
         if (c == 'n') {
-            char buffer[5] = {0};
-            for (int i = 0; i < 4; ++i) buffer[i] = readCharacterAndTrackPosition(); // Read "null" (4 characters)
-            if (std::string(buffer) != "null") throw std::runtime_error("Error: Expected JSON null value ('null'), but found '" + std::string(buffer) + "' (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
-        } else {
-            std::string actual = (c == EOF || c == '\0') ? "end of file" : ("'" + std::string(1, c) + "'");
-            throw std::runtime_error("Error: Expected JSON null value ('null'), but found " + actual + " (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
-        };
-        consumeComma();
-    };
-    void JsonReader::readNull(const char* expectedKey) {
-        readNull(std::string(expectedKey));
-    };
-    void JsonReader::readNull(const std::string& expectedKey) {
-        verifyFileStream();
-        expectKey(expectedKey);
-        readNull();
-    };
-
-    // JsonReader Class Public Member JSON Number Functions
-    template <typename T> T JsonReader::readNumber() {
-        verifyFileStream();
+            std::string buffer;
+            for (int i = 0; i < 4; ++i) buffer += readCharacterAndTrackPosition();
+            if (buffer == "null") return;
+            throw std::runtime_error("Error: Expected JSON null value ('null'), but found '" + buffer + "' (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
+        }
+        std::string actual = (c == EOF || c == '\0') ? "end of file" : ("'" + std::string(1, c) + "'");
+        throw std::runtime_error("Error: Expected JSON null value ('null'), but found " + actual + " (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
+    }
+    template <typename T> T JsonReader::parseNumber() {
         skipWhitespace();
         std::size_t errorLine = m_lineNumber;
         std::size_t errorChar = m_characterPosition + 1;
-        bool hasDecimal = false;
-        bool hasExponent = false;
         std::string numberStr;
-        char c = m_fileStream.peek();        
+        char c = peekCharacter();
         if (c == '-' || (c >= '0' && c <= '9')) { // A number must start with a digit or a minus sign
-            while (m_fileStream.peek() != EOF) { // Start consuming characters that form the number
-                c = m_fileStream.peek();
+            bool hasDecimal = false;
+            bool hasExponent = false;
+            numberStr += readCharacterAndTrackPosition(); // Consume first char
+            while (true) { // Start consuming characters that form the number
+                c = m_inputStream.peek();
                 // Check if the character is part of the number
-                if (c == '-' || (c >= '0' && c <= '9')) {
+                if ((c >= '0' && c <= '9')) {
                     numberStr += readCharacterAndTrackPosition();
                 } else if (c == '.') {
                     if (hasDecimal || hasExponent) throw std::runtime_error("Error: Invalid number format. Multiple decimal points or decimal after exponent (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(m_characterPosition + 1) + ").");
@@ -225,56 +159,175 @@ namespace Theseus88 {
                     if (hasExponent) throw std::runtime_error("Error: Invalid number format. Multiple exponents (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(m_characterPosition + 1) + ").");
                     hasExponent = true;
                     numberStr += readCharacterAndTrackPosition();
-                    c = m_fileStream.peek(); // Check for optional sign after 'e'
+                    c = m_inputStream.peek(); // Check for optional sign after 'e'
                     if (c == '+' || c == '-') numberStr += readCharacterAndTrackPosition();
                 } else { // Non-number character found (e.g., comma, brace, or whitespace)
                     break;
                 };
             };
         };
-        if (numberStr.empty() || numberStr == "-") { // If no characters were consumed or just a solitary '-'
+        if (numberStr.empty() || numberStr == "-" || numberStr.back() == '.' || numberStr.back() == 'e' || numberStr.back() == 'E' || numberStr.back() == '+' || numberStr.back() == '-') { // If no characters were consumed or just a solitary '-'
             std::string actual = (c == EOF || c == '\0') ? "end of file" : ("'" + std::string(1, c) + "'");
             throw std::runtime_error("Error: Expected JSON number, but found " + actual + " (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
         };
         try { // Convert the string to the template type T
             long double ldValue = std::stold(numberStr); // Use std::stold (string to long double) for highest precision, then cast to T
-            T value = static_cast<T>(ldValue);
-            consumeComma();
-            return value;
+            return static_cast<T>(ldValue);
         } catch (const std::out_of_range& oor) {
             throw std::runtime_error("Error: Number '" + numberStr + "' is out of range for type T (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
         } catch (const std::invalid_argument& ia) {
             throw std::runtime_error("Error: Invalid number format '" + numberStr + "' (Line: " + std::to_string(errorLine) + ", Char: " + std::to_string(errorChar) + ").");
         };
+    };
 
+    // JsonReader Class Public Member Constructors
+    JsonReader::JsonReader(std::istream& inputStream) : m_inputStream(inputStream), m_lineNumber(1), m_characterPosition(0) {
+        if (!m_inputStream.good()) throw std::runtime_error("Error: Could not use the provided input stream for reading.");
+        m_inputStream.imbue(std::locale::classic());
+        m_scopeStack.push({JsonScopeType::Root, 0});
     };
-    template <typename T> T JsonReader::readNumber(const char* expectedKey) {
-        return readNumber<T>(std::string(expectedKey));
+
+    // JsonReader Class Public Member Destructor
+    JsonReader::~JsonReader() {};
+
+    // JsonReader Class Public Member General Functions
+    bool JsonReader::hasNext() {
+        char next = peekCharacter();
+        if (next == EOF) return false;
+        if (m_scopeStack.empty()) return false;
+
+        auto& scope = m_scopeStack.top();
+        if (scope.type == JsonScopeType::Array && next == ']') return false;
+        if (scope.type == JsonScopeType::Object && next == '}') return false;
+
+        return true;
     };
-    template <typename T> T JsonReader::readNumber(const std::string& expectedKey) {
-        verifyFileStream();
+
+    // JsonReader Class Public Member JSON Array Functions
+    void JsonReader::readArrayStart() {
+        verifyInputStream();
+        prepareToReadValue();
+        expectCharacter('[');
+        m_scopeStack.top().itemCount++;
+        m_scopeStack.push({JsonScopeType::Array, 0});
+    };
+    void JsonReader::readArrayStart(const char* expectedKey) { readArrayStart(std::string(expectedKey)); };
+    void JsonReader::readArrayStart(const std::string& expectedKey) {
+        verifyInputStream();
+        prepareToReadKey();
         expectKey(expectedKey);
-        return readNumber<T>();
+        expectCharacter('[');
+        m_scopeStack.top().itemCount++;
+        m_scopeStack.push({JsonScopeType::Array, 0});
+    };
+    void JsonReader::readArrayEnd() {
+        verifyInputStream();
+        skipWhitespace();
+        if (m_scopeStack.top().type != JsonScopeType::Array) throw std::runtime_error("Error: Mismatched scope. Tried to close 'Array' but not in one.");
+        if (m_scopeStack.top().itemCount > 0 && peekCharacter() == ',') throw std::runtime_error("Error: Trailing comma detected in array (Line: " + std::to_string(m_lineNumber) + ", Char: " + std::to_string(m_characterPosition + 1) + ").");
+        expectCharacter(']');
+        m_scopeStack.pop();
+    };
+
+    // JsonReader Class Public Member JSON Object Functions
+    void JsonReader::readObjectStart() {
+        verifyInputStream();
+        prepareToReadValue();
+        expectCharacter('{');
+        m_scopeStack.top().itemCount++;
+        m_scopeStack.push({JsonScopeType::Object, 0});
+    };
+    void JsonReader::readObjectStart(const char* expectedKey) { readObjectStart(std::string(expectedKey)); };
+    void JsonReader::readObjectStart(const std::string& expectedKey) {
+        verifyInputStream();
+        prepareToReadKey();
+        expectKey(expectedKey);
+        expectCharacter('{');
+        m_scopeStack.top().itemCount++;
+        m_scopeStack.push({JsonScopeType::Object, 0});
+    };
+    void JsonReader::readObjectEnd() {
+        verifyInputStream();
+        skipWhitespace();
+        if (m_scopeStack.top().type != JsonScopeType::Object) throw std::runtime_error("Error: Mismatched scope. Tried to close 'Object' but not in one.");
+        if (m_scopeStack.top().itemCount > 0 && peekCharacter() == ',') throw std::runtime_error("Error: Trailing comma detected in object (Line: " + std::to_string(m_lineNumber) + ", Char: " + std::to_string(m_characterPosition + 1) + ").");
+        expectCharacter('}');
+        m_scopeStack.pop();
+    };
+
+    // JsonReader Class Public Member JSON Boolean Functions
+    bool JsonReader::readBoolean() {
+        verifyInputStream();
+        prepareToReadValue();
+        bool value = parseBoolean();
+        m_scopeStack.top().itemCount++;
+        return value;
+    };
+    bool JsonReader::readBoolean(const char* expectedKey) { return readBoolean(std::string(expectedKey)); };
+    bool JsonReader::readBoolean(const std::string& expectedKey) {
+        verifyInputStream();
+        prepareToReadKey();
+        expectKey(expectedKey);
+        bool value = parseBoolean();
+        m_scopeStack.top().itemCount++;
+        return value;
+    };
+
+    // JsonReader Class Public Member JSON Null Functions
+    void JsonReader::readNull() {
+        verifyInputStream();
+        prepareToReadValue();
+        parseNull();
+        m_scopeStack.top().itemCount++;
+    };
+    void JsonReader::readNull(const char* expectedKey) { readNull(std::string(expectedKey)); };
+    void JsonReader::readNull(const std::string& expectedKey) {
+        verifyInputStream();
+        prepareToReadKey();
+        expectKey(expectedKey);
+        parseNull();
+        m_scopeStack.top().itemCount++;
+    };
+
+    // JsonReader Class Public Member JSON Number Functions
+    template <typename T> T JsonReader::readNumber() {
+        verifyInputStream();
+        prepareToReadValue();
+        T value = parseNumber<T>();
+        m_scopeStack.top().itemCount++;
+        return value;
+    };
+    template <typename T> T JsonReader::readNumber(const char* expectedKey) { return readNumber<T>(std::string(expectedKey)); };
+    template <typename T> T JsonReader::readNumber(const std::string& expectedKey) {
+        verifyInputStream();
+        prepareToReadKey();
+        expectKey(expectedKey);
+        T value = parseNumber<T>();
+        m_scopeStack.top().itemCount++;
+        return value;
     };
 
     // JsonReader Class Public Member JSON String Functions
     std::string JsonReader::readString() {
-        verifyFileStream();
-        std::string value = std::move(readQuotedString());
-        consumeComma();
+        verifyInputStream();
+        prepareToReadValue();
+        std::string value = readQuotedString();
+        m_scopeStack.top().itemCount++;
         return value;
     };
-    std::string JsonReader::readString(const char* expectedKey) {
-        return readString(std::string(expectedKey));
-    };
+    std::string JsonReader::readString(const char* expectedKey) { return readString(std::string(expectedKey)); };
     std::string JsonReader::readString(const std::string& expectedKey) {
-        verifyFileStream();
+        verifyInputStream();
+        prepareToReadKey();
         expectKey(expectedKey);
-        return readString();
+        std::string value = readQuotedString();
+        m_scopeStack.top().itemCount++;
+        return value;
     };
 
     // JsonReader Class Public Explicit Template Instantiations For Supported Number Types
     #define INSTANTIATE_JSON_READER_NUMBER(T) \
+        template T JsonReader::parseNumber<T>(); \
         template T JsonReader::readNumber<T>(); \
         template T JsonReader::readNumber<T>(const char* expectedKey); \
         template T JsonReader::readNumber<T>(const std::string& expectedKey)
@@ -307,34 +360,34 @@ namespace Theseus88 {
     const std::string& JsonWriter::getIndentation() {
         return m_indentationCache[m_currentIndentationIndex];
     };
-    void JsonWriter::validateWrite(const bool isKey, const bool isValue, const bool isStartScope, const bool isEndScope, const ScopeType typeToCheck) {
+    void JsonWriter::validateWrite(const bool isKey, const bool isValue, const bool isStartScope, const bool isEndScope, const JsonScopeType typeToCheck) {
         if (!m_outputStream.good()) throw std::invalid_argument("Error: The output stream passed to JsonWriter is not in a 'good' state for writing.");
-        ScopeType currentScope = m_scopeStack.top().type;
+        JsonScopeType currentScope = m_scopeStack.top().type;
         // 1. VALIDATE KEY WRITES
         if (isKey) {
-            if (currentScope != ScopeType::Object) throw std::runtime_error("Error: Cannot write a 'Key' unless inside an 'Object'.");
+            if (currentScope != JsonScopeType::Object) throw std::runtime_error("Error: Cannot write a 'Key' unless inside an 'Object'.");
             if (m_expectingValue) throw std::runtime_error("Error: Cannot write a 'Key'; expecting a 'Value' for the previous 'Key'.");
         };
         // 2. VALIDATE VALUE WRITES (Strings, Numbers, Bools, or Start of Arrays/Objects)
         if (isValue) {
-            if (currentScope == ScopeType::Object && !m_expectingValue) throw std::runtime_error("Error: Cannot write a 'Value' inside an 'Object' without a preceding 'Key'.");
-            if (currentScope == ScopeType::Array && m_expectingValue) throw std::runtime_error("Error: 'Arrays' cannot contain 'Keys'.");
-            if (currentScope == ScopeType::Root && m_scopeStack.size() == 1 && !isStartScope) throw std::runtime_error("Error: 'Root' element must be 'Object' or 'Array'.");
+            if (currentScope == JsonScopeType::Object && !m_expectingValue) throw std::runtime_error("Error: Cannot write a 'Value' inside an 'Object' without a preceding 'Key'.");
+            if (currentScope == JsonScopeType::Array && m_expectingValue) throw std::runtime_error("Error: 'Arrays' cannot contain 'Keys'.");
+            if (currentScope == JsonScopeType::Root && m_scopeStack.size() == 1 && !isStartScope) throw std::runtime_error("Error: 'Root' element must be 'Object' or 'Array'.");
         };
         // 3. VALIDATE SCOPE CLOSING (EndObject / EndArray)
         if (isEndScope) {
             if (m_expectingValue) throw std::runtime_error("Error: Cannot close scope; waiting for a 'Value' for the last 'Key'.");
             if (currentScope != typeToCheck) {
-                std::string expected = (typeToCheck == ScopeType::Object) ? "Object" : "Array";
-                std::string actual = (currentScope == ScopeType::Object) ? "Object" : (currentScope == ScopeType::Array ? "Array" : "Root");
+                std::string expected = (typeToCheck == JsonScopeType::Object) ? "Object" : "Array";
+                std::string actual = (currentScope == JsonScopeType::Object) ? "Object" : (currentScope == JsonScopeType::Array ? "Array" : "Root");
                 throw std::runtime_error("Error: Mismatched scope. Tried to close '" + expected + "' but currently in '" + actual + "'.");
             };
-            if (currentScope == ScopeType::Root) throw std::runtime_error("Error: Cannot close 'Root' scope.");
+            if (currentScope == JsonScopeType::Root) throw std::runtime_error("Error: Cannot close 'Root' scope.");
         };
     };
     void JsonWriter::handleCommaForArray() {
         ScopeState& current = m_scopeStack.top();
-        if (current.type == ScopeType::Array) {
+        if (current.type == JsonScopeType::Array) {
             if (current.itemCount > 0) {
                 m_compactMode ? writeToBuffer(',') : writeToBuffer(",\n", 2);
             } else if (!m_compactMode) {
@@ -389,7 +442,7 @@ namespace Theseus88 {
     JsonWriter::JsonWriter(std::ostream& outputStream, const bool compactMode) :
         m_outputStream(outputStream), m_bufferPosition(0), m_currentIndentationIndex(0), m_expectingValue(false) , m_compactMode(compactMode) {
         m_outputStream.rdbuf()->pubsetbuf(nullptr, 0);
-        m_scopeStack.push({ScopeType::Root, 0});
+        m_scopeStack.push({JsonScopeType::Root, 0});
         m_buffer.reserve(S_BUFFERSIZE);
         if (!compactMode) {
             m_indentationCache.reserve(S_PRECALCULATEDCACHERESERVE);
@@ -436,7 +489,7 @@ namespace Theseus88 {
         if (needsIndentation && !m_compactMode) writeToBuffer(getIndentation());
         writeToBuffer('[');
         m_expectingValue = false;
-        m_scopeStack.push({ScopeType::Array, 0});
+        m_scopeStack.push({JsonScopeType::Array, 0});
     };
     void JsonWriter::writeArrayStart(const char* key, const bool needsIndentation) {
         writeArrayStart(std::string(key), needsIndentation);
@@ -446,7 +499,7 @@ namespace Theseus88 {
         writeArrayStart(false);
     };
     void JsonWriter::writeArrayEnd() {
-        validateWrite(false, false, false, true, ScopeType::Array);
+        validateWrite(false, false, false, true, JsonScopeType::Array);
         ScopeState& current = m_scopeStack.top();
         if (current.itemCount > 0 && !m_compactMode) {
             decreaseIndentation();
@@ -464,7 +517,7 @@ namespace Theseus88 {
         if (needsIndentation && !m_compactMode) writeToBuffer(getIndentation());
         writeToBuffer('{');
         m_expectingValue = false;
-        m_scopeStack.push({ScopeType::Object, 0});
+        m_scopeStack.push({JsonScopeType::Object, 0});
     };
     void JsonWriter::writeObjectStart(const char* key, const bool needsIndentation) {
         writeObjectStart(std::string(key), needsIndentation);
@@ -474,7 +527,7 @@ namespace Theseus88 {
         writeObjectStart(false);
     };
     void JsonWriter::writeObjectEnd() {
-        validateWrite(false, false, false, true, ScopeType::Object);
+        validateWrite(false, false, false, true, JsonScopeType::Object);
         ScopeState& current = m_scopeStack.top();
         if (current.itemCount > 0 && !m_compactMode) {
             decreaseIndentation();

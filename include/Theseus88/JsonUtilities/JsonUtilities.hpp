@@ -2,6 +2,7 @@
 #ifndef THESEUS88_JSONUTILITIES_HPP
 #define THESEUS88_JSONUTILITIES_HPP
 
+// ADD COMMENT HERE LATER
 #include <algorithm>    // std::string(count, char)
 #include <charconv>     // std::to_chars, std::chars_format
 #include <cstddef>      // std::size_t
@@ -18,30 +19,40 @@
 
 // ADD COMMENT HERE LATER
 namespace Theseus88 {
+
+    // Shared Enums for Reader and Writer
+    enum class JsonScopeType { Root, Object, Array };
+
     // JSON Reader Class
     class JsonReader {
     private:
+        // Private Structs
+        struct ScopeState { JsonScopeType type; std::size_t itemCount = 0; };
+
         // Private Member Variables
-        std::fstream m_fileStream;
+        std::istream& m_inputStream;
         std::size_t m_lineNumber;
         std::size_t m_characterPosition;
-        bool m_commaPresent;
+        std::stack<ScopeState> m_scopeStack;
 
         // Private Member Functions
-        void verifyFileStream();
+        void verifyInputStream();
         char readCharacterAndTrackPosition();
         void skipWhitespace();
+        char peekCharacter();
         void expectCharacter(const char expectedCharacter);
         std::string readQuotedString();
         void expectKey(const std::string& expectedKey);
-        void consumeComma();
+        void prepareToReadKey();
+        void prepareToReadValue();
+        bool parseBoolean();
+        void parseNull();
+        template <typename T> T parseNumber();
 
     public:
         // Public Member Constructors
         JsonReader() = delete;
-        //JsonReader(const char* path);
-        //JsonReader(const std::string& path);
-        JsonReader(const std::filesystem::path& path);
+        JsonReader(std::istream& inputStream);
 
         // Public Member Destructor
         ~JsonReader();
@@ -51,7 +62,7 @@ namespace Theseus88 {
         JsonReader& operator=(JsonReader&& other) = delete;
 
         // Public Member General Functions
-        bool commaPresent();
+        bool hasNext();
 
         // Public Member JSON Array Functions
         void readArrayStart();
@@ -89,9 +100,8 @@ namespace Theseus88 {
     // JSON Writer Class
     class JsonWriter {
     private:
-        // ADD COMMENT HERE LATER
-        enum class ScopeType { Root, Object, Array };
-        struct ScopeState { ScopeType type; std::size_t itemCount = 0; };
+        // Private Structs
+        struct ScopeState { JsonScopeType type; std::size_t itemCount = 0; };
 
         // Private Static Constants
         static constexpr std::size_t S_BUFFERSIZE = 128 * 1024;
@@ -111,7 +121,7 @@ namespace Theseus88 {
         void increaseIndentation();
         void decreaseIndentation();
         const std::string& getIndentation();
-        void validateWrite(const bool isKey, const bool isValue, const bool isStartScope, const bool isEndScope, const ScopeType typeToCheck = ScopeType::Root);
+        void validateWrite(const bool isKey, const bool isValue, const bool isStartScope, const bool isEndScope, const JsonScopeType typeToCheck = JsonScopeType::Root);
         void handleCommaForArray();
         const std::string getQuotedString(const std::string& data);
         template <std::size_t N> void writeToBuffer(const char (&data)[N]);
@@ -172,7 +182,7 @@ namespace Theseus88 {
         void writeString(const char* key, const std::string_view value, const bool needsIndentation = true);
         void writeString(const std::string& key, const char* value, const bool needsIndentation = true);
         void writeString(const std::string& key, const std::string& value, const bool needsIndentation = true);
-        void writeString(const std::string& key, const std::string_view value, const bool needsIndentation = true);        
+        void writeString(const std::string& key, const std::string_view value, const bool needsIndentation = true);
         void writeString(const std::string_view key, const char* value, const bool needsIndentation = true);
         void writeString(const std::string_view key, const std::string& value, const bool needsIndentation = true);
         void writeString(const std::string_view key, const std::string_view value, const bool needsIndentation = true);

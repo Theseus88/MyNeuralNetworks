@@ -24,6 +24,25 @@ namespace Theseus88 {
     template <typename T> const std::size_t LayerInput<T>::finalizeNetworkLayer(const std::size_t inputVectorSize) { // Still working on code here...
         return LayerBase<T>::finalizeNetworkLayer(inputVectorSize);
     };
+    template <typename T> void LayerInput<T>::loadNetworkLayer(JsonReader& reader) {
+        LayerBase<T>::m_layerNeurons.clear();
+        LayerBase<T>::m_layerNeurons.reserve(LayerBase<T>::m_neuronCount);
+        
+        reader.readArrayStart("Layer Neurons");
+        for (std::size_t i = 0; i < LayerBase<T>::m_neuronCount; ++i) {
+            reader.readObjectStart();
+            
+            std::string nDataType = reader.readString("Neuron Data Type");
+            NeuronType nType = stringToNeuronType(reader.readString("Neuron Type"));
+            
+            auto neuron = FactoryNeuron<T>::createNeuron(nType);
+            neuron->loadLayerNeuron(reader);
+            LayerBase<T>::m_layerNeurons.emplace_back(std::move(neuron));
+            
+            reader.readObjectEnd();
+        };
+        reader.readArrayEnd();
+    };
     template <typename T> void LayerInput<T>::saveNetworkLayer(JsonWriter& writer) const { // Still working on code here...
         LayerBase<T>::saveNetworkLayer(writer);
         writer.writeObjectEnd();

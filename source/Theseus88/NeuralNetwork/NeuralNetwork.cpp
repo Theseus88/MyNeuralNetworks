@@ -36,11 +36,102 @@ namespace Theseus88 {
             for (auto& layer : m_networkLayers | std::views::reverse) ioVectorPtr = &layer->propagateBackward(*ioVectorPtr);
         };
     };
+    template <typename T> void NeuralNetwork<T>::load(JsonReader& reader) {
+        // The caller (either the constructor or INeuralNetwork::loadNeuralNetwork)
+        // has already read the opening '{' and the "Network Data Type" key-value pair.
+        // This function is responsible for reading the remaining network properties.
+    
+        // Read network-level properties
+        setNetworkName(reader.readString("Network Name"));
+        bool wasFinalized = reader.readBoolean("Network Is Finalized");
+        setLearningRate(reader.readNumber<T>("Network Learning Rate"));
+        setMomentum(reader.readNumber<T>("Network Momentum"));
+        setInputVectorSize(reader.readNumber<std::size_t>("Network Input Vector Size"));
+        setOutputVectorSize(reader.readNumber<std::size_t>("Network Output Vector Size"));
+    
+        // The layer count is useful for reserving capacity, but not strictly necessary for the loop.
+        std::size_t layerCount = reader.readNumber<std::size_t>("Network Layer Count");
+        m_networkLayers.clear();
+        m_networkLayers.reserve(layerCount);
+    
+        // Read the array of layers
+        reader.readArrayStart("Network Layers");
+        for (std::size_t i = 0; i < layerCount; ++i) {
+            if (!reader.hasNext()) throwError("Layer count mismatch: Fewer layers in array than specified.");
+            reader.readObjectStart(); // Each layer is an object in the array
+    
+            // Read and verify the data type for this layer
+            std::string layerDataType = reader.readString("Layer Data Type");
+            if (layerDataType != M_NETWORKDATATYPE) throwError(("Layer Data Type mismatch. Expected " + M_NETWORKDATATYPE + " but found " + layerDataType).c_str());
+
+            // The next field of each layer object must be its type.
+            std::string layerTypeStr = reader.readString("Layer Type");
+            LayerType layerType = stringToLayerType(layerTypeStr);
+    
+            // Read properties required for constructor and setup
+            std::size_t uniqueId = reader.readNumber<std::size_t>("Layer Unique Id");
+            std::size_t inputVectorSize = reader.readNumber<std::size_t>("Layer Input Vector Size");
+            reader.readNumber<std::size_t>("Layer Output Vector Size"); // Consume and ignore
+
+            NeuronType neuronType = stringToNeuronType(reader.readString("Layer Neuron Type"));
+
+            T randP1 = reader.readNumber<T>("Layer Neuron Randomize Parameter One");
+            T randP2 = reader.readNumber<T>("Layer Neuron Randomize Parameter Two");
+            
+            RandomizeMethod randMethod = stringToRandomizeMethod(reader.readString("Layer Neuron Randomize Method"));
+            ActivationMethod actMethod = stringToActivationMethod(reader.readString("Layer Neuron Activation Method"));
+            ActivationMethod derMethod = stringToActivationMethod(reader.readString("Layer Neuron Derivative Method"));
+            ErrorMethod errMethod = stringToErrorMethod(reader.readString("Layer Neuron Error Method"));
+            OptimizerMethod optMethod = stringToOptimizerMethod(reader.readString("Layer Neuron Optimizer Method"));
+
+            std::size_t neuronCount = reader.readNumber<std::size_t>("Layer Neuron Count");
+
+            // Create the appropriate layer type using the FactoryLayer with specific constructor arguments.
+            std::unique_ptr<LayerBase<T>> newLayer;
+            switch (layerType) {
+                case LayerType::Input:  newLayer = FactoryLayer<T>::template createLayer<LayerType::Input>(neuronCount, neuronType, uniqueId);  break;
+                case LayerType::Dense:  newLayer = FactoryLayer<T>::template createLayer<LayerType::Dense>(neuronCount, neuronType, uniqueId);  break;
+                case LayerType::Output: newLayer = FactoryLayer<T>::template createLayer<LayerType::Output>(neuronCount, neuronType, uniqueId); break;
+                default: throwError("Unknown or unsupported layer type encountered during loading.");
+            };
+    
+            // Apply read properties
+            newLayer->setInputVectorSize(inputVectorSize);
+            newLayer->setRandomizeParameterOne(randP1);
+            newLayer->setRandomizeParameterTwo(randP2);
+            newLayer->setRandomizeMethod(randMethod);
+            newLayer->setActivationMethod(actMethod);
+            newLayer->setDerivativeMethod(derMethod);
+            newLayer->setErrorMethod(errMethod);
+            newLayer->setOptimizerMethod(optMethod);
+            // setNeuronCount is handled by constructor.
+
+            // Load neurons (rest of the object)
+            newLayer->loadNetworkLayer(reader);
+            m_networkLayers.emplace_back(std::move(newLayer));
+    
+            reader.readObjectEnd(); // End of the current layer object
+        };
+        if (reader.hasNext()) throwError("Layer count mismatch: More layers in array than specified.");
+        reader.readArrayEnd();
+    
+        // If the network was saved in a finalized state, re-finalize it after loading.
+        if (wasFinalized) finalizeNeuralNetwork();
+    };
 
     // Public Member Constructors
     template <typename T> NeuralNetwork<T>::NeuralNetwork()
     : NeuralNetwork(std::string(""), static_cast<std::size_t>(0), static_cast<std::size_t>(0)) {};
-    template <typename T> NeuralNetwork<T>::NeuralNetwork(const std::filesystem::path& path) {}; // Still working on code here...
+    template <typename T> NeuralNetwork<T>::NeuralNetwork(const std::filesystem::path& path) {
+        std::ifstream fileStream(path);
+        if (!fileStream.is_open()) throwError(std::string("Failed to open file for loading: " + path.string()).c_str());
+        JsonReader reader(fileStream);
+        reader.readObjectStart();
+        std::string dataType = reader.readString("Network Data Type");
+        if (dataType != M_NETWORKDATATYPE) throwError(std::string("Data type mismatch. File contains \"" + dataType + "\", but network is initialized as \"" + M_NETWORKDATATYPE + "\".").c_str());
+        load(reader);
+        reader.readObjectEnd();
+    };
     template <typename T> NeuralNetwork<T>::NeuralNetwork(const char* networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize)
     : NeuralNetwork(std::string(networkName), inputVectorSize, outputVectorSize) {};    
     template <typename T> NeuralNetwork<T>::NeuralNetwork(const std::string& networkName, const std::size_t inputVectorSize, const std::size_t outputVectorSize)
@@ -93,7 +184,7 @@ namespace Theseus88 {
         m_isFinalized = false;
         m_networkLayers.reserve(layerCapacity);
     };
-    template <typename T> void NeuralNetwork<T>::setRandomizeMethod(const RandomizeMethod randomizeMethod) { // Still working on code here...
+    template <typename T> void NeuralNetwork<T>::setRandomizeMethod(const RandomizeMethod randomizeMethod) {    // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setRandomizeMethod(randomizeMethod);
     };
     template <typename T> void NeuralNetwork<T>::setActivationMethod(const ActivationMethod activationMethod) { // Still working on code here...
@@ -102,10 +193,10 @@ namespace Theseus88 {
     template <typename T> void NeuralNetwork<T>::setDerivativeMethod(const ActivationMethod derivativeMethod) { // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setDerivativeMethod(derivativeMethod);
     };
-    template <typename T> void NeuralNetwork<T>::setErrorMethod(const ErrorMethod errorMethod) { // Still working on code here...
+    template <typename T> void NeuralNetwork<T>::setErrorMethod(const ErrorMethod errorMethod) {                // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setErrorMethod(errorMethod);
     };
-    template <typename T> void NeuralNetwork<T>::setOptimizerMethod(const OptimizerMethod optimizerMethod) { // Still working on code here...
+    template <typename T> void NeuralNetwork<T>::setOptimizerMethod(const OptimizerMethod optimizerMethod) {    // Still working on code here...
         //for (auto& layer : m_networkLayers) layer->setOptimizerMethod(optimizerMethod);
     };
 
